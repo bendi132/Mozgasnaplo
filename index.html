@@ -102,7 +102,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .hist-table tr:last-child td{border-bottom:none}
 .hist-table tr:hover td{background:var(--bg)}
 .score-pill{display:inline-block;width:30px;height:30px;border-radius:50%;text-align:center;line-height:30px;font-weight:700;font-size:.85rem}
-.empty-state{text-align:center;padding:40px 20px;color:var(--text3)}
 .setup-step{display:flex;gap:11px;margin-bottom:13px;padding:13px;background:var(--bg);border-radius:var(--r-sm)}
 .step-num{width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;flex-shrink:0}
 .step-title{font-weight:700;margin-bottom:3px;font-size:.92rem}
@@ -120,7 +119,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .wd-box{background:var(--bg);border-radius:var(--r-sm);padding:14px;text-align:center;border:1px solid var(--border)}
 .wd-val{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--primary)}
 .wd-lbl{font-size:.75rem;color:var(--text3);margin-top:3px}
-/* ── ANALYTICS ── */
 .analysis-controls{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .analysis-controls select{width:auto;padding:8px 12px}
 .idx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
@@ -133,7 +131,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .ana-table td{padding:9px 11px;border-bottom:1px solid var(--border);vertical-align:middle}
 .ana-table tr:nth-child(even) td{background:var(--bg)}
 .ana-table tr:hover td{background:var(--primary-l)}
-.ana-table .rank{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--text3);font-weight:600;width:30px;text-align:center}
+.rank{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--text3);font-weight:600;width:30px;text-align:center}
 .tei-bar-wrap{background:var(--bg2);border-radius:4px;height:8px;width:100%;margin-top:3px}
 .tei-bar{height:8px;border-radius:4px;transition:.5s}
 .trend-up{color:var(--green);font-weight:700}
@@ -180,23 +178,23 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
     <div class="header-top">
       <div class="app-brand">
         <h1>MozgásNapló</h1>
-        <p>SMA III · Napi állapotkövetés &amp; Profi Elemzés</p>
+        <p>SMA III &middot; Napi állapotkövetés &amp; Profi Elemzés</p>
       </div>
       <div class="weather" id="weatherWidget" onclick="refreshWeather()" title="Kattints a frissítéshez">
         <div class="weather-row">
-          <div class="w-item"><span class="w-val" id="wT">–</span><span class="w-lbl">°C</span></div>
-          <div class="w-item"><span class="w-val" id="wH">–</span><span class="w-lbl">% RH</span></div>
-          <div class="w-item"><span class="w-val" id="wP">–</span><span class="w-lbl">hPa</span></div>
+          <div class="w-item"><span class="w-val" id="wT">-</span><span class="w-lbl">C</span></div>
+          <div class="w-item"><span class="w-val" id="wH">-</span><span class="w-lbl">% RH</span></div>
+          <div class="w-item"><span class="w-val" id="wP">-</span><span class="w-lbl">hPa</span></div>
         </div>
         <div class="w-hint" id="wHint">Nórápi (8591) · Tölt...</div>
       </div>
     </div>
     <div class="tabs">
-      <button class="tab-btn active" onclick="showTab('bevitel',this)">✏️ Bevitel</button>
-      <button class="tab-btn" onclick="showTab('statisztika',this)">📊 Statisztika</button>
-      <button class="tab-btn" onclick="showTab('elemzes',this)">🔬 Profi Elemzés</button>
-      <button class="tab-btn" onclick="showTab('elozmenyek',this)">📋 Előzmények</button>
-      <button class="tab-btn" onclick="showTab('beallitasok',this)">⚙️ Beállítások</button>
+      <button class="tab-btn active" onclick="showTab('bevitel',this)">Bevitel</button>
+      <button class="tab-btn" onclick="showTab('statisztika',this)">Statisztika</button>
+      <button class="tab-btn" onclick="showTab('elemzes',this)">Profi Elemzés</button>
+      <button class="tab-btn" onclick="showTab('elozmenyek',this)">Elzmények</button>
+      <button class="tab-btn" onclick="showTab('beallitasok',this)">Beállítások</button>
     </div>
   </div>
 </div>
@@ -204,14 +202,13 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 <main>
 <div id="statusMsg" class="status"></div>
 
-<!-- BEVITEL -->
 <div id="tab-bevitel" class="tab-content active">
   <div class="card">
-    <div class="card-title">📅 Napi bejegyzés</div>
+    <div class="card-title">Napi bejegyzés</div>
     <div class="form-group"><label class="form-label">Dátum</label><input type="date" id="entryDate" /></div>
   </div>
   <div class="card">
-    <div class="card-title">🎯 Mozgás könnyűsége</div>
+    <div class="card-title">Mozgás könnyűsége</div>
     <div class="score-display">
       <div class="score-big" id="scoreBig" style="color:var(--amber)">5</div>
       <div class="score-meta">
@@ -220,53 +217,51 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
       </div>
     </div>
     <input type="range" id="scoreSlider" min="1" max="10" value="5" oninput="onScore(this.value)" />
-    <div class="range-labels"><span>1 – Alig tudok mozogni</span><span>10 – Kiváló!</span></div>
+    <div class="range-labels"><span>1 - Alig tudok mozogni</span><span>10 - Kiváló!</span></div>
   </div>
   <div class="card">
-    <div class="card-title">🏃 Tornák &amp; kezelések</div>
+    <div class="card-title">Tornák és kezelések</div>
     <p style="font-size:.84rem;color:var(--text3);margin-bottom:12px">Jelöld be amiben részt vettél, majd add meg a perceket.</p>
     <div class="ex-grid" id="exGrid"></div>
   </div>
   <div class="card">
-    <div class="card-title">🌤️ Mai időjárás – Nórápi (napi átlag)</div>
+    <div class="card-title">Mai időjárás - Nórápi (napi átlag)</div>
     <p style="font-size:.84rem;color:var(--text3)" id="wDetailStatus">Időjárási adatok lekérése...</p>
     <div class="weather-detail-grid" id="wDetailGrid" style="display:none"></div>
   </div>
   <div class="card">
-    <div class="card-title">📝 Megjegyzések</div>
+    <div class="card-title">Megjegyzések</div>
     <textarea id="notes" placeholder="Hogyan érezted magad? Mi volt nehéz, mi ment jól?"></textarea>
   </div>
-  <button class="btn btn-primary btn-full" id="saveBtn" onclick="saveEntry()">💾 Bejegyzés mentése</button>
+  <button class="btn btn-primary btn-full" id="saveBtn" onclick="saveEntry()">Bejegyzés mentése</button>
   <p style="text-align:center;font-size:.78rem;color:var(--text3);margin-top:8px">Helyi tárolóba és Google Sheets-be kerül (ha be vagy lépve).</p>
 </div>
 
-<!-- STATISZTIKA -->
 <div id="tab-statisztika" class="tab-content">
   <div class="stats-row">
-    <div class="stat-box"><div class="stat-val" id="st7">–</div><div class="stat-lbl">Átlag pont (7 nap)</div></div>
-    <div class="stat-box"><div class="stat-val" id="st30">–</div><div class="stat-lbl">Átlag pont (30 nap)</div></div>
-    <div class="stat-box"><div class="stat-val" id="stAll">–</div><div class="stat-lbl">Összes bejegyzés</div></div>
+    <div class="stat-box"><div class="stat-val" id="st7">-</div><div class="stat-lbl">Átlag pont (7 nap)</div></div>
+    <div class="stat-box"><div class="stat-val" id="st30">-</div><div class="stat-lbl">Átlag pont (30 nap)</div></div>
+    <div class="stat-box"><div class="stat-val" id="stAll">-</div><div class="stat-lbl">Összes bejegyzés</div></div>
   </div>
-  <div class="card"><div class="card-title">📈 Mozgás pontszám – utóbbi 30 nap</div><div class="chart-wrap"><canvas id="chartScore"></canvas></div></div>
-  <div class="card"><div class="card-title">🏋️ Tornatípusonkénti összes idő (perc)</div><div class="chart-wrap" style="height:280px"><canvas id="chartEx"></canvas></div></div>
-  <div class="card"><div class="card-title">🌡️ Hőmérséklet vs. Mozgás pontszám</div><div class="chart-wrap"><canvas id="chartCorr"></canvas></div></div>
+  <div class="card"><div class="card-title">Mozgás pontszám - utóbbi 30 nap</div><div class="chart-wrap"><canvas id="chartScore"></canvas></div></div>
+  <div class="card"><div class="card-title">Tornatípusonkénti összes idő (perc)</div><div class="chart-wrap" style="height:280px"><canvas id="chartEx"></canvas></div></div>
+  <div class="card"><div class="card-title">Hőmérséklet vs. Mozgás pontszám</div><div class="chart-wrap"><canvas id="chartCorr"></canvas></div></div>
 </div>
 
-<!-- PROFI ELEMZÉS -->
 <div id="tab-elemzes" class="tab-content">
   <div class="card">
     <div class="analysis-controls">
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-        <div class="card-title" style="margin:0">🔬 Profi Elemzés</div>
+        <div class="card-title" style="margin:0">Profi Elemzés</div>
         <select id="analysisPeriod" style="width:auto">
           <option value="7">Utóbbi 7 nap</option>
           <option value="30" selected>Utóbbi 30 nap</option>
           <option value="90">Utóbbi 90 nap</option>
           <option value="0">Összes adat</option>
         </select>
-        <button class="btn btn-primary btn-sm" onclick="runAnalysis()">🔄 Elemzés futtatása</button>
+        <button class="btn btn-primary btn-sm" onclick="runAnalysis()">Elemzés futtatása</button>
       </div>
-      <button class="btn btn-secondary btn-sm" onclick="exportAnalysisPDF()">📄 PDF Export</button>
+      <button class="btn btn-secondary btn-sm" onclick="exportAnalysisPDF()">PDF Export</button>
     </div>
     <p id="analysisMeta" style="font-size:.82rem;color:var(--text3);margin-top:10px"></p>
   </div>
@@ -279,23 +274,21 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
   <div id="diagnosisSection"></div>
   <div id="dataTableSection"></div>
   <div id="analysisPlaceholder" style="text-align:center;padding:50px;color:var(--text3)">
-    <div style="font-size:2.5rem;margin-bottom:12px">🔬</div>
+    <div style="font-size:2.5rem;margin-bottom:12px">&#128300;</div>
     <p style="font-size:1rem;font-weight:600">Kattints az <strong>Elemzés futtatása</strong> gombra.</p>
-    <p style="font-size:.85rem;margin-top:8px">Ajánlott: legalább 14 napi bejegyzés az értékes eredményekhez.</p>
+    <p style="font-size:.85rem;margin-top:8px">Ajánlott: legalább 14 napi bejegyzés.</p>
   </div>
 </div>
 
-<!-- ELŐZMÉNYEK -->
 <div id="tab-elozmenyek" class="tab-content">
-  <div class="card"><div class="card-title">📋 Korábbi bejegyzések</div><div id="histContent"><p style="color:var(--text3)">Betöltés...</p></div></div>
+  <div class="card"><div class="card-title">Korábbi bejegyzések</div><div id="histContent"><p style="color:var(--text3)">Betöltés...</p></div></div>
 </div>
 
-<!-- BEÁLLÍTÁSOK -->
 <div id="tab-beallitasok" class="tab-content">
   <div class="card">
-    <div class="card-title">🔐 Google Fiók</div>
+    <div class="card-title">Google Fiók</div>
     <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px">
-      <span class="auth-badge off" id="authBadge">● Nincs bejelentkezve</span>
+      <span class="auth-badge off" id="authBadge">Nincs bejelentkezve</span>
     </div>
     <button class="google-btn" id="gSignInBtn" onclick="gSignIn()">
       <svg class="g-logo" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
@@ -304,302 +297,1095 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
     <button class="btn btn-secondary" id="gSignOutBtn" onclick="gSignOut()" style="display:none">Kijelentkezés</button>
   </div>
   <div class="card">
-    <div class="card-title">🔑 Google Cloud beállítás</div>
-    <div class="note-box">⚠️ Ezt egyszer kell elvégezni. Utána automatikusan menti a Google Sheets táblázatba.</div>
-    <div class="setup-step"><div class="step-num">1</div><div><div class="step-title">Google Cloud Projekt</div><div class="step-desc"><a href="https://console.cloud.google.com/" target="_blank">console.cloud.google.com</a> → új projekt</div></div></div>
-    <div class="setup-step"><div class="step-num">2</div><div><div class="step-title">Google Sheets API engedélyezése</div><div class="step-desc">APIs &amp; Services → Library → „Google Sheets API" → Enable</div></div></div>
-    <div class="setup-step"><div class="step-num">3</div><div><div class="step-title">OAuth 2.0 Client ID</div><div class="step-desc">Credentials → OAuth Client ID → Web Application → Authorized JS origins: <code>http://localhost:8080</code></div></div></div>
-    <div class="setup-step"><div class="step-num">4</div><div><div class="step-title">Sheets táblázat ID</div><div class="step-desc"><code>docs.google.com/spreadsheets/d/<strong>[EZ AZ ID]</strong>/edit</code></div></div></div>
+    <div class="card-title">Google Cloud beállítás</div>
+    <div class="note-box">Ezt egyszer kell elvégezni. Utána automatikusan menti a Google Sheets táblázatba.</div>
+    <div class="setup-step"><div class="step-num">1</div><div><div class="step-title">Google Cloud Projekt</div><div class="step-desc"><a href="https://console.cloud.google.com/" target="_blank">console.cloud.google.com</a> - új projekt</div></div></div>
+    <div class="setup-step"><div class="step-num">2</div><div><div class="step-title">Google Sheets API engedélyezése</div><div class="step-desc">APIs &amp; Services - Library - Google Sheets API - Enable</div></div></div>
+    <div class="setup-step"><div class="step-num">3</div><div><div class="step-title">OAuth 2.0 Client ID</div><div class="step-desc">Credentials - OAuth Client ID - Web Application - Authorized JS origins: <code>http://localhost:8080</code></div></div></div>
+    <div class="setup-step"><div class="step-num">4</div><div><div class="step-title">Sheets táblázat ID</div><div class="step-desc"><code>docs.google.com/spreadsheets/d/[EZ AZ ID]/edit</code></div></div></div>
     <div class="form-group"><label class="form-label">OAuth 2.0 Client ID</label><input type="text" id="clientIdInp" oninput="saveSettings()" /></div>
     <div class="form-group"><label class="form-label">Google Sheets táblázat ID</label><input type="text" id="sheetIdInp" oninput="saveSettings()" /></div>
     <div class="form-group"><label class="form-label">Munkalap neve</label><input type="text" id="sheetNameInp" value="MozgásNapló" oninput="saveSettings()" /></div>
-    <button class="btn btn-primary" onclick="applySettings()">✔ Beállítások mentése &amp; alkalmazása</button>
+    <button class="btn btn-primary" onclick="applySettings()">Beállítások mentése és alkalmazása</button>
   </div>
   <div class="card">
-    <div class="card-title">🗃️ Helyi adatok kezelése</div>
+    <div class="card-title">Helyi adatok kezelése</div>
     <p style="font-size:.88rem;color:var(--text2);margin-bottom:14px">Az app minden bejegyzést helyi tárolóban is megőriz.</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn btn-secondary" onclick="exportExcel(false)">📊 Excel letöltés</button>
-      <button class="btn btn-secondary" onclick="exportExcel(true)">📊 Excel (standardizált)</button>
-      <button class="btn btn-secondary" onclick="exportCSV()">📥 CSV letöltés</button>
-      <button class="btn btn-danger" onclick="clearLocal()">🗑️ Helyi adatok törlése</button>
+      <button class="btn btn-secondary" onclick="exportExcel(false)">Excel letöltés</button>
+      <button class="btn btn-secondary" onclick="exportExcel(true)">Excel (standardizált)</button>
+      <button class="btn btn-secondary" onclick="exportCSV()">CSV letöltés</button>
+      <button class="btn btn-danger" onclick="clearLocal()">Helyi adatok törlése</button>
     </div>
   </div>
 </div>
 </main>
 
-<div id="pdfReport" style="display:none;position:absolute;left:-9999px;top:0;width:190mm;background:white;font-family:Arial,sans-serif;color:#1A1E25;font-size:10pt;line-height:1.5;padding:15mm 20mm"></div>
+<div id="pdfReport" style="display:none;position:absolute;left:-9999px;top:0;width:190mm;background:white;font-family:Arial,sans-serif;color:#1A1E25;font-size:10pt;line-height:1.5;padding:10mm 15mm"></div>
 
 <script>
-const EXERCISES=[
-  {id:'gyogytorna',label:'Gyógytorna',icon:'🤸'},
-  {id:'szomato',label:'Szomatoterápia',icon:'🖐️'},
-  {id:'gyogyuszas',label:'Gyógyúszás',icon:'🏊'},
-  {id:'masszazs',label:'Masszázs',icon:'💆'},
-  {id:'manualterpia',label:'Manuálterápia',icon:'🙌'},
-  {id:'robotterpia_allo',label:'Robotterápia – Álló',icon:'🦾'},
-  {id:'robotterpia_ulo',label:'Robotterápia – Ülő',icon:'🦿'},
-  {id:'otthoni_felso',label:'Otthoni – Felsőtest',icon:'💪'},
-  {id:'otthoni_vegyes',label:'Otthoni – Vegyes',icon:'🔄'},
-  {id:'otthoni_labak',label:'Otthoni – Lábak',icon:'🦵'},
-  {id:'szobabicikli',label:'Szobabicikli',icon:'🚴'},
-];
-const SCORE_DATA=[null,
-  {lbl:'Kritikus',desc:'Alig tudok mozogni',tag:'#B03030',tagBg:'#FEF2F2'},
-  {lbl:'Nagyon nehéz',desc:'Szinte minden mozgás nehéz',tag:'#B03030',tagBg:'#FEF2F2'},
-  {lbl:'Nehéz',desc:'Feszültség, lassúság',tag:'#A05020',tagBg:'#FBF0EB'},
-  {lbl:'Kissé nehéz',desc:'Küzdős, de megy',tag:'#9A6C18',tagBg:'#FDF6E3'},
-  {lbl:'Közepes',desc:'Átlagos nap',tag:'#9A6C18',tagBg:'#FDF6E3'},
-  {lbl:'Jó',desc:'Átlag feletti mozgás',tag:'#1D6B78',tagBg:'#E8F4F6'},
-  {lbl:'Jól megy',desc:'Könnyedén mozgok',tag:'#1D6B78',tagBg:'#E8F4F6'},
-  {lbl:'Nagyon jó',desc:'Szinte minden megy',tag:'#2A7A52',tagBg:'#E8F5EE'},
-  {lbl:'Kiváló',desc:'Kivételesen könnyű mozgás',tag:'#2A7A52',tagBg:'#E8F5EE'},
-  {lbl:'Fantasztikus',desc:'A legjobb, amit érezni tudok!',tag:'#2A7A52',tagBg:'#E8F5EE'},
+// ============================================================
+//  MOZGÁSNAPLÓ - SMA III - Teljes alkalmazás
+// ============================================================
+
+var EXERCISES = [
+  {id:'gyogytorna',       label:'Gyógytorna',           icon:'G'},
+  {id:'szomato',          label:'Szomatoterápia',       icon:'S'},
+  {id:'gyogyuszas',       label:'Gyógyúszás',           icon:'U'},
+  {id:'masszazs',         label:'Masszázs',             icon:'M'},
+  {id:'manualterpia',     label:'Manuálterápia',        icon:'N'},
+  {id:'robotterpia_allo', label:'Robotterápia - Álló',  icon:'RA'},
+  {id:'robotterpia_ulo',  label:'Robotterápia - Ülő',   icon:'RU'},
+  {id:'otthoni_felso',    label:'Otthoni - Felsőtest',  icon:'OF'},
+  {id:'otthoni_vegyes',   label:'Otthoni - Vegyes',     icon:'OV'},
+  {id:'otthoni_labak',    label:'Otthoni - Lábak',      icon:'OL'},
+  {id:'szobabicikli',     label:'Szobabicikli',         icon:'B'}
 ];
 
-let weatherData={temperature:null,humidity:null,pressure:null};
-let accessToken=null,tokenClient=null,charts={},lastAnalysis=null;
-
-window.onload=()=>{setToday();buildExGrid();loadSettings();refreshWeather();loadStats();loadHistory();};
-window.onGoogleLibraryLoad=()=>{initGAuth();};
-
-function setToday(){document.getElementById('entryDate').value=new Date().toISOString().split('T')[0];}
-function showTab(name,btn){
-  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(el=>el.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  if(btn)btn.classList.add('active');
-  if(name==='statisztika')renderCharts();
-  if(name==='elozmenyek')loadHistory();
-}
-function showStatus(msg,type='info'){
-  const el=document.getElementById('statusMsg');
-  el.textContent=msg;el.className='status show '+(type==='success'?'ok':type);
-  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),5500);
-}
-function daysDiff(d){return Math.floor((Date.now()-new Date(d))/86400000);}
-function fmtDateShort(d){const dt=new Date(d);return(dt.getMonth()+1)+'/'+dt.getDate();}
-function fmtDateHu(d){return new Date(d).toLocaleDateString('hu-HU',{year:'numeric',month:'long',day:'numeric'});}
-
-function onScore(v){
-  const n=parseInt(v),sd=SCORE_DATA[n];
-  document.getElementById('scoreBig').textContent=n;
-  document.getElementById('scoreBig').style.color=sd.tag;
-  document.getElementById('scoreTag').textContent=sd.lbl;
-  document.getElementById('scoreTag').style.background=sd.tagBg;
-  document.getElementById('scoreTag').style.color=sd.tag;
-  document.getElementById('scoreDesc').textContent=sd.desc;
-}
-
-function buildExGrid(){
-  const grid=document.getElementById('exGrid');grid.innerHTML='';
-  EXERCISES.forEach(ex=>{
-    const div=document.createElement('div');div.className='ex-item';div.id='exItem-'+ex.id;
-    div.innerHTML=`<div class="ex-name"><input type="checkbox" id="chk-${ex.id}" onchange="toggleEx('${ex.id}')" /><label for="chk-${ex.id}">${ex.icon} ${ex.label}</label></div><div class="dur-wrap"><input type="number" id="dur-${ex.id}" min="5" max="360" step="5" value="30" /><span>perc</span></div>`;
-    grid.appendChild(div);
-  });
-}
-function toggleEx(id){document.getElementById('exItem-'+id).classList.toggle('sel',document.getElementById('chk-'+id).checked);}
-
-async function refreshWeather(){
-  document.getElementById('wHint').textContent='⏳ Frissítés...';
-  try{
-    const url=`https://api.open-meteo.com/v1/forecast?latitude=47.2017&longitude=17.5947&daily=temperature_2m_mean,relative_humidity_2m_mean,surface_pressure_mean&timezone=auto&forecast_days=1`;
-    const d=await(await fetch(url)).json();
-    weatherData={temperature:d.daily?.temperature_2m_mean?.[0]??null,humidity:d.daily?.relative_humidity_2m_mean?.[0]??null,pressure:d.daily?.surface_pressure_mean?.[0]?Math.round(d.daily.surface_pressure_mean[0]):null};
-    document.getElementById('wT').textContent=weatherData.temperature!==null?weatherData.temperature.toFixed(1):'–';
-    document.getElementById('wH').textContent=weatherData.humidity!==null?Math.round(weatherData.humidity):'–';
-    document.getElementById('wP').textContent=weatherData.pressure!==null?weatherData.pressure:'–';
-    const now=new Date();document.getElementById('wHint').textContent=`Nórápi · ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
-    const dg=document.getElementById('wDetailGrid');document.getElementById('wDetailStatus').style.display='none';dg.style.display='grid';
-    dg.innerHTML=`<div class="wd-box"><div class="wd-val">${weatherData.temperature!==null?weatherData.temperature.toFixed(1)+'°':'–'}</div><div class="wd-lbl">Átlag hőmérséklet</div></div><div class="wd-box"><div class="wd-val">${weatherData.humidity!==null?Math.round(weatherData.humidity)+'%':'–'}</div><div class="wd-lbl">Átlag páratartalom</div></div><div class="wd-box"><div class="wd-val">${weatherData.pressure!==null?weatherData.pressure:'–'}</div><div class="wd-lbl">Átlag légnyomás (hPa)</div></div>`;
-  }catch(e){document.getElementById('wHint').textContent='⚠️ Hiba – kattints újra';}
-}
-
-function initGAuth(){
-  const cid=localStorage.getItem('gClientId');if(!cid||!window.google?.accounts)return;
-  try{tokenClient=google.accounts.oauth2.initTokenClient({client_id:cid,scope:'https://www.googleapis.com/auth/spreadsheets',callback:r=>{if(r.error){showStatus('Google hitelesítési hiba: '+r.error,'err');return;}accessToken=r.access_token;updateAuthUI(true);showStatus('✓ Sikeresen bejelentkezve!','success');}});}catch(e){console.error(e);}
-}
-function gSignIn(){const cid=document.getElementById('clientIdInp').value.trim();if(!cid){showStatus('⚠️ Add meg az OAuth Client ID-t!','err');return;}saveSettings();if(!tokenClient)initGAuth();if(tokenClient)tokenClient.requestAccessToken({prompt:''});else showStatus('⚠️ Inicializálás sikertelen.','err');}
-function gSignOut(){if(accessToken)google.accounts.oauth2.revoke(accessToken,()=>{});accessToken=null;updateAuthUI(false);}
-function updateAuthUI(on){document.getElementById('authBadge').textContent=on?'● Bejelentkezve':'● Nincs bejelentkezve';document.getElementById('authBadge').className='auth-badge '+(on?'on':'off');document.getElementById('gSignInBtn').style.display=on?'none':'inline-flex';document.getElementById('gSignOutBtn').style.display=on?'inline-flex':'none';}
-
-async function saveEntry(){
-  const btn=document.getElementById('saveBtn');btn.disabled=true;btn.textContent='⏳ Mentés...';
-  try{
-    const date=document.getElementById('entryDate').value,score=parseInt(document.getElementById('scoreSlider').value),notes=document.getElementById('notes').value;
-    if(!date){showStatus('⚠️ Kérlek válassz dátumot!','err');return;}
-    const exercises={};EXERCISES.forEach(ex=>{exercises[ex.id]=document.getElementById('chk-'+ex.id).checked?(parseInt(document.getElementById('dur-'+ex.id).value)||0):0;});
-    const entry={date,score,exercises,weather:{...weatherData},notes,ts:new Date().toISOString()};
-    saveLocal(entry);
-    if(accessToken){await sheetsAppend(entry);showStatus('✓ Mentve helyi tárolóba és Google Sheets-be!','success');}
-    else showStatus('✓ Mentve helyi tárolóba.','info');
-    resetForm();loadStats();
-  }catch(e){console.error(e);showStatus('⚠️ Hiba: '+e.message,'err');}
-  finally{btn.disabled=false;btn.textContent='💾 Bejegyzés mentése';}
-}
-function resetForm(){setToday();document.getElementById('scoreSlider').value=5;onScore(5);document.getElementById('notes').value='';EXERCISES.forEach(ex=>{document.getElementById('chk-'+ex.id).checked=false;document.getElementById('exItem-'+ex.id).classList.remove('sel');document.getElementById('dur-'+ex.id).value=30;});}
-function saveLocal(entry){const all=getLocal();const i=all.findIndex(e=>e.date===entry.date);if(i>=0)all[i]=entry;else all.push(entry);all.sort((a,b)=>b.date.localeCompare(a.date));localStorage.setItem('mozgasnaplo',JSON.stringify(all));}
-function getLocal(){try{return JSON.parse(localStorage.getItem('mozgasnaplo')||'[]');}catch{return[];}}
-
-async function sheetsAppend(entry){
-  const sid=localStorage.getItem('gSheetId'),sname=localStorage.getItem('gSheetName')||'MozgásNapló';
-  if(!sid)throw new Error('Nincs Sheets ID.');
-  await ensureHeader(sid,sname);
-  const r=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sid}/values/${encodeURIComponent(sname)}!A1:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,{method:'POST',headers:{'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'},body:JSON.stringify({values:[buildRow(entry)]})});
-  if(!r.ok){const e=await r.json();throw new Error(e.error?.message||'Sheets API hiba');}
-}
-async function ensureHeader(sid,sname){
-  const r=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sid}/values/${encodeURIComponent(sname)}!A1`,{headers:{'Authorization':'Bearer '+accessToken}});
-  const d=await r.json();if(d.values?.[0]?.[0]==='Dátum')return;
-  await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sid}/values/${encodeURIComponent(sname)}!A1?valueInputOption=RAW`,{method:'PUT',headers:{'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'},body:JSON.stringify({values:[buildHeaders()]})});
-}
-function buildHeaders(){const h=['Dátum','Mozgás Pontszám (1–10)'];EXERCISES.forEach(ex=>h.push(ex.label+' (perc)'));h.push('Összes tornaidő (perc)','Átlag hőmérséklet (°C)','Átlag páratartalom (%)','Átlag légnyomás (hPa)','Megjegyzések');return h;}
-function buildRow(e){const row=[e.date,e.score];let total=0;EXERCISES.forEach(ex=>{const m=e.exercises[ex.id]||0;row.push(m);total+=m;});row.push(total,e.weather.temperature??'',e.weather.humidity??'',e.weather.pressure??'',e.notes||'');return row;}
-function saveSettings(){const cid=document.getElementById('clientIdInp').value.trim(),sid=document.getElementById('sheetIdInp').value.trim(),sname=document.getElementById('sheetNameInp').value.trim();if(cid)localStorage.setItem('gClientId',cid);if(sid)localStorage.setItem('gSheetId',sid);if(sname)localStorage.setItem('gSheetName',sname);}
-function applySettings(){saveSettings();initGAuth();showStatus('✓ Beállítások mentve!','success');}
-function loadSettings(){document.getElementById('clientIdInp').value=localStorage.getItem('gClientId')||'';document.getElementById('sheetIdInp').value=localStorage.getItem('gSheetId')||'';document.getElementById('sheetNameInp').value=localStorage.getItem('gSheetName')||'MozgásNapló';}
-
-function loadStats(){const all=getLocal(),l7=all.filter(e=>daysDiff(e.date)<=7),l30=all.filter(e=>daysDiff(e.date)<=30),avg=arr=>arr.length?(arr.reduce((s,e)=>s+e.score,0)/arr.length).toFixed(1):'–';document.getElementById('st7').textContent=avg(l7);document.getElementById('st30').textContent=avg(l30);document.getElementById('stAll').textContent=all.length;}
-
-function renderCharts(){
-  Object.values(charts).forEach(c=>c.destroy());charts={};
-  const all=getLocal().slice().reverse(),l30=all.filter(e=>daysDiff(e.date)<=30);
-  charts.score=new Chart(document.getElementById('chartScore').getContext('2d'),{type:'line',data:{labels:l30.map(e=>fmtDateShort(e.date)),datasets:[{label:'Pontszám',data:l30.map(e=>e.score),borderColor:'#1D6B78',backgroundColor:'rgba(29,107,120,0.09)',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#1D6B78',fill:true,tension:0.35}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{min:0,max:10,ticks:{stepSize:2},grid:{color:'rgba(0,0,0,0.05)'}},x:{ticks:{maxRotation:45},grid:{display:false}}},plugins:{legend:{display:false}}}});
-  const totals=EXERCISES.map(ex=>all.reduce((s,e)=>s+(e.exercises?.[ex.id]||0),0));
-  charts.ex=new Chart(document.getElementById('chartEx').getContext('2d'),{type:'bar',data:{labels:EXERCISES.map(ex=>ex.icon+' '+ex.label),datasets:[{label:'perc',data:totals,backgroundColor:'rgba(29,107,120,0.72)',borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{display:false},ticks:{font:{size:11}}}},plugins:{legend:{display:false}}}});
-  const we=all.filter(e=>e.weather?.temperature!=null);
-  charts.corr=new Chart(document.getElementById('chartCorr').getContext('2d'),{type:'scatter',data:{datasets:[{label:'Nap',data:we.map(e=>({x:e.weather.temperature,y:e.score})),backgroundColor:'rgba(184,88,48,0.65)',pointRadius:6}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{title:{display:true,text:'Hőmérséklet (°C)'},grid:{color:'rgba(0,0,0,0.05)'}},y:{min:0,max:10,title:{display:true,text:'Mozgás pontszám'},grid:{color:'rgba(0,0,0,0.05)'}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:d=>`${d.raw.x}°C → ${d.raw.y} pont`}}}}});
-}
-
-function loadHistory(){
-  const all=getLocal(),cont=document.getElementById('histContent');
-  if(!all.length){cont.innerHTML='<div class="empty-state"><div style="font-size:2.5rem">📋</div><p>Még nincs bejegyzés.</p></div>';return;}
-  const sp=s=>s>=8?'background:#E8F5EE;color:#2A7A52':s>=6?'background:#E8F4F6;color:#1D6B78':s>=4?'background:#FDF6E3;color:#9A6C18':'background:#FEF2F2;color:#B03030';
-  let html=`<div class="hist-wrap"><table class="hist-table"><thead><tr><th>Dátum</th><th>Pont</th><th>Tornák</th><th>Perc</th><th>Hőm.</th><th>RH</th><th>hPa</th></tr></thead><tbody>`;
-  all.slice(0,60).forEach(e=>{
-    const active=EXERCISES.filter(ex=>(e.exercises?.[ex.id]||0)>0).map(ex=>`${ex.icon}${e.exercises[ex.id]}p`).join(' ');
-    const total=EXERCISES.reduce((s,ex)=>s+(e.exercises?.[ex.id]||0),0);
-    html+=`<tr><td><strong>${e.date}</strong></td><td><span class="score-pill" style="${sp(e.score)}">${e.score}</span></td><td style="font-size:.8rem">${active||'–'}</td><td>${total||'–'}</td><td>${e.weather?.temperature!=null?e.weather.temperature.toFixed(1)+'°':'–'}</td><td>${e.weather?.humidity!=null?Math.round(e.weather.humidity)+'%':'–'}</td><td>${e.weather?.pressure!=null?e.weather.pressure:'–'}</td></tr>`;
-  });
-  cont.innerHTML=html+'</tbody></table></div>';
-}
-
-function exportCSV(){const all=getLocal();if(!all.length){showStatus('Nincs adat.','info');return;}let csv=buildHeaders().join(';')+'\n';all.map(e=>buildRow(e)).forEach(r=>{csv+=r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(';')+'\n';});const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));a.download='mozgasnaplo_'+new Date().toISOString().split('T')[0]+'.csv';a.click();showStatus('✓ CSV letöltve!','success');}
-function exportExcel(std=false){const all=getLocal();if(!all.length){showStatus('Nincs adat.','info');return;}let rows=all.map(e=>buildRow(e));if(std)rows=stdRows(rows);const ws=XLSX.utils.aoa_to_sheet([buildHeaders(),...rows]);ws['!cols']=Array(buildHeaders().length).fill({wch:13});const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,std?'Standardizált':'MozgásNapló');XLSX.writeFile(wb,`mozgasnaplo_${std?'std_':''}${new Date().toISOString().split('T')[0]}.xlsx`);showStatus('✓ Excel letöltve!','success');}
-function stdRows(rows){if(!rows.length)return rows;const numCols=[];for(let c=1;c<buildHeaders().length-1;c++)numCols.push(c);const st={};numCols.forEach(col=>{const vals=rows.map(r=>r[col]).filter(v=>typeof v==='number'&&!isNaN(v));if(!vals.length)return;const m=vals.reduce((s,v)=>s+v,0)/vals.length,sd=Math.sqrt(vals.reduce((s,v)=>s+(v-m)**2,0)/vals.length)||1;st[col]={m,sd};});return rows.map(row=>{const nr=[...row];numCols.forEach(col=>{if(st[col]&&typeof nr[col]==='number')nr[col]=Math.round(((nr[col]-st[col].m)/st[col].sd)*100)/100;});return nr;});}
-function clearLocal(){if(confirm('Biztosan törlöd az összes helyi adatot?')){localStorage.removeItem('mozgasnaplo');loadStats();loadHistory();showStatus('Törölve.','info');}}
-
-// ════════════ ANALYTICS ENGINE ════════════
-const S={
-  mean(a){return a.length?a.reduce((s,v)=>s+v,0)/a.length:0;},
-  std(a){if(a.length<2)return 0;const m=this.mean(a);return Math.sqrt(a.reduce((s,v)=>s+(v-m)**2,0)/a.length);},
-  r(x,y){const n=x.length;if(n<3)return 0;const mx=this.mean(x),my=this.mean(y),num=x.reduce((s,xi,i)=>s+(xi-mx)*(y[i]-my),0),den=Math.sqrt(x.reduce((s,xi)=>s+(xi-mx)**2,0)*y.reduce((s,yi)=>s+(yi-my)**2,0));return den?num/den:0;},
-  p(r,n){if(n<3)return '>0.15';const t=Math.abs(r)*Math.sqrt((n-2)/(1-r*r+1e-10));return t>3.5?'<0.001':t>2.8?'<0.01':t>2.0?'<0.05':t>1.5?'<0.15':'>0.15';},
-  str(r){const a=Math.abs(r);return a>0.6?'erős':a>0.3?'közepes':a>0.1?'gyenge':'elhanyagolható';}
+var EXICONS = {
+  gyogytorna:'🤸', szomato:'🖐', gyogyuszas:'🏊', masszazs:'💆',
+  manualterpia:'🙌', robotterpia_allo:'🦾', robotterpia_ulo:'🦿',
+  otthoni_felso:'💪', otthoni_vegyes:'🔄', otthoni_labak:'🦵', szobabicikli:'🚴'
 };
 
-function calcMQI(entries){if(!entries.length)return null;const s=[...entries].sort((a,b)=>a.date.localeCompare(b.date));let ws=0,wt=0;s.forEach((e,i)=>{const w=i+1;ws+=e.score*w;wt+=w;});const mqi=ws/wt;let cat,col;if(mqi>=7.5){cat='Kiváló';col='var(--green)';}else if(mqi>=5.5){cat='Közepes';col='var(--amber)';}else if(mqi>=3.5){cat='Gyenge';col='var(--accent)';}else{cat='Kritikus';col='var(--red)';}return{mqi,cat,col};}
-function calcPVI(entries){if(entries.length<3)return null;const sc=entries.map(e=>e.score),m=S.mean(sc),sd=S.std(sc),pvi=(sd/m)*100;let lbl=pvi<15?'Nagyon stabil':pvi<25?'Stabil':pvi<35?'Mérsékelt ingadozás':'Nagy ingadozás';return{pvi,lbl,mean:m,stddev:sd};}
-function calcTEI(entries){return EXERCISES.map(ex=>{const days=entries.filter(e=>(e.exercises?.[ex.id]||0)>0),tei=days.length?S.mean(days.map(e=>e.score)):null,totalMins=entries.reduce((s,e)=>s+(e.exercises?.[ex.id]||0),0);let rating='–';if(tei!==null){if(tei>=7.5)rating='Kiváló';else if(tei>=6.0)rating='Jó';else if(tei>=4.5)rating='Közepes';else rating='Gyenge';}let trend=0;if(days.length>=4){const sd=[...days].sort((a,b)=>a.date.localeCompare(b.date)),h=Math.floor(sd.length/2);trend=S.mean(sd.slice(h).map(e=>e.score))-S.mean(sd.slice(0,h).map(e=>e.score));}return{id:ex.id,label:ex.label,icon:ex.icon,count:days.length,tei,totalMins,rating,trend};}).sort((a,b)=>(b.tei||0)-(a.tei||0));}
-function calcCSI(entries){const res=[];for(let i=0;i<EXERCISES.length;i++)for(let j=i+1;j<EXERCISES.length;j++){const A=EXERCISES[i],B=EXERCISES[j],both=entries.filter(e=>(e.exercises?.[A.id]||0)>0&&(e.exercises?.[B.id]||0)>0);if(both.length<2)continue;const onlyA=entries.filter(e=>(e.exercises?.[A.id]||0)>0&&(e.exercises?.[B.id]||0)===0),onlyB=entries.filter(e=>(e.exercises?.[A.id]||0)===0&&(e.exercises?.[B.id]||0)>0),mB=S.mean(both.map(e=>e.score)),mA=onlyA.length?S.mean(onlyA.map(e=>e.score)):mB,mBo=onlyB.length?S.mean(onlyB.map(e=>e.score)):mB,base=Math.max(mA,mBo,0.1),csi=mB/base;res.push({A:A.id,B:B.id,labelA:A.label,labelB:B.label,iconA:A.icon,iconB:B.icon,mBoth:mB,mA,mB:mBo,csi,count:both.length,type:csi>1.1?'szinergia':csi<0.9?'antagonizmus':'semleges'});}return res.sort((a,b)=>b.csi-a.csi);}
-function calcWSI(entries){const w=entries.filter(e=>e.weather?.temperature!=null&&e.weather?.humidity!=null&&e.weather?.pressure!=null);if(w.length<3)return null;const sc=w.map(e=>e.score),tp=w.map(e=>e.weather.temperature),hm=w.map(e=>e.weather.humidity),pr=w.map(e=>e.weather.pressure),n=w.length,rT=S.r(tp,sc),rH=S.r(hm,sc),rP=S.r(pr,sc);const dom=[{name:'Hőmérséklet',r:Math.abs(rT)},{name:'Páratartalom',r:Math.abs(rH)},{name:'Légnyomás',r:Math.abs(rP)}].sort((a,b)=>b.r-a.r)[0].name;return{rT,rH,rP,pT:S.p(rT,n),pH:S.p(rH,n),pP:S.p(rP,n),n,dom};}
-function calcFDI(entries){const sorted=[...entries].filter(e=>e.weather?.pressure!=null).sort((a,b)=>a.date.localeCompare(b.date));const evts=[];for(let i=1;i<sorted.length;i++){const prev=sorted[i-1],curr=sorted[i],gap=(new Date(curr.date)-new Date(prev.date))/86400000;if(gap>2)continue;const dp=curr.weather.pressure-prev.weather.pressure;if(Math.abs(dp)<3)continue;evts.push({date:curr.date,dp,type:dp<0?'közeledő':'távolodó',score:curr.score,scoreDelta:curr.score-prev.score});}const app=evts.filter(e=>e.type==='közeledő'),dep=evts.filter(e=>e.type==='távolodó');return{evts,total:evts.length,appCount:app.length,depCount:dep.length,avgImpactApp:app.length?S.mean(app.map(e=>e.scoreDelta)):null,avgImpactDep:dep.length?S.mean(dep.map(e=>e.scoreDelta)):null,sensitive:evts.length>=3&&Math.abs(S.mean(evts.map(e=>e.scoreDelta)))>0.5};}
-function calcOptWeather(entries){const w=entries.filter(e=>e.weather?.temperature!=null&&e.weather?.humidity!=null&&e.weather?.pressure!=null);if(w.length<5)return null;const sorted=[...w].sort((a,b)=>b.score-a.score),n=Math.max(3,Math.floor(sorted.length*0.25)),top=sorted.slice(0,n),bot=sorted.slice(-n);const band=(arr,key)=>({mean:parseFloat(S.mean(arr.map(e=>e.weather[key])).toFixed(1)),min:parseFloat(Math.min(...arr.map(e=>e.weather[key])).toFixed(1)),max:parseFloat(Math.max(...arr.map(e=>e.weather[key])).toFixed(1))});return{opt:{temp:band(top,'temperature'),hum:band(top,'humidity'),press:band(top,'pressure')},adv:{temp:band(bot,'temperature'),hum:band(bot,'humidity'),press:band(bot,'pressure')},topMean:parseFloat(S.mean(top.map(e=>e.score)).toFixed(2)),botMean:parseFloat(S.mean(bot.map(e=>e.score)).toFixed(2))};}
-async function fetchForecast(){try{const d=await(await fetch(`https://api.open-meteo.com/v1/forecast?latitude=47.2017&longitude=17.5947&daily=temperature_2m_mean,relative_humidity_2m_mean,surface_pressure_mean&timezone=auto&forecast_days=4`)).json();const days=[];for(let i=1;i<=3;i++)days.push({date:d.daily.time[i],temperature:d.daily.temperature_2m_mean[i],humidity:Math.round(d.daily.relative_humidity_2m_mean[i]),pressure:Math.round(d.daily.surface_pressure_mean[i])});return days;}catch(e){return[];}}
-function adviseForecast(fc,tei,optW,wsi){const scored=tei.filter(t=>t.tei!==null).map(t=>{let sc=t.tei;if(optW&&wsi){const tD=Math.abs(fc.temperature-optW.opt.temp.mean),hD=Math.abs(fc.humidity-optW.opt.hum.mean),pD=Math.abs(fc.pressure-optW.opt.press.mean);sc-=(tD*Math.abs(wsi.rT)*0.3+hD*Math.abs(wsi.rH)*0.05+pD*Math.abs(wsi.rP)*0.02);}return{...t,prob:Math.round(Math.min(95,Math.max(20,(sc/10)*100)))};}).sort((a,b)=>b.prob-a.prob);let wa='normál';if(optW){const tD=Math.abs(fc.temperature-optW.opt.temp.mean),hD=Math.abs(fc.humidity-optW.opt.hum.mean),pD=Math.abs(fc.pressure-optW.opt.press.mean),pen=tD*0.3+hD*0.05+pD*0.02;if(pen>8)wa='kedvezőtlen';else if(pen>4)wa='átlag alatti';else if(pen<2)wa='kedvező';}return{scored,wa};}
+var SCORE_DATA = [
+  null,
+  {lbl:'Kritikus',     desc:'Alig tudok mozogni',            tag:'#B03030', tagBg:'#FEF2F2'},
+  {lbl:'Nagyon nehéz', desc:'Szinte minden mozgás nehéz',    tag:'#B03030', tagBg:'#FEF2F2'},
+  {lbl:'Nehéz',        desc:'Feszültség, lassúság',           tag:'#A05020', tagBg:'#FBF0EB'},
+  {lbl:'Kissé nehéz',  desc:'Küzdős, de megy',               tag:'#9A6C18', tagBg:'#FDF6E3'},
+  {lbl:'Közepes',      desc:'Átlagos nap',                   tag:'#9A6C18', tagBg:'#FDF6E3'},
+  {lbl:'Jó',           desc:'Átlag feletti mozgás',           tag:'#1D6B78', tagBg:'#E8F4F6'},
+  {lbl:'Jól megy',     desc:'Könnyedén mozgok',              tag:'#1D6B78', tagBg:'#E8F4F6'},
+  {lbl:'Nagyon jó',    desc:'Szinte minden megy',            tag:'#2A7A52', tagBg:'#E8F5EE'},
+  {lbl:'Kiváló',       desc:'Kivételesen könnyű mozgás',     tag:'#2A7A52', tagBg:'#E8F5EE'},
+  {lbl:'Fantasztikus', desc:'A legjobb, amit érezni tudok!', tag:'#2A7A52', tagBg:'#E8F5EE'}
+];
 
-async function runAnalysis(){
-  const period=parseInt(document.getElementById('analysisPeriod').value),all=getLocal(),entries=period===0?all:all.filter(e=>daysDiff(e.date)<=period);
-  if(!entries.length){showStatus('⚠️ Nincs elegendő adat.','err');return;}
-  document.getElementById('analysisPlaceholder').style.display='none';
-  document.getElementById('analysisMeta').textContent=`${entries.length} bejegyzés · ${entries[entries.length-1]?.date} – ${entries[0]?.date} · Generálva: ${new Date().toLocaleDateString('hu-HU')}`;
-  const mqi=calcMQI(entries),pvi=calcPVI(entries),tei=calcTEI(entries),csi=calcCSI(entries),wsi=calcWSI(entries),fdi=calcFDI(entries),optW=calcOptWeather(entries),forecast=await fetchForecast();
-  lastAnalysis={mqi,pvi,tei,csi,wsi,fdi,optW,forecast,entries,period};
-  renderIdxCards(mqi,pvi,tei,wsi);renderTEI(tei);renderCSI(csi);renderWeatherSection(wsi,optW);renderFrontSection(fdi);
-  if(forecast.length)renderForecast(forecast,tei,optW,wsi);
-  renderDiagnosis(entries,mqi,pvi,tei,csi,wsi,fdi,optW,period);renderDataTable(entries);
-  showStatus('✓ Elemzés kész!','success');
+var weatherData = {temperature:null, humidity:null, pressure:null};
+var accessToken = null;
+var tokenClient = null;
+var appCharts = {};
+var lastAnalysis = null;
+
+// ── INIT ──────────────────────────────────────────────────
+window.onload = function() {
+  setToday();
+  buildExGrid();
+  loadSettings();
+  refreshWeather();
+  loadStats();
+  loadHistory();
+};
+
+window.onGoogleLibraryLoad = function() { initGAuth(); };
+
+// ── CORE ──────────────────────────────────────────────────
+function setToday() {
+  document.getElementById('entryDate').value = new Date().toISOString().split('T')[0];
 }
 
-function renderIdxCards(mqi,pvi,tei,wsi){
-  const top=tei.filter(t=>t.tei!==null)[0];
-  document.getElementById('idxCards').innerHTML=`<div class="idx-grid">
-    <div class="idx-card"><div class="idx-val" style="color:${mqi?mqi.col:'var(--text3)'}">${mqi?mqi.mqi.toFixed(2):'–'}</div><div class="idx-name">MQI · Mozgásminőség Index</div>${mqi?`<div class="idx-sub" style="background:${mqi.col}20;color:${mqi.col}">${mqi.cat}</div>`:''}</div>
-    <div class="idx-card"><div class="idx-val" style="color:${pvi?pvi.pvi<25?'var(--green)':pvi.pvi<35?'var(--amber)':'var(--red)':'var(--text3)'}">${pvi?pvi.pvi.toFixed(1)+'%':'–'}</div><div class="idx-name">PVI · Variabilitás Index</div>${pvi?`<div class="idx-sub" style="background:var(--bg2);color:var(--text2)">${pvi.lbl}</div>`:''}</div>
-    <div class="idx-card"><div class="idx-val" style="color:var(--primary)">${top&&top.tei!==null?top.tei.toFixed(2):'–'}</div><div class="idx-name">TEI max · ${top?top.icon+' '+top.label:'–'}</div>${top&&top.tei!==null?`<span class="badge badge-green">${top.rating}</span>`:''}</div>
-    <div class="idx-card"><div class="idx-val" style="color:var(--primary)">${wsi?wsi.rT.toFixed(3):'–'}</div><div class="idx-name">WSI · Hőmérs. korreláció (r)</div>${wsi?`<span class="badge badge-blue">${S.str(wsi.rT)}</span>`:''}</div>
-    <div class="idx-card"><div class="idx-val" style="color:var(--primary)">${wsi?wsi.rP.toFixed(3):'–'}</div><div class="idx-name">WSI · Légnyomás korrel. (r)</div>${wsi?`<span class="badge badge-blue">${S.str(wsi.rP)}</span>`:''}</div>
-    <div class="idx-card"><div class="idx-val" style="color:${pvi?pvi.mean>6.5?'var(--green)':pvi.mean>4.5?'var(--amber)':'var(--red)':'var(--text3)'}">${pvi?pvi.mean.toFixed(2):'–'}</div><div class="idx-name">Átlag mozgáspontszám</div>${pvi?`<span class="badge badge-blue">σ = ${pvi.stddev.toFixed(2)}</span>`:''}</div>
-  </div>`;}
+function showTab(name, btn) {
+  var tabs = document.querySelectorAll('.tab-content');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  var btns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  if (btn) btn.classList.add('active');
+  if (name === 'statisztika') renderCharts();
+  if (name === 'elozmenyek') loadHistory();
+}
 
-function renderTEI(tei){
-  const rows=tei.map((t,i)=>{if(t.count===0)return'';const pct=t.tei?(t.tei/10)*100:0,bc=t.tei>=7.5?'var(--green)':t.tei>=6?'var(--primary)':t.tei>=4.5?'var(--amber)':'var(--red)',bCls=t.rating==='Kiváló'?'badge-green':t.rating==='Jó'?'badge-blue':t.rating==='Közepes'?'badge-amber':'badge-red',tr=t.trend>0.3?`<span class="trend-up">▲${t.trend.toFixed(1)}</span>`:t.trend<-0.3?`<span class="trend-dn">▼${Math.abs(t.trend).toFixed(1)}</span>`:`<span class="trend-eq">→</span>`;return`<tr><td class="rank">${i+1}</td><td>${t.icon} <strong>${t.label}</strong></td><td><strong>${t.tei!==null?t.tei.toFixed(2):'–'}</strong><div class="tei-bar-wrap"><div class="tei-bar" style="width:${pct}%;background:${bc}"></div></div></td><td>${t.count}</td><td>${t.totalMins}</td><td><span class="badge ${bCls}">${t.rating}</span></td><td>${tr}</td></tr>`;}).join('');
-  document.getElementById('teiSection').innerHTML=`<div class="card"><div class="card-title">🏅 Kezelési Hatékonysági Rangsor (TEI)</div><div style="overflow-x:auto"><table class="ana-table"><thead><tr><th>#</th><th>Kezelés</th><th>TEI (max 10)</th><th>Alkalmak</th><th>Összes perc</th><th>Értékelés</th><th>Trend</th></tr></thead><tbody>${rows}</tbody></table></div><p style="font-size:.78rem;color:var(--text3);margin-top:10px">TEI = átlagos mozgáspontszám az adott kezelés napjain · Trend = 2. fél – 1. fél átlag</p></div>`;}
+function showStatus(msg, type) {
+  type = type || 'info';
+  var el = document.getElementById('statusMsg');
+  el.textContent = msg;
+  el.className = 'status show ' + (type === 'success' ? 'ok' : type);
+  clearTimeout(el._t);
+  el._t = setTimeout(function() { el.classList.remove('show'); }, 5500);
+}
 
-function renderCSI(csi){
-  if(!csi.length){document.getElementById('csiSection').innerHTML=`<div class="card"><div class="card-title">🔗 Kombinációs Szinergia (CSI)</div><p style="color:var(--text3)">Kevés adat – legalább 2 együttes alkalom szükséges páronként.</p></div>`;return;}
-  const rows=csi.slice(0,8).map((c,i)=>{const cls=c.type==='szinergia'?'csi-syn':c.type==='antagonizmus'?'csi-ant':'csi-neu',icon=c.type==='szinergia'?'✅':c.type==='antagonizmus'?'❌':'➡️';return`<tr><td class="rank">${i+1}</td><td>${c.iconA} ${c.labelA}</td><td>${c.iconB} ${c.labelB}</td><td class="${cls}"><strong>${c.csi.toFixed(3)}</strong></td><td>${c.mBoth.toFixed(2)}</td><td>${c.count}</td><td>${icon} ${c.type}</td></tr>`;}).join('');
-  document.getElementById('csiSection').innerHTML=`<div class="card"><div class="card-title">🔗 Kombinációs Szinergia Index (CSI) – Top párok</div><div style="overflow-x:auto"><table class="ana-table"><thead><tr><th>#</th><th>Kezelés A</th><th>Kezelés B</th><th>CSI</th><th>Átlag pont</th><th>Alkalmak</th><th>Típus</th></tr></thead><tbody>${rows}</tbody></table></div><p style="font-size:.78rem;color:var(--text3);margin-top:10px">CSI>1.1: szinergia · CSI&lt;0.9: antagonizmus · 0.9–1.1: semleges</p></div>`;}
+function daysDiff(d) { return Math.floor((Date.now() - new Date(d)) / 86400000); }
+function fmtShort(d) { var dt = new Date(d); return (dt.getMonth()+1) + '/' + dt.getDate(); }
+function fmtHu(d) { return new Date(d).toLocaleDateString('hu-HU', {year:'numeric',month:'long',day:'numeric'}); }
 
-function renderWeatherSection(wsi,optW){
-  let cH='',oH='';
-  if(wsi){const rows=[{n:'Hőmérséklet',r:wsi.rT,p:wsi.pT},{n:'Páratartalom',r:wsi.rH,p:wsi.pH},{n:'Légnyomás',r:wsi.rP,p:wsi.pP}].map(row=>{const cls=Math.abs(row.r)>0.5?'badge-green':Math.abs(row.r)>0.3?'badge-blue':'badge-amber';return`<tr><td><strong>${row.n}</strong></td><td><strong>${row.r.toFixed(3)}</strong></td><td>${row.p}</td><td>${row.r>0?'Pozitív':'Negatív'}</td><td><span class="badge ${cls}">${S.str(row.r)}</span></td></tr>`;}).join('');cH=`<table class="ana-table"><thead><tr><th>Változó</th><th>Pearson r</th><th>p-érték</th><th>Irány</th><th>Erősség</th></tr></thead><tbody>${rows}</tbody></table><p style="font-size:.78rem;color:var(--text3);margin-top:8px">n = ${wsi.n} nap · Domináns tényező: <strong>${wsi.dom}</strong></p>`;}
-  else cH='<p style="color:var(--text3)">Kevés adat (min. 3 időjárásos nap szükséges).</p>';
-  if(optW){oH=`<div class="card-title" style="margin-top:20px">🎯 Optimális időjárási körülmények</div><div style="overflow-x:auto"><table class="ana-table"><thead><tr><th>Változó</th><th>Optimum átlag</th><th>Optimum tartomány</th><th>Kedvezőtlen átlag</th><th>Különbség</th></tr></thead><tbody><tr><td><strong>Hőmérséklet (°C)</strong></td><td><strong>${optW.opt.temp.mean}°C</strong></td><td>${optW.opt.temp.min}–${optW.opt.temp.max}°C</td><td>${optW.adv.temp.mean}°C</td><td><strong>${(optW.opt.temp.mean-optW.adv.temp.mean).toFixed(1)}°C</strong></td></tr><tr><td><strong>Páratartalom (%)</strong></td><td><strong>${optW.opt.hum.mean}%</strong></td><td>${optW.opt.hum.min}–${optW.opt.hum.max}%</td><td>${optW.adv.hum.mean}%</td><td><strong>${(optW.opt.hum.mean-optW.adv.hum.mean).toFixed(1)}%</strong></td></tr><tr><td><strong>Légnyomás (hPa)</strong></td><td><strong>${optW.opt.press.mean} hPa</strong></td><td>${optW.opt.press.min}–${optW.opt.press.max} hPa</td><td>${optW.adv.press.mean} hPa</td><td><strong>${(optW.opt.press.mean-optW.adv.press.mean).toFixed(1)} hPa</strong></td></tr></tbody></table></div><p style="font-size:.78rem;color:var(--text3);margin-top:8px">Optimum napok átlag pontszáma: <strong>${optW.topMean}/10</strong> · Kedvezőtlen napok: <strong>${optW.botMean}/10</strong></p>`;}
-  document.getElementById('weatherSection').innerHTML=`<div class="card"><div class="card-title">🌡️ Időjárás-korreláció &amp; Optimális körülmények</div>${cH}${oH}</div>`;}
+function onScore(v) {
+  var n = parseInt(v), sd = SCORE_DATA[n];
+  document.getElementById('scoreBig').textContent = n;
+  document.getElementById('scoreBig').style.color = sd.tag;
+  document.getElementById('scoreTag').textContent = sd.lbl;
+  document.getElementById('scoreTag').style.background = sd.tagBg;
+  document.getElementById('scoreTag').style.color = sd.tag;
+  document.getElementById('scoreDesc').textContent = sd.desc;
+}
 
-function renderFrontSection(fdi){
-  const evtHtml=fdi.evts.length?`<ul class="front-list">${fdi.evts.slice(0,10).map(ev=>`<li><span class="front-badge ${ev.type==='közeledő'?'front-app':'front-dep'}">${ev.type==='közeledő'?'↘ Közeledő':'↗ Távolodó'}</span><strong>${ev.date}</strong><span style="color:var(--text2)">${ev.dp>0?'+':''}${ev.dp.toFixed(1)} hPa</span><span style="${ev.scoreDelta>=0?'color:var(--green)':'color:var(--red)'}">${ev.scoreDelta>=0?'▲':'▼'}${Math.abs(ev.scoreDelta).toFixed(1)} pont</span></li>`).join('')}</ul>`:'<p style="color:var(--text3)">Nem azonosítható frontesemény.</p>';
-  const sensHtml=fdi.sensitive?`<span class="badge badge-red">Frontérzékenység azonosítható</span>`:`<span class="badge badge-green">Nincs egyértelmű frontérzékenység</span>`;
-  document.getElementById('frontSection').innerHTML=`<div class="card"><div class="card-title">🌪️ Frontérzékenység Elemzés (FDI)</div><div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px"><div class="wd-box" style="flex:1"><div class="wd-val">${fdi.total}</div><div class="wd-lbl">Frontesemény</div></div><div class="wd-box" style="flex:1"><div class="wd-val" style="color:var(--red)">${fdi.appCount}</div><div class="wd-lbl">Közeledő</div></div><div class="wd-box" style="flex:1"><div class="wd-val" style="color:var(--green)">${fdi.depCount}</div><div class="wd-lbl">Távolodó</div></div><div class="wd-box" style="flex:1"><div class="wd-val">${fdi.avgImpactApp!==null?(fdi.avgImpactApp>0?'+':'')+fdi.avgImpactApp.toFixed(2):'–'}</div><div class="wd-lbl">Hatás (közeledő)</div></div></div>${sensHtml}<div style="margin-top:14px">${evtHtml}</div></div>`;}
+function buildExGrid() {
+  var grid = document.getElementById('exGrid');
+  grid.innerHTML = '';
+  for (var i = 0; i < EXERCISES.length; i++) {
+    var ex = EXERCISES[i];
+    var icon = EXICONS[ex.id] || '';
+    var div = document.createElement('div');
+    div.className = 'ex-item';
+    div.id = 'exItem-' + ex.id;
+    div.innerHTML = '<div class="ex-name">' +
+      '<input type="checkbox" id="chk-' + ex.id + '" onchange="toggleEx(\'' + ex.id + '\')" />' +
+      '<label for="chk-' + ex.id + '">' + icon + ' ' + ex.label + '</label>' +
+      '</div>' +
+      '<div class="dur-wrap">' +
+      '<input type="number" id="dur-' + ex.id + '" min="5" max="360" step="5" value="30" />' +
+      '<span>perc</span></div>';
+    grid.appendChild(div);
+  }
+}
 
-function renderForecast(forecast,tei,optW,wsi){
-  const cards=forecast.map(fc=>{const adv=adviseForecast(fc,tei,optW,wsi),wCol=adv.wa==='kedvező'?'var(--green)':adv.wa==='kedvezőtlen'?'var(--red)':'var(--amber)',dateStr=new Date(fc.date).toLocaleDateString('hu-HU',{weekday:'short',month:'short',day:'numeric'});return`<div class="fc-card"><div class="fc-date">${dateStr}</div><div class="fc-weather">🌡️ ${fc.temperature.toFixed(1)}°C · 💧 ${fc.humidity}% · 🔽 ${fc.pressure} hPa</div><div style="font-size:.8rem;font-weight:700;color:${wCol};margin-bottom:8px">Időjárás: ${adv.wa}</div><ul class="fc-list">${adv.scored.slice(0,4).map(t=>`<li>${t.icon} ${t.label.replace('Otthoni – ','').replace('Robotterápia – ','R-')} <span style="float:right;font-weight:700;color:var(--primary)">${t.prob}%</span></li>`).join('')}</ul></div>`;}).join('');
-  document.getElementById('forecastSection').innerHTML=`<div class="card"><div class="card-title">🔮 3 napos előrejelzés &amp; Kezelési Tanács – Nórápi</div><div class="forecast-grid">${cards}</div><p style="font-size:.78rem;color:var(--text3);margin-top:10px">A valószínűség a TEI-n és az előrejelzett időjárás optimum-egyezésén alapul.</p></div>`;}
+function toggleEx(id) {
+  var chk = document.getElementById('chk-' + id).checked;
+  document.getElementById('exItem-' + id).classList[chk ? 'add' : 'remove']('sel');
+}
 
-function renderDiagnosis(entries,mqi,pvi,tei,csi,wsi,fdi,optW,period){
-  const now=new Date().toLocaleDateString('hu-HU',{year:'numeric',month:'long',day:'numeric'}),periStr=period===0?'az összes rendelkezésre álló':`az utóbbi ${period}`,topTEI=tei.filter(t=>t.tei!==null),topCSI=csi.filter(c=>c.type==='szinergia'),antCSI=csi.filter(c=>c.type==='antagonizmus');
-  let h='<div class="diagnosis-body">';
-  h+=`<h4>1. Általános áttekintés</h4><p>Az elemzés <strong>${entries.length} napi bejegyzés</strong> alapján készült, ${periStr} napra vonatkozóan (Nórápi, ${now}).</p>`;
-  if(mqi)h+=`<p>A mozgásteljesítmény összesített mutatója (<strong>MQI = ${mqi.mqi.toFixed(2)}</strong>) a <strong>${mqi.cat}</strong> kategóriába sorolja az időszakot. ${mqi.mqi>=7?'A vizsgált időszak mozgásilag kedvező volt.':mqi.mqi>=5?'A mozgásteljesítmény átlagos szintű volt.':'A mozgásteljesítmény az átlag alatt marad.'}</p>`;
-  h+=`<h4>2. Teljesítmény és stabilitás</h4>`;
-  if(pvi)h+=`<p>A variabilitási index (<strong>PVI = ${pvi.pvi.toFixed(1)}%</strong>, átlag: ${pvi.mean.toFixed(1)}, σ = ${pvi.stddev.toFixed(2)}) alapján a mozgásteljesítmény <strong>${pvi.lbl}</strong> ingadozást mutat. ${pvi.pvi<20?'Kiszámítható, jól tervezhető állapot.':pvi.pvi<35?'Bizonyos napokon jelentős különbségek mutatkoznak.':'Fokozott figyelmet érdemel a nagy variabilitás.'}</p>`;
-  else h+=`<p>A stabilitáshoz több bejegyzés szükséges.</p>`;
-  h+=`<h4>3. Kezelési hatékonyság (TEI)</h4>`;
-  if(topTEI.length>=1){h+=`<p>A leghatékonyabb kezelések:</p><ul>`;topTEI.slice(0,3).forEach((t,i)=>{h+=`<li>${t.icon} <strong>${t.label}</strong> — TEI: ${t.tei.toFixed(2)}/10, ${t.count} alkalom, ${t.totalMins} perc, ${t.trend>0.3?'emelkedő tendencia':t.trend<-0.3?'csökkenő tendencia':'stabil'}. Értékelés: <em>${t.rating}</em>.</li>`;});h+=`</ul>`;if(topTEI.length>=4)h+=`<p>Legalacsonyabb TEI-értékű kezelések: ${topTEI.slice(-2).map(t=>`<strong>${t.label}</strong> (TEI: ${t.tei.toFixed(2)})`).join(', ')}.</p>`;}
-  else h+=`<p>A TEI elemzéshez több bejegyzés szükséges kezelésenként.</p>`;
-  h+=`<h4>4. Kombinációs szinergiák (CSI)</h4>`;
-  if(topCSI.length){h+=`<p>Szinergista kombinációk (CSI > 1.1):</p><ul>`;topCSI.slice(0,3).forEach(c=>{h+=`<li>${c.iconA}<strong>${c.labelA}</strong> + ${c.iconB}<strong>${c.labelB}</strong> — CSI: ${c.csi.toFixed(3)}, átlag: ${c.mBoth.toFixed(1)}/10, ${c.count} alkalom.</li>`;});h+=`</ul>`;}else h+=`<p>Szinergiaelemzéshez legalább 2 közös alkalom szükséges páronként.</p>`;
-  if(antCSI.length)h+=`<p>Antagonista kombinációk (CSI &lt; 0.9): ${antCSI.slice(0,2).map(c=>`<strong>${c.labelA} + ${c.labelB}</strong>`).join(', ')}.</p>`;
-  h+=`<h4>5. Meteorológiai korreláció</h4>`;
-  if(wsi){h+=`<p>Pearson-korreláció elemzése (n = ${wsi.n} nap):</p><ul><li><strong>Hőmérséklet:</strong> r = ${wsi.rT.toFixed(3)} (${S.str(wsi.rT)}, ${wsi.rT>0?'pozitív':'negatív'}, p ${wsi.pT})</li><li><strong>Páratartalom:</strong> r = ${wsi.rH.toFixed(3)} (${S.str(wsi.rH)}, ${wsi.rH>0?'pozitív':'negatív'}, p ${wsi.pH})</li><li><strong>Légnyomás:</strong> r = ${wsi.rP.toFixed(3)} (${S.str(wsi.rP)}, ${wsi.rP>0?'pozitív':'negatív'}, p ${wsi.pP})</li></ul><p>Domináns meteorológiai tényező: <strong>${wsi.dom}</strong>.</p>`;}
-  else h+=`<p>Meteorológiai korreláció elemzéséhez legalább 3 időjárásos bejegyzés szükséges.</p>`;
-  if(optW){h+=`<h4>6. Optimális körülmények</h4><p>A legjobb mozgásnapokon (átlag: ${optW.topMean}/10) jellemző körülmények: <strong>${optW.opt.temp.mean}°C</strong> (${optW.opt.temp.min}–${optW.opt.temp.max}°C), <strong>${optW.opt.hum.mean}%</strong> RH, <strong>${optW.opt.press.mean} hPa</strong>. Kedvezőtlen napokon (átlag: ${optW.botMean}/10): ${optW.adv.temp.mean}°C, ${optW.adv.hum.mean}%, ${optW.adv.press.mean} hPa.</p>`;}
-  h+=`<h4>7. Frontérzékenység</h4>`;
-  if(fdi.total>0){h+=`<p>${fdi.total} frontátvonulás (${fdi.appCount} közeledő, ${fdi.depCount} távolodó). `;if(fdi.avgImpactApp!==null)h+=`Közeledő frontnál átlag pontszámváltozás: <strong>${fdi.avgImpactApp>0?'+':''}${fdi.avgImpactApp.toFixed(2)}</strong> pont. `;h+=fdi.sensitive?`<strong>Frontérzékenység azonosítható.</strong> Javasolt könnyebb kezelések frontidőszakban.</p>`:`Egyértelmű frontérzékenység nem mutatható ki.</p>`;}
-  else h+=`<p>Frontérzékenység elemzéséhez több légnyomásadattal ellátott bejegyzés szükséges.</p>`;
-  h+=`<h4>8. Összefoglalás</h4><ul>`;
-  if(mqi)h+=`<li>MQI = <strong>${mqi.mqi.toFixed(2)}</strong> → ${mqi.cat}</li>`;
-  if(pvi)h+=`<li>PVI = <strong>${pvi.pvi.toFixed(1)}%</strong> → ${pvi.lbl}</li>`;
-  if(topTEI.length)h+=`<li>Leghatékonyabb kezelés: <strong>${topTEI[0].label}</strong> (TEI: ${topTEI[0].tei.toFixed(2)})</li>`;
-  if(topCSI.length)h+=`<li>Legjobb kombináció: <strong>${topCSI[0].labelA} + ${topCSI[0].labelB}</strong> (CSI: ${topCSI[0].csi.toFixed(3)})</li>`;
-  if(wsi)h+=`<li>Legerősebb időjárási hatás: <strong>${wsi.dom}</strong></li>`;
-  if(fdi.sensitive)h+=`<li><strong>Frontérzékenység kimutatható</strong> – frontátvonulások körül pihenés javasolt</li>`;
-  if(optW)h+=`<li>Optimális hőmérsékleti tartomány: <strong>${optW.opt.temp.min}–${optW.opt.temp.max}°C</strong></li>`;
-  h+=`</ul></div>`;
-  document.getElementById('diagnosisSection').innerHTML=`<div class="card"><div class="card-title">📋 Szöveges Diagnózis – Teljes Elemzés</div>${h}</div>`;}
+// ── IDŐJÁRÁS ──────────────────────────────────────────────
+function refreshWeather() {
+  document.getElementById('wHint').textContent = 'Frissítés...';
+  var url = 'https://api.open-meteo.com/v1/forecast?latitude=47.2017&longitude=17.5947' +
+    '&daily=temperature_2m_mean,relative_humidity_2m_mean,surface_pressure_mean&timezone=auto&forecast_days=1';
+  fetch(url).then(function(r) { return r.json(); }).then(function(d) {
+    weatherData = {
+      temperature: d.daily && d.daily.temperature_2m_mean ? d.daily.temperature_2m_mean[0] : null,
+      humidity:    d.daily && d.daily.relative_humidity_2m_mean ? Math.round(d.daily.relative_humidity_2m_mean[0]) : null,
+      pressure:    d.daily && d.daily.surface_pressure_mean ? Math.round(d.daily.surface_pressure_mean[0]) : null
+    };
+    document.getElementById('wT').textContent = weatherData.temperature !== null ? weatherData.temperature.toFixed(1) : '-';
+    document.getElementById('wH').textContent = weatherData.humidity !== null ? weatherData.humidity : '-';
+    document.getElementById('wP').textContent = weatherData.pressure !== null ? weatherData.pressure : '-';
+    var now = new Date();
+    document.getElementById('wHint').textContent = 'Nórápi ' + now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
+    document.getElementById('wDetailStatus').style.display = 'none';
+    var dg = document.getElementById('wDetailGrid');
+    dg.style.display = 'grid';
+    dg.innerHTML =
+      '<div class="wd-box"><div class="wd-val">' + (weatherData.temperature !== null ? weatherData.temperature.toFixed(1) + '°' : '-') + '</div><div class="wd-lbl">Átlag hőmérséklet</div></div>' +
+      '<div class="wd-box"><div class="wd-val">' + (weatherData.humidity !== null ? weatherData.humidity + '%' : '-') + '</div><div class="wd-lbl">Átlag páratartalom</div></div>' +
+      '<div class="wd-box"><div class="wd-val">' + (weatherData.pressure !== null ? weatherData.pressure : '-') + '</div><div class="wd-lbl">Átlag légnyomás (hPa)</div></div>';
+  }).catch(function() {
+    document.getElementById('wHint').textContent = 'Hiba - kattints újra';
+  });
+}
 
-function renderDataTable(entries){
-  const rows=entries.slice(0,30).map((e,i)=>{const total=EXERCISES.reduce((s,ex)=>s+(e.exercises?.[ex.id]||0),0),exList=EXERCISES.filter(ex=>(e.exercises?.[ex.id]||0)>0).map(ex=>`${ex.icon}${e.exercises[ex.id]}p`).join(' ');return`<tr style="${i%2?'background:var(--bg)':''}"><td>${e.date}</td><td style="text-align:center;font-weight:700">${e.score}</td><td style="font-size:.8rem">${exList||'–'}</td><td>${total||'–'}</td><td>${e.weather?.temperature!=null?e.weather.temperature.toFixed(1)+'°':'–'}</td><td>${e.weather?.humidity!=null?Math.round(e.weather.humidity)+'%':'–'}</td><td>${e.weather?.pressure!=null?e.weather.pressure:'–'}</td></tr>`;}).join('');
-  document.getElementById('dataTableSection').innerHTML=`<div class="card"><div class="card-title">📊 Nyers adattábla (utolsó 30 bejegyzés)</div><div style="overflow-x:auto"><table class="ana-table"><thead><tr><th>Dátum</th><th>Pont</th><th>Kezelések</th><th>Perc</th><th>Hőm.</th><th>RH</th><th>hPa</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;}
+// ── GOOGLE AUTH ────────────────────────────────────────────
+function initGAuth() {
+  var cid = localStorage.getItem('gClientId');
+  if (!cid || !window.google || !window.google.accounts) return;
+  try {
+    tokenClient = google.accounts.oauth2.initTokenClient({
+      client_id: cid,
+      scope: 'https://www.googleapis.com/auth/spreadsheets',
+      callback: function(r) {
+        if (r.error) { showStatus('Google hitelesítési hiba: ' + r.error, 'err'); return; }
+        accessToken = r.access_token;
+        updateAuthUI(true);
+        showStatus('Sikeresen bejelentkezve!', 'success');
+      }
+    });
+  } catch(e) { console.error(e); }
+}
 
-// ════════════ PDF EXPORT ════════════
-async function exportAnalysisPDF(){
-  if(!lastAnalysis){showStatus('⚠️ Először futtasd le az elemzést!','err');return;}
-  showStatus('⏳ PDF generálása...','info');
-  const {mqi,pvi,tei,csi,wsi,fdi,optW,entries,period}=lastAnalysis;
-  const now=new Date().toLocaleDateString('hu-HU',{year:'numeric',month:'long',day:'numeric'}),periStr=period===0?'Összes adat':`Utóbbi ${period} nap`,topTEI=tei.filter(t=>t.tei!==null),topCSI=csi.filter(c=>c.type==='szinergia');
-  const th='background:#1D6B78;color:white;padding:7px 9px;text-align:left;font-size:9pt;border:1px solid #1D6B78';
-  const td='padding:6px 9px;border:1px solid #DDD8CE;font-size:9pt';
-  const teiRows=topTEI.map((t,i)=>`<tr style="background:${i%2?'#f7f7f7':'white'}"><td style="${td};text-align:center;font-weight:700">${i+1}</td><td style="${td}">${t.icon} ${t.label}</td><td style="${td};text-align:center;font-weight:700;color:#1D6B78">${t.tei!==null?t.tei.toFixed(2):'–'}</td><td style="${td};text-align:center">${t.count}</td><td style="${td};t
+function gSignIn() {
+  var cid = document.getElementById('clientIdInp').value.trim();
+  if (!cid) { showStatus('Add meg az OAuth Client ID-t!', 'err'); return; }
+  saveSettings();
+  if (!tokenClient) initGAuth();
+  if (tokenClient) tokenClient.requestAccessToken({prompt:''});
+  else showStatus('Google Auth inicializálás sikertelen.', 'err');
+}
+
+function gSignOut() {
+  if (accessToken) google.accounts.oauth2.revoke(accessToken, function(){});
+  accessToken = null;
+  updateAuthUI(false);
+  showStatus('Kijelentkezve.', 'info');
+}
+
+function updateAuthUI(on) {
+  document.getElementById('authBadge').textContent = on ? 'Bejelentkezve' : 'Nincs bejelentkezve';
+  document.getElementById('authBadge').className = 'auth-badge ' + (on ? 'on' : 'off');
+  document.getElementById('gSignInBtn').style.display = on ? 'none' : 'inline-flex';
+  document.getElementById('gSignOutBtn').style.display = on ? 'inline-flex' : 'none';
+}
+
+// ── MENTÉS ────────────────────────────────────────────────
+function saveEntry() {
+  var btn = document.getElementById('saveBtn');
+  btn.disabled = true; btn.textContent = 'Mentés...';
+  var date = document.getElementById('entryDate').value;
+  var score = parseInt(document.getElementById('scoreSlider').value);
+  var notes = document.getElementById('notes').value;
+  if (!date) { showStatus('Kérlek válassz dátumot!', 'err'); btn.disabled=false; btn.textContent='Bejegyzés mentése'; return; }
+  var exercises = {};
+  for (var i = 0; i < EXERCISES.length; i++) {
+    var ex = EXERCISES[i];
+    var chk = document.getElementById('chk-' + ex.id).checked;
+    exercises[ex.id] = chk ? (parseInt(document.getElementById('dur-' + ex.id).value) || 0) : 0;
+  }
+  var entry = {date:date, score:score, exercises:exercises, weather:{temperature:weatherData.temperature,humidity:weatherData.humidity,pressure:weatherData.pressure}, notes:notes, ts:new Date().toISOString()};
+  saveLocal(entry);
+  if (accessToken) {
+    sheetsAppend(entry).then(function() {
+      showStatus('Mentve helyi tárolóba és Google Sheets-be!', 'success');
+    }).catch(function(e) {
+      showStatus('Helyi mentés OK. Sheets hiba: ' + e.message, 'info');
+    }).finally(function() {
+      btn.disabled=false; btn.textContent='Bejegyzés mentése';
+    });
+  } else {
+    showStatus('Mentve helyi tárolóba. (Google Sheets-hez jelentkezz be.)', 'info');
+    btn.disabled=false; btn.textContent='Bejegyzés mentése';
+  }
+  resetForm();
+  loadStats();
+}
+
+function resetForm() {
+  setToday();
+  document.getElementById('scoreSlider').value = 5; onScore(5);
+  document.getElementById('notes').value = '';
+  for (var i = 0; i < EXERCISES.length; i++) {
+    document.getElementById('chk-' + EXERCISES[i].id).checked = false;
+    document.getElementById('exItem-' + EXERCISES[i].id).classList.remove('sel');
+    document.getElementById('dur-' + EXERCISES[i].id).value = 30;
+  }
+}
+
+// ── LOCAL STORAGE ──────────────────────────────────────────
+function saveLocal(entry) {
+  var all = getLocal();
+  var idx = -1;
+  for (var i = 0; i < all.length; i++) { if (all[i].date === entry.date) { idx = i; break; } }
+  if (idx >= 0) all[idx] = entry; else all.push(entry);
+  all.sort(function(a,b){ return b.date.localeCompare(a.date); });
+  localStorage.setItem('mozgasnaplo', JSON.stringify(all));
+}
+
+function getLocal() {
+  try { return JSON.parse(localStorage.getItem('mozgasnaplo') || '[]'); }
+  catch(e) { return []; }
+}
+
+// ── GOOGLE SHEETS API ─────────────────────────────────────
+function sheetsAppend(entry) {
+  var sid = localStorage.getItem('gSheetId');
+  var sname = localStorage.getItem('gSheetName') || 'MozgásNapló';
+  if (!sid) return Promise.reject(new Error('Nincs Sheets ID.'));
+  return ensureHeader(sid, sname).then(function() {
+    var url = 'https://sheets.googleapis.com/v4/spreadsheets/' + sid + '/values/' +
+      encodeURIComponent(sname) + '!A1:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS';
+    return fetch(url, {
+      method: 'POST',
+      headers: {'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'},
+      body: JSON.stringify({values:[buildRow(entry)]})
+    }).then(function(r) {
+      if (!r.ok) return r.json().then(function(e) { throw new Error(e.error && e.error.message ? e.error.message : 'Sheets API hiba'); });
+    });
+  });
+}
+
+function ensureHeader(sid, sname) {
+  var url = 'https://sheets.googleapis.com/v4/spreadsheets/' + sid + '/values/' + encodeURIComponent(sname) + '!A1';
+  return fetch(url, {headers:{'Authorization':'Bearer '+accessToken}}).then(function(r){ return r.json(); }).then(function(d) {
+    if (d.values && d.values[0] && d.values[0][0] === 'Dátum') return;
+    var wurl = 'https://sheets.googleapis.com/v4/spreadsheets/' + sid + '/values/' + encodeURIComponent(sname) + '!A1?valueInputOption=RAW';
+    return fetch(wurl, {method:'PUT', headers:{'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'}, body:JSON.stringify({values:[buildHeaders()]})});
+  });
+}
+
+function buildHeaders() {
+  var h = ['Dátum', 'Mozgás Pontszám (1-10)'];
+  for (var i = 0; i < EXERCISES.length; i++) h.push(EXERCISES[i].label + ' (perc)');
+  h.push('Összes tornaidő (perc)', 'Átlag hőmérséklet (°C)', 'Átlag páratartalom (%)', 'Átlag légnyomás (hPa)', 'Megjegyzések');
+  return h;
+}
+
+function buildRow(e) {
+  var row = [e.date, e.score];
+  var total = 0;
+  for (var i = 0; i < EXERCISES.length; i++) {
+    var m = (e.exercises && e.exercises[EXERCISES[i].id]) || 0;
+    row.push(m); total += m;
+  }
+  row.push(total);
+  row.push(e.weather && e.weather.temperature !== null ? e.weather.temperature : '');
+  row.push(e.weather && e.weather.humidity !== null ? e.weather.humidity : '');
+  row.push(e.weather && e.weather.pressure !== null ? e.weather.pressure : '');
+  row.push(e.notes || '');
+  return row;
+}
+
+// ── BEÁLLÍTÁSOK ────────────────────────────────────────────
+function saveSettings() {
+  var cid = document.getElementById('clientIdInp').value.trim();
+  var sid = document.getElementById('sheetIdInp').value.trim();
+  var sname = document.getElementById('sheetNameInp').value.trim();
+  if (cid) localStorage.setItem('gClientId', cid);
+  if (sid) localStorage.setItem('gSheetId', sid);
+  if (sname) localStorage.setItem('gSheetName', sname);
+}
+
+function applySettings() { saveSettings(); initGAuth(); showStatus('Beállítások mentve!', 'success'); }
+
+function loadSettings() {
+  document.getElementById('clientIdInp').value = localStorage.getItem('gClientId') || '';
+  document.getElementById('sheetIdInp').value = localStorage.getItem('gSheetId') || '';
+  document.getElementById('sheetNameInp').value = localStorage.getItem('gSheetName') || 'MozgásNapló';
+}
+
+// ── ALAP STATISZTIKA ───────────────────────────────────────
+function loadStats() {
+  var all = getLocal();
+  var l7 = all.filter(function(e){ return daysDiff(e.date) <= 7; });
+  var l30 = all.filter(function(e){ return daysDiff(e.date) <= 30; });
+  function avg(arr) {
+    if (!arr.length) return '-';
+    return (arr.reduce(function(s,e){ return s+e.score; },0)/arr.length).toFixed(1);
+  }
+  document.getElementById('st7').textContent = avg(l7);
+  document.getElementById('st30').textContent = avg(l30);
+  document.getElementById('stAll').textContent = all.length;
+}
+
+// ── GRAFIKONOK ─────────────────────────────────────────────
+function renderCharts() {
+  Object.keys(appCharts).forEach(function(k){ appCharts[k].destroy(); });
+  appCharts = {};
+  var all = getLocal().slice().reverse();
+  var l30 = all.filter(function(e){ return daysDiff(e.date) <= 30; });
+  appCharts.score = new Chart(document.getElementById('chartScore').getContext('2d'), {
+    type:'line',
+    data:{labels:l30.map(function(e){return fmtShort(e.date);}),datasets:[{label:'Pontszám',data:l30.map(function(e){return e.score;}),borderColor:'#1D6B78',backgroundColor:'rgba(29,107,120,0.09)',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#1D6B78',fill:true,tension:0.35}]},
+    options:{responsive:true,maintainAspectRatio:false,scales:{y:{min:0,max:10,ticks:{stepSize:2}},x:{ticks:{maxRotation:45}}},plugins:{legend:{display:false}}}
+  });
+  var totals = EXERCISES.map(function(ex){ return all.reduce(function(s,e){ return s+((e.exercises&&e.exercises[ex.id])||0); },0); });
+  appCharts.ex = new Chart(document.getElementById('chartEx').getContext('2d'), {
+    type:'bar',
+    data:{labels:EXERCISES.map(function(ex){return ex.label;}),datasets:[{label:'perc',data:totals,backgroundColor:'rgba(29,107,120,0.72)',borderRadius:5,borderSkipped:false}]},
+    options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{beginAtZero:true},y:{grid:{display:false}}},plugins:{legend:{display:false}}}
+  });
+  var we = all.filter(function(e){ return e.weather && e.weather.temperature !== null; });
+  appCharts.corr = new Chart(document.getElementById('chartCorr').getContext('2d'), {
+    type:'scatter',
+    data:{datasets:[{label:'Nap',data:we.map(function(e){return {x:e.weather.temperature,y:e.score};}),backgroundColor:'rgba(184,88,48,0.65)',pointRadius:6}]},
+    options:{responsive:true,maintainAspectRatio:false,scales:{x:{title:{display:true,text:'Hőmérséklet (°C)'}},y:{min:0,max:10,title:{display:true,text:'Mozgás pontszám'}}},plugins:{legend:{display:false}}}
+  });
+}
+
+// ── ELŐZMÉNYEK ─────────────────────────────────────────────
+function loadHistory() {
+  var all = getLocal();
+  var cont = document.getElementById('histContent');
+  if (!all.length) { cont.innerHTML = '<p style="color:var(--text3)">Még nincs bejegyzés.</p>'; return; }
+  function sp(s) {
+    if (s>=8) return 'background:#E8F5EE;color:#2A7A52';
+    if (s>=6) return 'background:#E8F4F6;color:#1D6B78';
+    if (s>=4) return 'background:#FDF6E3;color:#9A6C18';
+    return 'background:#FEF2F2;color:#B03030';
+  }
+  var html = '<div class="hist-wrap"><table class="hist-table"><thead><tr><th>Dátum</th><th>Pont</th><th>Kezelések</th><th>Perc</th><th>Hőm.</th><th>RH</th><th>hPa</th></tr></thead><tbody>';
+  var shown = all.slice(0, 60);
+  for (var i = 0; i < shown.length; i++) {
+    var e = shown[i];
+    var active = [];
+    for (var j = 0; j < EXERCISES.length; j++) {
+      var ex = EXERCISES[j];
+      if (e.exercises && e.exercises[ex.id] > 0) active.push(EXICONS[ex.id] + ' ' + e.exercises[ex.id] + 'p');
+    }
+    var total = 0;
+    for (var j = 0; j < EXERCISES.length; j++) total += (e.exercises && e.exercises[EXERCISES[j].id]) || 0;
+    html += '<tr><td><strong>' + e.date + '</strong></td>';
+    html += '<td><span class="score-pill" style="' + sp(e.score) + '">' + e.score + '</span></td>';
+    html += '<td style="font-size:.8rem">' + (active.join(' | ') || '-') + '</td>';
+    html += '<td>' + (total || '-') + '</td>';
+    html += '<td>' + (e.weather && e.weather.temperature !== null ? e.weather.temperature.toFixed(1) + '°' : '-') + '</td>';
+    html += '<td>' + (e.weather && e.weather.humidity !== null ? e.weather.humidity + '%' : '-') + '</td>';
+    html += '<td>' + (e.weather && e.weather.pressure !== null ? e.weather.pressure : '-') + '</td></tr>';
+  }
+  cont.innerHTML = html + '</tbody></table></div>';
+}
+
+// ── EXPORT ────────────────────────────────────────────────
+function exportCSV() {
+  var all = getLocal();
+  if (!all.length) { showStatus('Nincs adat.', 'info'); return; }
+  var csv = buildHeaders().join(';') + '\n';
+  for (var i = 0; i < all.length; i++) {
+    var row = buildRow(all[i]);
+    csv += row.map(function(c){ return '"' + String(c).replace(/"/g,'""') + '"'; }).join(';') + '\n';
+  }
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'}));
+  a.download = 'mozgasnaplo_' + new Date().toISOString().split('T')[0] + '.csv';
+  a.click();
+  showStatus('CSV letöltve!', 'success');
+}
+
+function exportExcel(std) {
+  var all = getLocal();
+  if (!all.length) { showStatus('Nincs adat.', 'info'); return; }
+  var rows = all.map(function(e){ return buildRow(e); });
+  if (std) rows = standardizeRows(rows);
+  var ws = XLSX.utils.aoa_to_sheet([buildHeaders()].concat(rows));
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, std ? 'Standardizált' : 'MozgásNapló');
+  XLSX.writeFile(wb, 'mozgasnaplo_' + (std ? 'std_' : '') + new Date().toISOString().split('T')[0] + '.xlsx');
+  showStatus('Excel letöltve!', 'success');
+}
+
+function standardizeRows(rows) {
+  if (!rows.length) return rows;
+  var numCols = [];
+  var hlen = buildHeaders().length;
+  for (var c = 1; c < hlen - 1; c++) numCols.push(c);
+  var stats = {};
+  numCols.forEach(function(col) {
+    var vals = rows.map(function(r){ return r[col]; }).filter(function(v){ return typeof v === 'number' && !isNaN(v); });
+    if (!vals.length) return;
+    var m = vals.reduce(function(s,v){return s+v;},0) / vals.length;
+    var sd = Math.sqrt(vals.reduce(function(s,v){return s+(v-m)*(v-m);},0) / vals.length) || 1;
+    stats[col] = {m:m, sd:sd};
+  });
+  return rows.map(function(row) {
+    var nr = row.slice();
+    numCols.forEach(function(col) {
+      if (stats[col] && typeof nr[col] === 'number') nr[col] = Math.round(((nr[col]-stats[col].m)/stats[col].sd)*100)/100;
+    });
+    return nr;
+  });
+}
+
+function clearLocal() {
+  if (confirm('Biztosan törlöd az összes helyi adatot? Ez nem vonható vissza!')) {
+    localStorage.removeItem('mozgasnaplo');
+    loadStats(); loadHistory();
+    showStatus('Törölve.', 'info');
+  }
+}
+
+// ============================================================
+//  ANALYTICS ENGINE
+// ============================================================
+
+var STAT = {
+  mean: function(a) { return a.length ? a.reduce(function(s,v){return s+v;},0)/a.length : 0; },
+  std: function(a) {
+    if (a.length < 2) return 0;
+    var m = this.mean(a);
+    return Math.sqrt(a.reduce(function(s,v){return s+(v-m)*(v-m);},0)/a.length);
+  },
+  r: function(x, y) {
+    var n = x.length; if (n < 3) return 0;
+    var mx = this.mean(x), my = this.mean(y);
+    var num = 0, dx = 0, dy = 0;
+    for (var i = 0; i < n; i++) { num += (x[i]-mx)*(y[i]-my); dx += (x[i]-mx)*(x[i]-mx); dy += (y[i]-my)*(y[i]-my); }
+    var den = Math.sqrt(dx*dy);
+    return den ? num/den : 0;
+  },
+  pval: function(r, n) {
+    if (n < 3) return '>0.15';
+    var t = Math.abs(r) * Math.sqrt((n-2)/(1-r*r+0.0001));
+    if (t > 3.5) return '<0.001';
+    if (t > 2.8) return '<0.01';
+    if (t > 2.0) return '<0.05';
+    if (t > 1.5) return '<0.15';
+    return '>0.15';
+  },
+  strength: function(r) {
+    var a = Math.abs(r);
+    if (a > 0.6) return 'erős';
+    if (a > 0.3) return 'közepes';
+    if (a > 0.1) return 'gyenge';
+    return 'elhanyagolható';
+  }
+};
+
+function calcMQI(entries) {
+  if (!entries.length) return null;
+  var sorted = entries.slice().sort(function(a,b){ return a.date.localeCompare(b.date); });
+  var ws = 0, wt = 0;
+  for (var i = 0; i < sorted.length; i++) { var w = i+1; ws += sorted[i].score*w; wt += w; }
+  var mqi = ws/wt;
+  var cat, col;
+  if (mqi >= 7.5) { cat='Kiváló'; col='var(--green)'; }
+  else if (mqi >= 5.5) { cat='Közepes'; col='var(--amber)'; }
+  else if (mqi >= 3.5) { cat='Gyenge'; col='var(--accent)'; }
+  else { cat='Kritikus'; col='var(--red)'; }
+  return {mqi:mqi, cat:cat, col:col};
+}
+
+function calcPVI(entries) {
+  if (entries.length < 3) return null;
+  var sc = entries.map(function(e){return e.score;});
+  var m = STAT.mean(sc), sd = STAT.std(sc), pvi = (sd/m)*100;
+  var lbl = pvi < 15 ? 'Nagyon stabil' : pvi < 25 ? 'Stabil' : pvi < 35 ? 'Mérsékelt ingadozás' : 'Nagy ingadozás';
+  return {pvi:pvi, lbl:lbl, mean:m, stddev:sd};
+}
+
+function calcTEI(entries) {
+  return EXERCISES.map(function(ex) {
+    var days = entries.filter(function(e){ return (e.exercises && e.exercises[ex.id] || 0) > 0; });
+    var tei = days.length ? STAT.mean(days.map(function(e){return e.score;})) : null;
+    var totalMins = entries.reduce(function(s,e){ return s + ((e.exercises && e.exercises[ex.id]) || 0); }, 0);
+    var rating = '-';
+    if (tei !== null) {
+      if (tei >= 7.5) rating='Kiváló';
+      else if (tei >= 6.0) rating='Jó';
+      else if (tei >= 4.5) rating='Közepes';
+      else rating='Gyenge';
+    }
+    var trend = 0;
+    if (days.length >= 4) {
+      var sd = days.slice().sort(function(a,b){return a.date.localeCompare(b.date);});
+      var h = Math.floor(sd.length/2);
+      trend = STAT.mean(sd.slice(h).map(function(e){return e.score;})) - STAT.mean(sd.slice(0,h).map(function(e){return e.score;}));
+    }
+    return {id:ex.id, label:ex.label, icon:EXICONS[ex.id]||'', count:days.length, tei:tei, totalMins:totalMins, rating:rating, trend:trend};
+  }).sort(function(a,b){ return (b.tei||0)-(a.tei||0); });
+}
+
+function calcCSI(entries) {
+  var res = [];
+  for (var i = 0; i < EXERCISES.length; i++) {
+    for (var j = i+1; j < EXERCISES.length; j++) {
+      var A = EXERCISES[i], B = EXERCISES[j];
+      var both = entries.filter(function(e){ return (e.exercises&&e.exercises[A.id]||0)>0 && (e.exercises&&e.exercises[B.id]||0)>0; });
+      if (both.length < 2) continue;
+      var onlyA = entries.filter(function(e){ return (e.exercises&&e.exercises[A.id]||0)>0 && !(e.exercises&&e.exercises[B.id]||0)>0; });
+      var onlyB = entries.filter(function(e){ return !(e.exercises&&e.exercises[A.id]||0)>0 && (e.exercises&&e.exercises[B.id]||0)>0; });
+      var mB = STAT.mean(both.map(function(e){return e.score;}));
+      var mA = onlyA.length ? STAT.mean(onlyA.map(function(e){return e.score;})) : mB;
+      var mBo = onlyB.length ? STAT.mean(onlyB.map(function(e){return e.score;})) : mB;
+      var base = Math.max(mA, mBo, 0.1);
+      var csi = mB/base;
+      res.push({A:A.id, B:B.id, labelA:A.label, labelB:B.label, iconA:EXICONS[A.id]||'', iconB:EXICONS[B.id]||'', mBoth:mB, csi:csi, count:both.length, type:csi>1.1?'szinergia':csi<0.9?'antagonizmus':'semleges'});
+    }
+  }
+  return res.sort(function(a,b){return b.csi-a.csi;});
+}
+
+function calcWSI(entries) {
+  var w = entries.filter(function(e){ return e.weather && e.weather.temperature !== null && e.weather.humidity !== null && e.weather.pressure !== null; });
+  if (w.length < 3) return null;
+  var sc = w.map(function(e){return e.score;}), tp = w.map(function(e){return e.weather.temperature;}), hm = w.map(function(e){return e.weather.humidity;}), pr = w.map(function(e){return e.weather.pressure;});
+  var rT = STAT.r(tp,sc), rH = STAT.r(hm,sc), rP = STAT.r(pr,sc), n = w.length;
+  var candidates = [{name:'Hőmérséklet',r:Math.abs(rT)},{name:'Páratartalom',r:Math.abs(rH)},{name:'Légnyomás',r:Math.abs(rP)}];
+  candidates.sort(function(a,b){return b.r-a.r;});
+  return {rT:rT, rH:rH, rP:rP, pT:STAT.pval(rT,n), pH:STAT.pval(rH,n), pP:STAT.pval(rP,n), n:n, dom:candidates[0].name};
+}
+
+function calcFDI(entries) {
+  var sorted = entries.filter(function(e){return e.weather&&e.weather.pressure!==null;}).sort(function(a,b){return a.date.localeCompare(b.date);});
+  var evts = [];
+  for (var i = 1; i < sorted.length; i++) {
+    var prev = sorted[i-1], curr = sorted[i];
+    var gap = (new Date(curr.date) - new Date(prev.date)) / 86400000;
+    if (gap > 2) continue;
+    var dp = curr.weather.pressure - prev.weather.pressure;
+    if (Math.abs(dp) < 3) continue;
+    evts.push({date:curr.date, dp:dp, type:dp<0?'közeledő':'távolodó', score:curr.score, scoreDelta:curr.score-prev.score});
+  }
+  var app = evts.filter(function(e){return e.type==='közeledő';});
+  var dep = evts.filter(function(e){return e.type==='távolodó';});
+  var avgApp = app.length ? STAT.mean(app.map(function(e){return e.scoreDelta;})) : null;
+  var avgDep = dep.length ? STAT.mean(dep.map(function(e){return e.scoreDelta;})) : null;
+  var sensitive = evts.length >= 3 && Math.abs(STAT.mean(evts.map(function(e){return e.scoreDelta;}))) > 0.5;
+  return {evts:evts, total:evts.length, appCount:app.length, depCount:dep.length, avgImpactApp:avgApp, avgImpactDep:avgDep, sensitive:sensitive};
+}
+
+function calcOptWeather(entries) {
+  var w = entries.filter(function(e){ return e.weather && e.weather.temperature !== null && e.weather.humidity !== null && e.weather.pressure !== null; });
+  if (w.length < 5) return null;
+  var sorted = w.slice().sort(function(a,b){return b.score-a.score;});
+  var n = Math.max(3, Math.floor(sorted.length*0.25));
+  var top = sorted.slice(0,n), bot = sorted.slice(-n);
+  function band(arr, key) {
+    var vals = arr.map(function(e){return e.weather[key];});
+    return {mean:parseFloat(STAT.mean(vals).toFixed(1)), min:parseFloat(Math.min.apply(null,vals).toFixed(1)), max:parseFloat(Math.max.apply(null,vals).toFixed(1))};
+  }
+  return {
+    opt:{temp:band(top,'temperature'),hum:band(top,'humidity'),press:band(top,'pressure')},
+    adv:{temp:band(bot,'temperature'),hum:band(bot,'humidity'),press:band(bot,'pressure')},
+    topMean:parseFloat(STAT.mean(top.map(function(e){return e.score;})).toFixed(2)),
+    botMean:parseFloat(STAT.mean(bot.map(function(e){return e.score;})).toFixed(2))
+  };
+}
+
+function fetchForecast() {
+  var url = 'https://api.open-meteo.com/v1/forecast?latitude=47.2017&longitude=17.5947&daily=temperature_2m_mean,relative_humidity_2m_mean,surface_pressure_mean&timezone=auto&forecast_days=4';
+  return fetch(url).then(function(r){return r.json();}).then(function(d) {
+    var days = [];
+    for (var i = 1; i <= 3; i++) {
+      days.push({date:d.daily.time[i], temperature:d.daily.temperature_2m_mean[i], humidity:Math.round(d.daily.relative_humidity_2m_mean[i]), pressure:Math.round(d.daily.surface_pressure_mean[i])});
+    }
+    return days;
+  }).catch(function(){ return []; });
+}
+
+function adviseForecast(fc, tei, optW, wsi) {
+  var scored = tei.filter(function(t){return t.tei!==null;}).map(function(t) {
+    var sc = t.tei;
+    if (optW && wsi) {
+      var tD = Math.abs(fc.temperature - optW.opt.temp.mean);
+      var hD = Math.abs(fc.humidity - optW.opt.hum.mean);
+      var pD = Math.abs(fc.pressure - optW.opt.press.mean);
+      sc -= (tD*Math.abs(wsi.rT)*0.3 + hD*Math.abs(wsi.rH)*0.05 + pD*Math.abs(wsi.rP)*0.02);
+    }
+    return {label:t.label, icon:t.icon, prob:Math.round(Math.min(95, Math.max(20, (sc/10)*100)))};
+  }).sort(function(a,b){return b.prob-a.prob;});
+  var wa = 'normál';
+  if (optW) {
+    var pen = Math.abs(fc.temperature-optW.opt.temp.mean)*0.3 + Math.abs(fc.humidity-optW.opt.hum.mean)*0.05 + Math.abs(fc.pressure-optW.opt.press.mean)*0.02;
+    if (pen > 8) wa = 'kedvezőtlen';
+    else if (pen > 4) wa = 'átlag alatti';
+    else if (pen < 2) wa = 'kedvező';
+  }
+  return {scored:scored, wa:wa};
+}
+
+// ── ELEMZÉS FUTTATÁSA ──────────────────────────────────────
+function runAnalysis() {
+  var period = parseInt(document.getElementById('analysisPeriod').value);
+  var all = getLocal();
+  var entries = period === 0 ? all : all.filter(function(e){ return daysDiff(e.date) <= period; });
+  if (!entries.length) { showStatus('Nincs elegendő adat.', 'err'); return; }
+  document.getElementById('analysisPlaceholder').style.display = 'none';
+  document.getElementById('analysisMeta').textContent = entries.length + ' bejegyzés · ' + (entries[entries.length-1]||{}).date + ' - ' + (entries[0]||{}).date + ' · ' + new Date().toLocaleDateString('hu-HU');
+  var mqi = calcMQI(entries);
+  var pvi = calcPVI(entries);
+  var tei = calcTEI(entries);
+  var csi = calcCSI(entries);
+  var wsi = calcWSI(entries);
+  var fdi = calcFDI(entries);
+  var optW = calcOptWeather(entries);
+  renderIdxCards(mqi, pvi, tei, wsi);
+  renderTEI(tei);
+  renderCSI(csi);
+  renderWeatherSection(wsi, optW);
+  renderFrontSection(fdi);
+  renderDiagnosis(entries, mqi, pvi, tei, csi, wsi, fdi, optW, period);
+  renderDataTable(entries);
+  fetchForecast().then(function(forecast) {
+    lastAnalysis = {mqi:mqi, pvi:pvi, tei:tei, csi:csi, wsi:wsi, fdi:fdi, optW:optW, forecast:forecast, entries:entries, period:period};
+    if (forecast.length) renderForecast(forecast, tei, optW, wsi);
+  });
+  lastAnalysis = {mqi:mqi, pvi:pvi, tei:tei, csi:csi, wsi:wsi, fdi:fdi, optW:optW, forecast:[], entries:entries, period:period};
+  showStatus('Elemzés kész!', 'success');
+}
+
+// ── RENDER FÜGGVÉNYEK ──────────────────────────────────────
+function renderIdxCards(mqi, pvi, tei, wsi) {
+  var top = tei.filter(function(t){return t.tei!==null;})[0];
+  var mqiCol = mqi ? mqi.col : 'var(--text3)';
+  var pviCol = pvi ? (pvi.pvi<25?'var(--green)':pvi.pvi<35?'var(--amber)':'var(--red)') : 'var(--text3)';
+  var meanCol = pvi ? (pvi.mean>6.5?'var(--green)':pvi.mean>4.5?'var(--amber)':'var(--red)') : 'var(--text3)';
+  var h = '<div class="idx-grid">';
+  h += '<div class="idx-card"><div class="idx-val" style="color:' + mqiCol + '">' + (mqi ? mqi.mqi.toFixed(2) : '-') + '</div><div class="idx-name">MQI - Mozgásminőség Index</div>' + (mqi ? '<div class="idx-sub" style="background:' + mqi.col + '20;color:' + mqi.col + '">' + mqi.cat + '</div>' : '') + '</div>';
+  h += '<div class="idx-card"><div class="idx-val" style="color:' + pviCol + '">' + (pvi ? pvi.pvi.toFixed(1)+'%' : '-') + '</div><div class="idx-name">PVI - Variabilitás Index</div>' + (pvi ? '<div class="idx-sub" style="background:var(--bg2);color:var(--text2)">' + pvi.lbl + '</div>' : '') + '</div>';
+  h += '<div class="idx-card"><div class="idx-val" style="color:var(--primary)">' + (top && top.tei !== null ? top.tei.toFixed(2) : '-') + '</div><div class="idx-name">TEI max - ' + (top ? top.label : '-') + '</div>' + (top && top.tei !== null ? '<span class="badge badge-green">' + top.rating + '</span>' : '') + '</div>';
+  h += '<div class="idx-card"><div class="idx-val" style="color:var(--primary)">' + (wsi ? wsi.rT.toFixed(3) : '-') + '</div><div class="idx-name">WSI - Hőmérs. korreláció (r)</div>' + (wsi ? '<span class="badge badge-blue">' + STAT.strength(wsi.rT) + '</span>' : '') + '</div>';
+  h += '<div class="idx-card"><div class="idx-val" style="color:var(--primary)">' + (wsi ? wsi.rP.toFixed(3) : '-') + '</div><div class="idx-name">WSI - Légnyomás korrel. (r)</div>' + (wsi ? '<span class="badge badge-blue">' + STAT.strength(wsi.rP) + '</span>' : '') + '</div>';
+  h += '<div class="idx-card"><div class="idx-val" style="color:' + meanCol + '">' + (pvi ? pvi.mean.toFixed(2) : '-') + '</div><div class="idx-name">Átlag mozgáspontszám</div>' + (pvi ? '<span class="badge badge-blue">σ = ' + pvi.stddev.toFixed(2) + '</span>' : '') + '</div>';
+  h += '</div>';
+  document.getElementById('idxCards').innerHTML = h;
+}
+
+function renderTEI(tei) {
+  var rows = '';
+  for (var i = 0; i < tei.length; i++) {
+    var t = tei[i];
+    if (t.count === 0) continue;
+    var pct = t.tei ? (t.tei/10)*100 : 0;
+    var bc = t.tei >= 7.5 ? 'var(--green)' : t.tei >= 6 ? 'var(--primary)' : t.tei >= 4.5 ? 'var(--amber)' : 'var(--red)';
+    var bCls = t.rating==='Kiváló' ? 'badge-green' : t.rating==='Jó' ? 'badge-blue' : t.rating==='Közepes' ? 'badge-amber' : 'badge-red';
+    var tr = t.trend>0.3 ? '<span class="trend-up">&#9650; '+t.trend.toFixed(1)+'</span>' : t.trend<-0.3 ? '<span class="trend-dn">&#9660; '+Math.abs(t.trend).toFixed(1)+'</span>' : '<span class="trend-eq">&#8594;</span>';
+    rows += '<tr>';
+    rows += '<td class="rank">' + (i+1) + '</td>';
+    rows += '<td>' + t.icon + ' <strong>' + t.label + '</strong></td>';
+    rows += '<td><strong>' + (t.tei !== null ? t.tei.toFixed(2) : '-') + '</strong><div class="tei-bar-wrap"><div class="tei-bar" style="width:'+pct+'%;background:'+bc+'"></div></div></td>';
+    rows += '<td>' + t.count + '</td>';
+    rows += '<td>' + t.totalMins + '</td>';
+    rows += '<td><span class="badge ' + bCls + '">' + t.rating + '</span></td>';
+    rows += '<td>' + tr + '</td>';
+    rows += '</tr>';
+  }
+  document.getElementById('teiSection').innerHTML =
+    '<div class="card">' +
+    '<div class="card-title">Kezelési Hatékonysági Rangsor (TEI)</div>' +
+    '<div style="overflow-x:auto"><table class="ana-table">' +
+    '<thead><tr><th>#</th><th>Kezelés</th><th>TEI (max 10)</th><th>Alkalmak</th><th>Összes perc</th><th>Értékelés</th><th>Trend</th></tr></thead>' +
+    '<tbody>' + rows + '</tbody></table></div>' +
+    '<p style="font-size:.78rem;color:var(--text3);margin-top:10px">TEI = átlagos mozgáspontszám az adott kezelés napjain · Trend = 2. fél minus 1. fél átlag</p>' +
+    '</div>';
+}
+
+function renderCSI(csi) {
+  if (!csi.length) {
+    document.getElementById('csiSection').innerHTML = '<div class="card"><div class="card-title">Kombinációs Szinergia (CSI)</div><p style="color:var(--text3)">Kevés adat - legalább 2 együttes alkalom szükséges párként.</p></div>';
+    return;
+  }
+  var rows = '';
+  var top = csi.slice(0,8);
+  for (var i = 0; i < top.length; i++) {
+    var c = top[i];
+    var cls = c.type==='szinergia' ? 'csi-syn' : c.type==='antagonizmus' ? 'csi-ant' : 'csi-neu';
+    var icon = c.type==='szinergia' ? '✓' : c.type==='antagonizmus' ? '✗' : '~';
+    rows += '<tr><td class="rank">' + (i+1) + '</td><td>' + c.iconA + ' ' + c.labelA + '</td><td>' + c.iconB + ' ' + c.labelB + '</td><td class="' + cls + '"><strong>' + c.csi.toFixed(3) + '</strong></td><td>' + c.mBoth.toFixed(2) + '</td><td>' + c.count + '</td><td>' + icon + ' ' + c.type + '</td></tr>';
+  }
+  document.getElementById('csiSection').innerHTML =
+    '<div class="card"><div class="card-title">Kombinációs Szinergia Index (CSI) - Top párok</div>' +
+    '<div style="overflow-x:auto"><table class="ana-table"><thead><tr><th>#</th><th>Kezelés A</th><th>Kezelés B</th><th>CSI</th><th>Átlag pont</th><th>Alkalmak</th><th>Típus</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
+    '<p style="font-size:.78rem;color:var(--text3);margin-top:10px">CSI &gt; 1.1: szinergia · CSI &lt; 0.9: antagonizmus · 0.9-1.1: semleges</p></div>';
+}
+
+function renderWeatherSection(wsi, optW) {
+  var corrH = '';
+  if (wsi) {
+    var rows = '';
+    var data = [{n:'Hőmérséklet',r:wsi.rT,p:wsi.pT},{n:'Páratartalom',r:wsi.rH,p:wsi.pH},{n:'Légnyomás',r:wsi.rP,p:wsi.pP}];
+    for (var i = 0; i < data.length; i++) {
+      var row = data[i];
+      var cls = Math.abs(row.r)>0.5?'badge-green':Math.abs(row.r)>0.3?'badge-blue':'badge-amber';
+      rows += '<tr><td><strong>' + row.n + '</strong></td><td><strong>' + row.r.toFixed(3) + '</strong></td><td>' + row.p + '</td><td>' + (row.r>0?'Pozitív':'Negatív') + '</td><td><span class="badge ' + cls + '">' + STAT.strength(row.r) + '</span></td></tr>';
+    }
+    corrH = '<table class="ana-table"><thead><tr><th>Változó</th><th>Pearson r</th><th>p-érték</th><th>Irány</th><th>Erősség</th></tr></thead><tbody>' + rows + '</tbody></table>' +
+      '<p style="font-size:.78rem;color:var(--text3);margin-top:8px">n = ' + wsi.n + ' nap · Domináns tényező: <strong>' + wsi.dom + '</strong></p>';
+  } else {
+    corrH = '<p style="color:var(--text3)">Kevés adat (min. 3 időjárásos nap szükséges).</p>';
+  }
+  var optH = '';
+  if (optW) {
+    var tDiff = (optW.opt.temp.mean - optW.adv.temp.mean).toFixed(1);
+    var hDiff = (optW.opt.hum.mean - optW.adv.hum.mean).toFixed(1);
+    var pDiff = (optW.opt.press.mean - optW.adv.press.mean).toFixed(1);
+    optH = '<div class="card-title" style="margin-top:20px">Optimális időjárási körülmények</div>' +
+      '<div style="overflow-x:auto"><table class="ana-table"><thead><tr><th>Változó</th><th>Optimum átlag</th><th>Optimum tartomány</th><th>Kedvezőtlen átlag</th><th>Különbség</th></tr></thead><tbody>' +
+      '<tr><td><strong>Hőmérséklet (°C)</strong></td><td><strong>' + optW.opt.temp.mean + '°C</strong></td><td>' + optW.opt.temp.min + '-' + optW.opt.temp.max + '°C</td><td>' + optW.adv.temp.mean + '°C</td><td><strong>' + tDiff + '°C</strong></td></tr>' +
+      '<tr><td><strong>Páratartalom (%)</strong></td><td><strong>' + optW.opt.hum.mean + '%</strong></td><td>' + optW.opt.hum.min + '-' + optW.opt.hum.max + '%</td><td>' + optW.adv.hum.mean + '%</td><td><strong>' + hDiff + '%</strong></td></tr>' +
+      '<tr><td><strong>Légnyomás (hPa)</strong></td><td><strong>' + optW.opt.press.mean + ' hPa</strong></td><td>' + optW.opt.press.min + '-' + optW.opt.press.max + ' hPa</td><td>' + optW.adv.press.mean + ' hPa</td><td><strong>' + pDiff + ' hPa</strong></td></tr>' +
+      '</tbody></table></div>' +
+      '<p style="font-size:.78rem;color:var(--text3);margin-top:8px">Optimum napok átlag: <strong>' + optW.topMean + '/10</strong> · Kedvezőtlen napok átlag: <strong>' + optW.botMean + '/10</strong></p>';
+  }
+  document.getElementById('weatherSection').innerHTML = '<div class="card"><div class="card-title">Időjárás-korreláció és Optimális körülmények</div>' + corrH + optH + '</div>';
+}
+
+function renderFrontSection(fdi) {
+  var evtH = '';
+  if (fdi.evts.length) {
+    evtH = '<ul class="front-list">';
+    var shown = fdi.evts.slice(0,10);
+    for (var i = 0; i < shown.length; i++) {
+      var ev = shown[i];
+      var cls = ev.type==='közeledő' ? 'front-app' : 'front-dep';
+      var scCol = ev.scoreDelta >= 0 ? 'var(--green)' : 'var(--red)';
+      var scArrow = ev.scoreDelta >= 0 ? '&#9650;' : '&#9660;';
+      evtH += '<li><span class="front-badge ' + cls + '">' + (ev.type==='közeledő' ? 'Közeledő' : 'Távolodó') + '</span><strong>' + ev.date + '</strong><span style="color:var(--text2)">' + (ev.dp>0?'+':'') + ev.dp.toFixed(1) + ' hPa</span><span style="color:' + scCol + '">' + scArrow + Math.abs(ev.scoreDelta).toFixed(1) + ' pont</span></li>';
+    }
+    evtH += '</ul>';
+  } else {
+    evtH = '<p style="color:var(--text3)">Nem azonosítható frontesemény.</p>';
+  }
+  var sensH = fdi.sensitive ?
+    '<span class="badge badge-red">Frontérzékenység azonosítható</span>' :
+    '<span class="badge badge-green">Nincs egyértelmű frontérzékenység</span>';
+  var avgAppTxt = fdi.avgImpactApp !== null ? (fdi.avgImpactApp>0?'+':'') + fdi.avgImpactApp.toFixed(2) : '-';
+  document.getElementById('frontSection').innerHTML =
+    '<div class="card"><div class="card-title">Frontérzékenység Elemzés (FDI)</div>' +
+    '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px">' +
+    '<div class="wd-box" style="flex:1"><div class="wd-val">' + fdi.total + '</div><div class="wd-lbl">Frontesemény</div></div>' +
+    '<div class="wd-box" style="flex:1"><div class="wd-val" style="color:var(--red)">' + fdi.appCount + '</div><div class="wd-lbl">Közeledő</div></div>' +
+    '<div class="wd-box" style="flex:1"><div class="wd-val" style="color:var(--green)">' + fdi.depCount + '</div><div class="wd-lbl">Távolodó</div></div>' +
+    '<div class="wd-box" style="flex:1"><div class="wd-val">' + avgAppTxt + '</div><div class="wd-lbl">Hatás (közeledő)</div></div>' +
+    '</div>' + sensH + '<div style="margin-top:14px">' + evtH + '</div></div>';
+}
+
+function renderForecast(forecast, tei, optW, wsi) {
+  var cards = '';
+  for (var i = 0; i < forecast.length; i++) {
+    var fc = forecast[i];
+    var adv = adviseForecast(fc, tei, optW, wsi);
+    var wCol = adv.wa==='kedvező' ? 'var(--green)' : adv.wa==='kedvezőtlen' ? 'var(--red)' : 'var(--amber)';
+    var dateStr = new Date(fc.date).toLocaleDateString('hu-HU', {weekday:'short',month:'short',day:'numeric'});
+    var listItems = '';
+    var topItems = adv.scored.slice(0,4);
+    for (var j = 0; j < topItems.length; j++) {
+      var t = topItems[j];
+      listItems += '<li>' + t.icon + ' ' + t.label + ' <span style="float:right;font-weight:700;color:var(--primary)">' + t.prob + '%</span></li>';
+    }
+    cards += '<div class="fc-card">';
+    cards += '<div class="fc-date">' + dateStr + '</div>';
+    cards += '<div class="fc-weather">' + fc.temperature.toFixed(1) + 'C | ' + fc.humidity + '% | ' + fc.pressure + ' hPa</div>';
+    cards += '<div style="font-size:.8rem;font-weight:700;color:' + wCol + ';margin-bottom:8px">Időjárás: ' + adv.wa + '</div>';
+    cards += '<ul class="fc-list">' + listItems + '</ul>';
+    cards += '</div>';
+  }
+  document.getElementById('forecastSection').innerHTML =
+    '<div class="card"><div class="card-title">3 napos előrejelzés és Kezelési Tanács - Nórápi</div>' +
+    '<div class="forecast-grid">' + cards + '</div>' +
+    '<p style="font-size:.78rem;color:var(--text3);margin-top:10px">A valószínűség a TEI-n és az előrejelzett időjárás optimum-egyezésén alapul.</p></div>';
+}
+
+function renderDiagnosis(entries, mqi, pvi, tei, csi, wsi, fdi, optW, period) {
+  var now = new Date().toLocaleDateString('hu-HU',{year:'numeric',month:'long',day:'numeric'});
+  var periStr = period===0 ? 'az összes rendelkezésre álló' : 'az utóbbi ' + period;
+  var topTEI = tei.filter(function(t){return t.tei!==null;});
+  var topCSI = csi.filter(function(c){return c.type==='szinergia';});
+  var antCSI = csi.filter(function(c){return c.type==='antagonizmus';});
+  var h = '<div class="diagnosis-body">';
+  h += '<h4>1. Általános áttekintés</h4>';
+  h += '<p>Az elemzés <strong>' + entries.length + ' napi bejegyzés</strong> alapján készült, ' + periStr + ' napra vonatkozóan (Nórápi, ' + now + ').</p>';
+  if (mqi) h += '<p>A mozgásteljesítmény összesített mutatója (<strong>MQI = ' + mqi.mqi.toFixed(2) + '</strong>) a <strong>' + mqi.cat + '</strong> kategóriába sorolja az időszakot. ' + (mqi.mqi>=7?'A vizsgált időszak mozgásilag kedvező volt.':mqi.mqi>=5?'A mozgásteljesítmény átlagos szintű volt.':'A mozgásteljesítmény az átlag alatt marad.') + '</p>';
+  h += '<h4>2. Teljesítmény és stabilitás</h4>';
+  if (pvi) h += '<p>A variabilitási index (<strong>PVI = ' + pvi.pvi.toFixed(1) + '%</strong>, átlag: ' + pvi.mean.toFixed(1) + ', szórás: ' + pvi.stddev.toFixed(2) + ') alapján a mozgásteljesítmény <strong>' + pvi.lbl + '</strong> ingadozást mutat. ' + (pvi.pvi<20?'Kiszámítható, jól tervezhető állapot.':pvi.pvi<35?'Bizonyos napokon jelentős különbségek mutatkoznak.':'Fokozott figyelmet érdemel.') + '</p>';
+  else h += '<p>A stabilitáshoz több bejegyzés szükséges.</p>';
+  h += '<h4>3. Kezelési hatékonyság (TEI)</h4>';
+  if (topTEI.length >= 1) {
+    h += '<p>A leghatékonyabb kezelések:</p><ul>';
+    var shown = topTEI.slice(0,3);
+    for (var i = 0; i < shown.length; i++) {
+      var t = shown[i];
+      h += '<li>' + t.icon + ' <strong>' + t.label + '</strong> - TEI: ' + t.tei.toFixed(2) + '/10, ' + t.count + ' alkalom, ' + t.totalMins + ' perc, ' + (t.trend>0.3?'emelkedő tendencia':t.trend<-0.3?'csökkenő tendencia':'stabil') + '. Értékelés: <em>' + t.rating + '</em>.</li>';
+    }
+    h += '</ul>';
+    if (topTEI.length >= 4) {
+      var worst = topTEI.slice(-2);
+      h += '<p>Legalacsonyabb TEI: ';
+      for (var i = 0; i < worst.length; i++) h += '<strong>' + worst[i].label + '</strong> (TEI: ' + worst[i].tei.toFixed(2) + ')' + (i<worst.length-1?', ':'');
+      h += '.</p>';
+    }
+  } else h += '<p>A TEI elemzéshez több bejegyzés szükséges kezelésenként.</p>';
+  h += '<h4>4. Kombinációs szinergiák (CSI)</h4>';
+  if (topCSI.length) {
+    h += '<p>Szinergista kombinációk (CSI &gt; 1.1):</p><ul>';
+    var shown = topCSI.slice(0,3);
+    for (var i = 0; i < shown.length; i++) {
+      var c = shown[i];
+      h += '<li>' + c.iconA + ' <strong>' + c.labelA + '</strong> + ' + c.iconB + ' <strong>' + c.labelB + '</strong> - CSI: ' + c.csi.toFixed(3) + ', átlag pont: ' + c.mBoth.toFixed(1) + '/10, ' + c.count + ' alkalom.</li>';
+    }
+    h += '</ul>';
+  } else h += '<p>Szinergiaelemzéshez legalább 2 közös alkalom szükséges párként.</p>';
+  if (antCSI.length) {
+    h += '<p>Kerülendő kombinációk (CSI &lt; 0.9): ';
+    var shown = antCSI.slice(0,2);
+    for (var i = 0; i < shown.length; i++) h += '<strong>' + shown[i].labelA + ' + ' + shown[i].labelB + '</strong>' + (i<shown.length-1?', ':'');
+    h += '.</p>';
+  }
+  h += '<h4>5. Meteorológiai korreláció</h4>';
+  if (wsi) {
+    h += '<p>Pearson-korreláció elemzése (n = ' + wsi.n + ' nap):</p><ul>';
+    h += '<li><strong>Hőmérséklet:</strong> r = ' + wsi.rT.toFixed(3) + ' (' + STAT.strength(wsi.rT) + ', ' + (wsi.rT>0?'pozitív':'negatív') + ', p ' + wsi.pT + ')</li>';
+    h += '<li><strong>Páratartalom:</strong> r = ' + wsi.rH.toFixed(3) + ' (' + STAT.strength(wsi.rH) + ', ' + (wsi.rH>0?'pozitív':'negatív') + ', p ' + wsi.pH + ')</li>';
+    h += '<li><strong>Légnyomás:</strong> r = ' + wsi.rP.toFixed(3) + ' (' + STAT.strength(wsi.rP) + ', ' + (wsi.rP>0?'pozitív':'negatív') + ', p ' + wsi.pP + ')</li>';
+    h += '</ul><p>Domináns meteorológiai tényező: <strong>' + wsi.dom + '</strong>.</p>';
+  } else h += '<p>Meteorológiai korreláció elemzéséhez legalább 3 időjárásos bejegyzés szükséges.</p>';
+  if (optW) {
+    h += '<h4>6. Optimális körülmények</h4>';
+    h += '<p>A legjobb mozgásnapokon (átlag: ' + optW.topMean + '/10): <strong>' + optW.opt.temp.mean + '°C</strong> (' + optW.opt.temp.min + '-' + optW.opt.temp.max + '°C), <strong>' + optW.opt.hum.mean + '%</strong> RH, <strong>' + optW.opt.press.mean + ' hPa</strong>. Kedvezőtlen napokon (átlag: ' + optW.botMean + '/10): ' + optW.adv.temp.mean + '°C, ' + optW.adv.hum.mean + '%, ' + optW.adv.press.mean + ' hPa.</p>';
+  }
+  h += '<h4>7. Frontérzékenység</h4>';
+  if (fdi.total > 0) {
+    h += '<p>' + fdi.total + ' frontátvonulás (' + fdi.appCount + ' közeledő, ' + fdi.depCount + ' távolodó). ';
+    if (fdi.avgImpactApp !== null) h += 'Közeledő frontnál átlag pontszámváltozás: <strong>' + (fdi.avgImpactApp>0?'+':'') + fdi.avgImpactApp.toFixed(2) + '</strong> pont. ';
+    h += fdi.sensitive ? '<strong>Frontérzékenység azonosítható.</strong> Javasolt könnyebb kezelések frontidőszakban.</p>' : 'Egyértelmű frontérzékenység nem mutatható ki.</p>';
+  } else h += '<p>Frontérzékenység elemzéséhez több légnyomásadattal ellátott bejegyzés szükséges.</p>';
+  h += '<h4>8. Összefoglalás</h4><ul>';
+  if (mqi) h += '<li>MQI = <strong>' + mqi.mqi.toFixed(2) + '</strong> - ' + mqi.cat + '</li>';
+  if (pvi) h += '<li>PVI = <strong>' + pvi.pvi.toFixed(1) + '%</strong> - ' + pvi.lbl + '</li>';
+  if (topTEI.length) h += '<li>Leghatékonyabb kezelés: <strong>' + topTEI[0].label + '</strong> (TEI: ' + topTEI[0].tei.toFixed(2) + ')</li>';
+  if (topCSI.length) h += '<li>Legjobb kombináció: <strong>' + topCSI[0].labelA + ' + ' + topCSI[0].labelB + '</strong> (CSI: ' + topCSI[0].csi.toFixed(3) + ')</li>';
+  if (wsi) h += '<li>Legerősebb időjárási hatás: <strong>' + wsi.dom + '</strong></li>';
+  if (fdi.sensitive) h += '<li><strong>Frontérzékenység kimutatható</strong> - frontátvonulások körül pihenés javasolt</li>';
+  if (optW) h += '<li>Optimális hőmérsékleti tartomány: <strong>' + optW.opt.temp.min + '-' + optW.opt.temp.max + '°C</strong></li>';
+  h += '</ul></div>';
+  document.getElementById('diagnosisSection').innerHTML = '<div class="card"><div class="card-title">Szöveges Diagnózis - Teljes Elemzés</div>' + h + '</div>';
+}
+
+function renderDataTable(entries) {
+  var rows = '';
+  var shown = entries.slice(0,30);
+  for (var i = 0; i < shown.length; i++) {
+    var e = shown[i];
+    var total = 0;
+    var exList = [];
+    for (var j = 0; j < EXERCISES.length; j++) {
+      var ex = EXERCISES[j];
+      var mins = (e.exercises && e.exercises[ex.id]) || 0;
+      total += mins;
+      if (mins > 0) exList.push(EXICONS[ex.id] + ' ' + mins + 'p');
+    }
+    rows += '<tr style="' + (i%2?'background:var(--bg)':'') + '">';
+    rows += '<td>' + e.date + '</td>';
+    rows += '<td style="text-align:center;font-weight:700">' + e.score + '</td>';
+    rows += '<td style="font-size:.8rem">' + (exList.join(' | ') || '-') + '</td>';
+    rows += '<td>' + (total || '-') + '</td>';
+    rows += '<td>' + (e.weather&&e.weather.temperature!==null?e.weather.temperature.toFixed(1)+'°':'-') + '</td>';
+    rows += '<td>' + (e.weather&&e.weather.humidity!==null?e.weather.humidity+'%':'-') + '</td>';
+    rows += '<td>' + (e.weather&&e.weather.pressure!==null?e.weather.pressure:'-') + '</td></tr>';
+  }
+  document.getElementById('dataTableSection').innerHTML =
+    '<div class="card"><div class="card-title">Nyers adattábla (utolsó 30 bejegyzés)</div>' +
+    '<div style="overflow-x:auto"><table class="ana-table"><thead><tr><th>Dátum</th><th>Pont</th><th>Kezelések</th><th>Perc</th><th>Hőm.</th><th>RH</th><th>hPa</th></tr></thead><tbody>' + rows + '</tbody></table></div></div>';
+}
+
+// ── PDF EXPORT ─────────────────────────────────────────────
+function exportAnalysisPDF() {
+  if (!lastAnalysis) { showStatus('Először futtasd le az elemzést!', 'err'); return; }
+  showStatus('PDF generálása...', 'info');
+  var mqi = lastAnalysis.mqi, pvi = lastAnalysis.pvi, tei = lastAnalysis.tei;
+  var csi = lastAnalysis.csi, wsi = lastAnalysis.wsi, fdi = lastAnalysis.fdi;
+  var optW = lastAnalysis.optW, entries = lastAnalysis.entries, period = lastAnalysis.period;
+  var now = new Date().toLocaleDateString('hu-HU',{year:'numeric',month:'long',day:'numeric'});
+  var periStr = period===0 ? 'Összes adat' : 'Utóbbi ' + period + ' nap';
+  var topTEI = tei.filter(function(t){return t.tei!==null;});
+
+  var th = 'background:#1D6B78;color:white;padding:7px 9px;text-align:left;font-size:9pt;border:1px solid #155060';
+  var td = 'padding:6px 9px;border:1px solid #DDD8CE;font-size:9pt';
+
+  function teiTableRows() {
+    var r = '';
+    for (var i = 0; i < topTEI.length; i++) {
+      var t = topTEI[i];
+      var bg = i%2 ? '#f7f7f7' : 'white';
+      r += '<tr style="background:' + bg + '"><td style="' + td + ';text-align:center;font-weight:700">' + (i+1) + '</td><td style="' + td + '">' + t.label + '</td><td style="' + td + ';text-align:center;font-weight:700;color:#1D6B78">' + (t.tei!==null?t.tei.toFixed(2):'-') + '</td><td style="' + td + ';text-align:center">' + t.count + '</td><td style="' + td + ';text-align:center">' + t.totalMins + '</td><td style="' + td + ';text-align:center">' + t.rating + '</td><td style="' + td + ';text-align:center">' + (t.trend>0.3?'Javuló':t.trend<-0.3?'Csökkenő':'Stabil') + '</td></tr>';
+    }
+    return r;
+  }
+
+  function csiTableRows() {
+    var r = '';
+    var top = csi.slice(0,10);
+    for (var i = 0; i < top.length; i++) {
+      var c = top[i];
+      var bg = i%2 ? '#f7f7f7' : 'white';
+      var col = c.type==='szinergia'?'#155724':c.type==='antagonizmus'?'#721c24':'#666';
+      r += '<tr style="background:' + bg + '"><td style="' + td + '">' + c.labelA + '</td><td style="' + td + '">' + c.labelB + '</td><td style="' + td + ';text-align:center;font-weight:700;color:' + col + '">' + c.csi.toFixed(3) + '</td><td style="' + td + ';text-align:center">' + c.mBoth.toFixed(2) + '</td><td style="' + td + ';text-align:center">' + c.count + '</td><td style="' + td + ';text-align:center">' + c.type + '</td></tr>';
+    }
+    return r;
+  }
+
+  function dataTableRows() {
+    var r = '';
+    var shown = entries.slice(0,40);
+    for (var i = 0; i < shown.length; i++) {
+      var e = shown[i];
+      var total = 0;
+      var exNames = [];
+      for (var j = 0; j < EXERCISES.length; j++) {
+        var mins = (e.exercises && e.exercises[EXERCISES[j].id]) || 0;
+        total += mins;
+        if (mins > 0) exNames.push(EXERCISES[j].label.substring(0,10));
+      }
+      var bg = i%2 ? '#f7f7f7' : 'white';
+      r += '<tr style="background:' + bg + '"><td style="' + td + '">' + e.date + '</td><td style="' + td + ';text-align:center;font-weight:700">' + e.score + '</td><td style="' + td + ';font-size:8.5pt">' + (exNames.join(', ')||'-') + '</td><td style="' + td + ';text-align:center">' + (total||'-') + '</td><td style="' + td + ';text-align:center">' + (e.weather&&e.weather.temperature!==null?e.weather.temperature.toFixed(1)+'°':'-') + '</td><td style="' + td + ';text-align:center">' + (e.weather&&e.weather.humidity!==null?e.weather.humidity+'%':'-') + '</td><td style="' + td + ';text-align:center">' + (e.weather&&e.weather.pressure!==null?e.weather.pressure:'-') + '</td></tr>';
+    }
+    return r;
+  }
+
+  var diagnosisEl = document.getElementById('diagnosisSection');
+  var diagBody = diagnosisEl ? diagnosisEl.querySelector('.diagnosis-body') : null;
+  var diagHTML = diagBody ? diagBody.innerHTML : '<p>Nincs elemzési szöveg.</p>';
+
+  var s = 'margin-bottom:22px;page-break-inside:avoid';
+  var h2 = 'font-family:Georgia,serif;color:#1D6B78;font-size:14pt;border-bottom:2.5px solid #1D6B78;padding-bottom:5px;margin-bottom:12px';
+
+  var wsiSection = '';
+  if (wsi) {
+    wsiSection = '<table style="width:100%;border-collapse:collapse"><thead><tr><th style="' + th + '">Változó</th><th style="' + th + ';text-align:center">Pearson r</th><th style="' + th + ';text-align:center">p-érték</th><th style="' + th + ';text-align:center">Irány</th><th style="' + th + ';text-align:center">Erősség</th></tr></thead><tbody>' +
+      '<tr><td style="' + td + '">Hőmérséklet (°C)</td><td style="' + td + ';text-align:center;font-weight:bold">' + wsi.rT.toFixed(3) + '</td><td style="' + td + ';text-align:center">' + wsi.pT + '</td><td style="' + td + ';text-align:center">' + (wsi.rT>0?'Pozitív':'Negatív') + '</td><td style="' + td + ';text-align:center">' + STAT.strength(wsi.rT) + '</td></tr>' +
+      '<tr style="background:#f7f7f7"><td style="' + td + '">Páratartalom (%)</td><td style="' + td + ';text-align:center;font-weight:bold">' + wsi.rH.toFixed(3) + '</td><td style="' + td + ';text-align:center">' + wsi.pH + '</td><td style="' + td + ';text-align:center">' + (wsi.rH>0?'Pozitív':'Negatív') + '</td><td style="' + td + ';text-align:center">' + STAT.strength(wsi.rH) + '</td></tr>' +
+      '<tr><td style="' + td + '">Légnyomás (hPa)</td><td style="' + td + ';text-align:center;font-weight:bold">' + wsi.rP.toFixed(3) + '</td><td style="' + td + ';text-align:center">' + wsi.pP + '</td><td style="' + td + ';text-align:center">' + (wsi.rP>0?'Pozitív':'Negatív') + '</td><td style="' + td + ';text-align:center">' + STAT.strength(wsi.rP) + '</td></tr>' +
+      '</tbody></table><p style="font-size:9pt;color:#4A5568;margin-top:8px">n = ' + wsi.n + ' nap · Domináns tényező: <strong>' + wsi.dom + '</strong></p>';
+  } else {
+    wsiSection = '<p style="font-size:9pt">Nincs elegendő adat.</p>';
+  }
+
+  var optSection = '';
+  if (optW) {
+    optSection = '<table style="width:100%;border-collapse:collapse"><thead><tr><th style="' + th + '">Változó</th><th style="' + th + ';text-align:center">Optimum átlag</th><th style="' + th + ';text-align:center">Optimum tartomány</th><th style="' + th + ';text-align:center">Kedvezőtlen átlag</th><th style="' + th + ';text-align:center">Különbség</th></tr></thead><tbody>' +
+      '<tr><td style="' + td + '">Hőmérséklet (°C)</td><td style="' + td + ';text-align:center;font-weight:bold">' + optW.opt.temp.mean + '°C</td><td style="' + td + ';text-align:center">' + optW.opt.temp.min + '-' + optW.opt.temp.max + '°C</td><td style="' + td + ';text-align:center">' + optW.adv.temp.mean + '°C</td><td style="' + td + ';text-align:center;font-weight:bold">' + (optW.opt.temp.mean-optW.adv.temp.mean).toFixed(1) + '°C</td></tr>' +
+      '<tr style="background:#f7f7f7"><td style="' + td + '">Páratartalom (%)</td><td style="' + td + ';text-align:center;font-weight:bold">' + optW.opt.hum.mean + '%</td><td style="' + td + ';text-align:center">' + optW.opt.hum.min + '-' + optW.opt.hum.max + '%</td><td style="' + td + ';text-align:center">' + optW.adv.hum.mean + '%</td><td style="' + td + ';text-align:center;font-weight:bold">' + (optW.opt.hum.mean-optW.adv.hum.mean).toFixed(1) + '%</td></tr>' +
+      '<tr><td style="' + td + '">Légnyomás (hPa)</td><td style="' + td + ';text-align:center;font-weight:bold">' + optW.opt.press.mean + ' hPa</td><td style="' + td + ';text-align:center">' + optW.opt.press.min + '-' + optW.opt.press.max + ' hPa</td><td style="' + td + ';text-align:center">' + optW.adv.press.mean + ' hPa</td><td style="' + td + ';text-align:center;font-weight:bold">' + (optW.opt.press.mean-optW.adv.press.mean).toFixed(1) + ' hPa</td></tr>' +
+      '</tbody></table><p style="font-size:9pt;margin-top:8px">Optimum napok: <strong>' + optW.topMean + '/10</strong> · Kedvezőtlen napok: <strong>' + optW.botMean + '/10</strong></p>';
+  } else {
+    optSection = '<p style="font-size:9pt">Nincs elegendő adat.</p>';
+  }
+
+  var sumCards = '';
+  if (mqi) sumCards += '<td style="width:33%;padding:10px;background:#E8F4F6;border-radius:6px;text-align:center;border:1px solid #b8dce4"><div style="font-family:Georgia,serif;font-size:22pt;color:#1D6B78;font-weight:bold">' + mqi.mqi.toFixed(2) + '</div><div style="font-size:8pt;text-transform:uppercase;letter-spacing:.05em;color:#4A5568">MQI - Mozgásminőség</div><div style="font-size:9pt;font-weight:bold;color:#1D6B78">' + mqi.cat + '</div></td>';
+  if (pvi) sumCards += '<td style="width:33%;padding:10px;background:#E8F5EE;border-radius:6px;text-align:center;border:1px solid #b0dcc0"><div style="font-family:Georgia,serif;font-size:22pt;color:#2A7A52;font-weight:bold">' + pvi.pvi.toFixed(1) + '%</div><div style="font-size:8pt;text-transform:uppercase;letter-spacing:.05em;color:#4A5568">PVI - Variabilitás</div><div style="font-size:9pt;font-weight:bold;color:#2A7A52">' + pvi.lbl + '</div></td>';
+  if (topTEI.length) sumCards += '<td style="width:33%;padding:10px;background:#FDF6E3;border-radius:6px;text-align:center;border:1px solid #e8d5a0"><div style="font-family:Georgia,serif;font-size:22pt;color:#9A6C18;font-weight:bold">' + topTEI[0].tei.toFixed(2) + '</div><div style="font-size:8pt;text-transform:uppercase;letter-spacing:.05em;color:#4A5568">TEI max - ' + topTEI[0].label + '</div><div style="font-size:9pt;font-weight:bold;color:#9A6C18">' + topTEI[0].rating + '</div></td>';
+
+  var fdiAvgAppTxt = fdi.avgImpactApp !== null ? (fdi.avgImpactApp>0?'+':'') + fdi.avgImpactApp.toFixed(2) + ' pont' : '-';
+  var fdiAvgDepTxt = fdi.avgImpactDep !== null ? (fdi.avgImpactDep>0?'+':'') + fdi.avgImpactDep.toFixed(2) + ' pont' : '-';
+
+  var html = '<div style="font-family:Arial,sans-serif;color:#1A1E25;background:white">' +
+    '<div style="background:linear-gradient(135deg,#134D57,#1D6B78);color:white;padding:50px 40px;text-align:center;margin:-10mm -15mm 30px;page-break-after:always">' +
+    '<div style="font-family:Georgia,serif;font-size:26pt;font-weight:bold;margin-bottom:10px">MozgásNapló</div>' +
+    '<div style="font-size:12pt;opacity:.85;margin-bottom:24px">SMA III - Személyre szabott Mozgáselemzési Jelentés</div>' +
+    '<div style="background:rgba(255,255,255,.15);border-radius:10px;padding:16px 28px;display:inline-block;margin-bottom:18px">' +
+    '<div style="font-size:10pt;opacity:.8;margin-bottom:4px">Elemzési időszak</div>' +
+    '<div style="font-size:14pt;font-weight:bold">' + periStr + '</div>' +
+    '<div style="font-size:10pt;margin-top:4px">' + entries.length + ' napi bejegyzés</div></div>' +
+    '<div style="font-size:9pt;opacity:.7">' + now + ' - Nórápi (8591) - Open-Meteo API (napi átlag)</div></div>' +
+    '<div style="' + s + '"><h2 style="' + h2 + '">Összefoglalás - Főbb Indexek</h2><table style="width:100%;border-collapse:collapse"><tr>' + sumCards + '</tr></table></div>' +
+    '<div style="' + s + '"><h2 style="' + h2 + '">1. Kezelési Hatékonysági Index (TEI)</h2>' +
+    '<p style="font-size:9pt;color:#4A5568;margin-bottom:10px">TEI = átlagos mozgáspontszám az adott kezelés napjain. Trend = 2. fél mínusz 1. fél átlag.</p>' +
+    '<table style="width:100%;border-collapse:collapse"><thead><tr><th style="' + th + ';width:30px">#</th><th style="' + th + '">Kezelés</th><th style="' + th + ';text-align:center">TEI</th><th style="' + th + ';text-align:center">Alk.</th><th style="' + th + ';text-align:center">Perc</th><th style="' + th + ';text-align:center">Értékelés</th><th style="' + th + ';text-align:center">Trend</th></tr></thead><tbody>' + teiTableRows() + '</tbody></table></div>' +
+    '<div style="' + s + '"><h2 style="' + h2 + '">2. Kombinációs Szinergia Index (CSI)</h2>' +
+    '<p style="font-size:9pt;color:#4A5568;margin-bottom:10px">CSI &gt; 1.1: szinergia - CSI &lt; 0.9: antagonizmus - 0.9-1.1: semleges</p>' +
+    '<table style="width:100%;border-collapse:collapse"><thead><tr><th style="' + th + '">Kezelés A</th><th style="' + th + '">Kezelés B</th><th style="' + th + ';text-align:center">CSI</th><th style="' + th + ';text-align:center">Átlag pont</th><th style="' + th + ';text-align:center">Alk.</th><th style="' + th + ';text-align:center">Típus</th></tr></thead><tbody>' + csiTableRows() + '</tbody></table></div>' +
+    '<div style="' + s + '"><h2 style="' + h2 + '">3. Meteorológiai Korreláció (WSI)</h2>' + wsiSection + '</div>' +
+    '<div style="' + s + '"><h2 style="' + h2 + '">4. Optimális Időjárási Körülmények</h2>' + optSection + '</div>' +
+    '<div style="' + s + '"><h2 style="' + h2 + '">5. Frontérzékenység (FDI)</h2>' +
+    '<table style="width:100%;border-collapse:collapse"><thead><tr><th style="' + th + '">Mutató</th><th style="' + th + ';text-align:center">Érték</th></tr></thead><tbody>' +
+    '<tr><td style="' + td + '">Frontesemények száma</td><td style="' + td + ';text-align:center;font-weight:bold">' + fdi.total + '</td></tr>' +
+    '<tr style="background:#f7f7f7"><td style="' + td + '">Közeledő frontok</td><td style="' + td + ';text-align:center">' + fdi.appCount + '</td></tr>' +
+    '<tr><td style="' + td + '">Távolodó frontok</td><td style="' + td + ';text-align:center">' + fdi.depCount + '</td></tr>' +
+    '<tr style="background:#f7f7f7"><td style="' + td + '">Hatás közeledő frontnál</td><td style="' + td + ';text-align:center;font-weight:bold">' + fdiAvgAppTxt + '</td></tr>' +
+    '<tr><td style="' + td + '">Hatás távolodó frontnál</td><td style="' + td + ';text-align:center;font-weight:bold">' + fdiAvgDepTxt + '</td></tr>' +
+    '<tr style="background:#f7f7f7"><td style="' + td + '">Frontérzékenység</td><td style="' + td + ';text-align:center;font-weight:bold;color:' + (fdi.sensitive?'#B03030':'#2A7A52') + '">' + (fdi.sensitive?'AZONOSÍTHATÓ':'Nem mutatható ki') + '</td></tr>' +
+    '</tbody></table></div>' +
+    '<div style="' + s + '"><h2 style="' + h2 + '">6. Szöveges Diagnózis</h2><div style="font-size:9.5pt;line-height:1.7;color:#2D3748">' + diagHTML + '</div></div>' +
+    '<div style="' + s + ';page-break-before:always"><h2 style="' + h2 + '">7. Nyers Adattábla (utolsó 40 bejegyzés)</h2>' +
+    '<table style="width:100%;border-collapse:collapse"><thead><tr><th style="' + th + '">Dátum</th><th style="' + th + ';text-align:center">Pont</th><th style="' + th + '">Kezelések</th><th style="' + th + ';text-align:center">Perc</th><th style="' + th + ';text-align:center">Hőm.</th><th style="' + th + ';text-align:center">RH</th><th style="' + th + ';text-align:center">hPa</th></tr></thead><tbody>' + dataTableRows() + '</tbody></table></div>' +
+    '<div style="' + s + '"><h2 style="' + h2 + '">8. Módszertani Függelék</h2>' +
+    '<table style="width:100%;border-collapse:collapse"><thead><tr><th style="' + th + '">Index</th><th style="' + th + '">Definíció</th><th style="' + th + '">Értelmezés</th></tr></thead><tbody>' +
+    '<tr><td style="' + td + ';font-weight:bold">MQI</td><td style="' + td + '">Lineárisan súlyozott átlag (újabb napok nagyobb súllyal)</td><td style="' + td + '">&lt;3.5 Kritikus - 3.5-5.5 Gyenge - 5.5-7.5 Közepes - &gt;7.5 Kiváló</td></tr>' +
+    '<tr style="background:#f7f7f7"><td style="' + td + ';font-weight:bold">PVI</td><td style="' + td + '">Szórás / Átlag x 100 (%)</td><td style="' + td + '">&lt;15% Nagyon stabil - 15-25% Stabil - 25-35% Mérsékelt - &gt;35% Nagy</td></tr>' +
+    '<tr><td style="' + td + ';font-weight:bold">TEI</td><td style="' + td + '">Átlagos pontszám az adott kezelés napjain</td><td style="' + td + '">&lt;4.5 Gyenge - 4.5-6.0 Közepes - 6.0-7.5 Jó - &gt;7.5 Kiváló</td></tr>' +
+    '<tr style="background:#f7f7f7"><td style="' + td + ';font-weight:bold">CSI</td><td style="' + td + '">Kombinált pontszám / max(egyes TEI-k)</td><td style="' + td + '">&lt;0.9 Antagonizmus - 0.9-1.1 Semleges - &gt;1.1 Szinergia</td></tr>' +
+    '<tr><td style="' + td + ';font-weight:bold">WSI</td><td style="' + td + '">Pearson-korreláció (időjárás vs. pontszám)</td><td style="' + td + '">|r|&lt;0.1 Elhanyagolható - 0.1-0.3 Gyenge - 0.3-0.6 Közepes - &gt;0.6 Erős</td></tr>' +
+    '<tr style="background:#f7f7f7"><td style="' + td + ';font-weight:bold">FDI</td><td style="' + td + '">Napi légnyomásváltozás legalább 3 hPa = frontesemény</td><td style="' + td + '">Közeledő: nyomáscsökkenés - Távolodó: nyomásemelkedés</td></tr>' +
+    '</tbody></table>' +
+    '<p style="font-size:8pt;color:#666;margin-top:16px;border-top:1px solid #DDD8CE;padding-top:8px">MozgásNapló v2.0 - Komplex Mozgáselemzési Rendszer - ' + now + ' - Nórápi (8591)</p></div></div>';
+
+  var el = document.getElementById('pdfReport');
+  el.innerHTML = html;
+  el.style.display = 'block';
+
+  html2pdf().set({
+    margin: [12, 15, 18, 15],
+    filename: 'mozgasnaplo_elemzes_' + new Date().toISOString().split('T')[0] + '.pdf',
+    image: {type:'jpeg', quality:0.97},
+    html2canvas: {scale:2, useCORS:true},
+    jsPDF: {unit:'mm', format:'a4', orientation:'portrait'},
+    pagebreak: {mode:['css','legacy']}
+  }).from(el).save().then(function() {
+    showStatus('PDF sikeresen letöltve!', 'success');
+    el.style.display = 'none';
+    el.innerHTML = '';
+  }).catch(function(e) {
+    console.error(e);
+    showStatus('PDF hiba: ' + e.message, 'err');
+    el.style.display = 'none';
+    el.innerHTML = '';
+  });
+}
+</script>
+</body>
+</html>
