@@ -8,42 +8,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
-:root {
-  --bg:         #F3EFE8;
-  --bg2:        #EAE5DC;
-  --card:       #FFFFFF;
-  --primary:    #1D6B78;
-  --primary-d:  #134D57;
-  --primary-l:  #E8F4F6;
-  --accent:     #B85830;
-  --accent-l:   #FBF0EB;
-  --green:      #2A7A52;
-  --green-l:    #E8F5EE;
-  --amber:      #9A6C18;
-  --amber-l:    #FDF6E3;
-  --text:       #1A1E25;
-  --text2:      #4A5568;
-  --text3:      #8C98AA;
-  --border:     #DDD8CE;
-  --shadow:     0 2px 10px rgba(29,107,120,0.09);
-  --shadow-md:  0 6px 20px rgba(29,107,120,0.13);
-  --r:          12px;
-  --r-sm:       8px;
+:root{
+  --bg:#F3EFE8;--bg2:#EAE5DC;--card:#FFFFFF;
+  --primary:#1D6B78;--primary-d:#134D57;--primary-l:#E8F4F6;
+  --accent:#B85830;--accent-l:#FBF0EB;
+  --green:#2A7A52;--green-l:#E8F5EE;
+  --amber:#9A6C18;--amber-l:#FDF6E3;
+  --red:#B03030;--red-l:#FEF2F2;
+  --text:#1A1E25;--text2:#4A5568;--text3:#8C98AA;
+  --border:#DDD8CE;
+  --shadow:0 2px 10px rgba(29,107,120,0.09);
+  --shadow-md:0 6px 20px rgba(29,107,120,0.13);
+  --r:12px;--r-sm:8px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:16px;line-height:1.6}
-
-/* ── HEADER ───────────────────────────────── */
 .header{background:linear-gradient(135deg,var(--primary-d) 0%,var(--primary) 100%);position:sticky;top:0;z-index:200;box-shadow:0 3px 16px rgba(0,0,0,0.2)}
-.header-inner{max-width:820px;margin:0 auto;padding:16px 20px 0}
+.header-inner{max-width:900px;margin:0 auto;padding:16px 20px 0}
 .header-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
 .app-brand h1{font-family:'Playfair Display',serif;color:#fff;font-size:1.55rem;line-height:1.1}
-.app-brand p{color:rgba(255,255,255,0.6);font-size:0.75rem;margin-top:2px;font-weight:400}
-
-/* Weather widget */
+.app-brand p{color:rgba(255,255,255,0.6);font-size:0.75rem;margin-top:2px}
 .weather{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);border-radius:var(--r-sm);padding:8px 14px;cursor:pointer;transition:.2s;text-align:right}
 .weather:hover{background:rgba(255,255,255,0.18)}
 .weather-row{display:flex;gap:14px;justify-content:flex-end}
@@ -51,31 +39,21 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 .w-val{font-size:1.05rem;font-weight:700;display:block}
 .w-lbl{font-size:0.62rem;opacity:.65;text-transform:uppercase;letter-spacing:.05em}
 .w-hint{font-size:0.65rem;color:rgba(255,255,255,.5);margin-top:3px}
-
-/* Tabs */
-.tabs{display:flex;gap:3px;padding-bottom:0}
-.tab-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.72);padding:8px 18px 10px;border-radius:var(--r-sm) var(--r-sm) 0 0;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.87rem;font-weight:600;transition:.2s;border-bottom:none}
+.tabs{display:flex;gap:3px;flex-wrap:wrap}
+.tab-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.72);padding:8px 14px 10px;border-radius:var(--r-sm) var(--r-sm) 0 0;cursor:pointer;font-family:'Nunito',sans-serif;font-size:0.84rem;font-weight:600;transition:.2s;border-bottom:none}
 .tab-btn:hover{background:rgba(255,255,255,0.2);color:#fff}
 .tab-btn.active{background:var(--bg);color:var(--primary);border-color:rgba(255,255,255,0.15)}
-
-/* ── MAIN ─────────────────────────────────── */
-main{max-width:820px;margin:0 auto;padding:22px 16px 80px}
+main{max-width:900px;margin:0 auto;padding:22px 16px 80px}
 .tab-content{display:none}
 .tab-content.active{display:block;animation:fadeUp .28s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── CARDS ────────────────────────────────── */
 .card{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:14px}
 .card-title{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--primary);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-
-/* ── FORMS ────────────────────────────────── */
 .form-group{margin-bottom:16px}
 .form-label{display:block;font-weight:700;font-size:0.78rem;color:var(--text2);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
 input[type=date],input[type=number],input[type=text],textarea,select{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--r-sm);font-family:'Nunito',sans-serif;font-size:.97rem;color:var(--text);background:#fff;transition:.2s;outline:none}
 input:focus,textarea:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-l)}
 textarea{resize:vertical;min-height:76px}
-
-/* ── SCORE SLIDER ─────────────────────────── */
 .score-display{display:flex;align-items:center;gap:18px;margin-bottom:10px}
 .score-big{font-family:'Playfair Display',serif;font-size:3.6rem;font-weight:600;min-width:68px;text-align:center;transition:color .3s;line-height:1}
 .score-meta{display:flex;flex-direction:column}
@@ -85,13 +63,11 @@ input[type=range]{width:100%;height:8px;-webkit-appearance:none;border-radius:4p
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--primary);box-shadow:0 2px 6px rgba(0,0,0,.25);cursor:pointer;transition:.1s}
 input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .range-labels{display:flex;justify-content:space-between;font-size:.72rem;color:var(--text3);margin-top:4px}
-
-/* ── EXERCISE GRID ────────────────────────── */
 .ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .ex-item{border:1.5px solid var(--border);border-radius:var(--r-sm);padding:10px 12px;transition:.2s;background:#fff}
 .ex-item:hover{border-color:#a0c8d0;background:var(--primary-l)}
 .ex-item.sel{border-color:var(--primary);background:var(--primary-l)}
-.ex-name{display:flex;align-items:center;gap:7px;font-size:.88rem;font-weight:600;cursor:pointer}
+.ex-name{display:flex;align-items:center;gap:7px;font-size:.88rem;font-weight:600}
 .ex-name input[type=checkbox]{width:16px;height:16px;accent-color:var(--primary);cursor:pointer;flex-shrink:0}
 .ex-name label{cursor:pointer;margin:0;text-transform:none;letter-spacing:0;font-size:.88rem;color:var(--text)}
 .ex-item.sel .ex-name label{color:var(--primary)}
@@ -99,34 +75,26 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .ex-item.sel .dur-wrap{display:flex}
 .dur-wrap input{width:72px;padding:4px 8px;font-size:.9rem}
 .dur-wrap span{font-size:.8rem;color:var(--text2)}
-
-/* ── BUTTONS ──────────────────────────────── */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;border-radius:var(--r-sm);border:none;font-family:'Nunito',sans-serif;font-size:.97rem;font-weight:700;cursor:pointer;transition:.2s}
 .btn-primary{background:var(--primary);color:#fff;box-shadow:0 4px 14px rgba(29,107,120,.28)}
-.btn-primary:hover{background:var(--primary-d);box-shadow:0 6px 18px rgba(29,107,120,.38);transform:translateY(-1px)}
-.btn-primary:active{transform:none}
+.btn-primary:hover{background:var(--primary-d);transform:translateY(-1px)}
 .btn-secondary{background:#fff;color:var(--primary);border:1.5px solid var(--border)}
 .btn-secondary:hover{border-color:var(--primary);background:var(--primary-l)}
 .btn-danger{background:#fff;color:var(--accent);border:1.5px solid #EDCCC0}
 .btn-danger:hover{background:var(--accent-l)}
 .btn-full{width:100%}
 .btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
-
-/* ── STATUS MESSAGE ───────────────────────── */
+.btn-sm{padding:7px 14px;font-size:.85rem}
 .status{padding:11px 16px;border-radius:var(--r-sm);margin-bottom:14px;font-size:.9rem;display:none;font-weight:600}
 .status.show{display:block;animation:fadeUp .2s ease}
 .status.ok{background:var(--green-l);color:var(--green);border:1px solid #b0dcc0}
-.status.err{background:#FEF2F2;color:#B03030;border:1px solid #FAD0D0}
+.status.err{background:var(--red-l);color:var(--red);border:1px solid #FAD0D0}
 .status.info{background:var(--primary-l);color:var(--primary);border:1px solid #b8dce4}
-
-/* ── STATS GRID ───────────────────────────── */
 .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:14px}
 .stat-box{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:15px 12px;text-align:center;box-shadow:var(--shadow)}
 .stat-val{font-family:'Playfair Display',serif;font-size:2.1rem;color:var(--primary);font-weight:600}
 .stat-lbl{font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
 .chart-wrap{position:relative;height:210px;margin-top:10px}
-
-/* ── HISTORY TABLE ────────────────────────── */
 .hist-wrap{overflow-x:auto}
 .hist-table{width:100%;border-collapse:collapse;font-size:.85rem}
 .hist-table th{background:var(--bg);padding:8px 10px;text-align:left;font-weight:700;color:var(--text2);border-bottom:2px solid var(--border);font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
@@ -135,9 +103,6 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .hist-table tr:hover td{background:var(--bg)}
 .score-pill{display:inline-block;width:30px;height:30px;border-radius:50%;text-align:center;line-height:30px;font-weight:700;font-size:.85rem}
 .empty-state{text-align:center;padding:40px 20px;color:var(--text3)}
-.empty-state .big{font-size:2.5rem;margin-bottom:8px}
-
-/* ── SETTINGS ─────────────────────────────── */
 .setup-step{display:flex;gap:11px;margin-bottom:13px;padding:13px;background:var(--bg);border-radius:var(--r-sm)}
 .step-num{width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;flex-shrink:0}
 .step-title{font-weight:700;margin-bottom:3px;font-size:.92rem}
@@ -146,75 +111,107 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .step-desc code{background:var(--bg2);padding:1px 5px;border-radius:3px;font-size:.8rem}
 .auth-badge{padding:5px 13px;border-radius:20px;font-size:.85rem;font-weight:700}
 .auth-badge.on{background:var(--green-l);color:var(--green)}
-.auth-badge.off{background:#FEF2F2;color:#B03030}
+.auth-badge.off{background:var(--red-l);color:var(--red)}
 .google-btn{display:inline-flex;align-items:center;gap:9px;background:#fff;color:#333;border:1.5px solid var(--border);padding:9px 18px;border-radius:var(--r-sm);font-family:'Nunito',sans-serif;font-size:.93rem;font-weight:600;cursor:pointer;transition:.2s;box-shadow:var(--shadow)}
 .google-btn:hover{box-shadow:var(--shadow-md);border-color:#bbb}
 .g-logo{width:20px;height:20px;flex-shrink:0}
 .note-box{background:var(--amber-l);border:1px solid #e8d5a0;border-radius:var(--r-sm);padding:12px 14px;font-size:.85rem;color:var(--amber);margin-bottom:14px}
-
-/* ── WEATHER DETAIL ───────────────────────── */
 .weather-detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:10px}
 .wd-box{background:var(--bg);border-radius:var(--r-sm);padding:14px;text-align:center;border:1px solid var(--border)}
 .wd-val{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--primary)}
 .wd-lbl{font-size:.75rem;color:var(--text3);margin-top:3px}
-
-/* ── RESPONSIVE ───────────────────────────── */
-@media(max-width:580px){
+/* ── ANALYTICS ── */
+.analysis-controls{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.analysis-controls select{width:auto;padding:8px 12px}
+.idx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.idx-card{background:var(--card);border-radius:var(--r);padding:16px;border:1px solid var(--border);box-shadow:var(--shadow);text-align:center}
+.idx-val{font-family:'Playfair Display',serif;font-size:2rem;font-weight:600;line-height:1}
+.idx-name{font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
+.idx-sub{font-size:.8rem;font-weight:700;margin-top:6px;padding:2px 10px;border-radius:20px;display:inline-block}
+.ana-table{width:100%;border-collapse:collapse;font-size:.86rem}
+.ana-table th{background:var(--primary);color:#fff;padding:9px 11px;text-align:left;font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em}
+.ana-table td{padding:9px 11px;border-bottom:1px solid var(--border);vertical-align:middle}
+.ana-table tr:nth-child(even) td{background:var(--bg)}
+.ana-table tr:hover td{background:var(--primary-l)}
+.ana-table .rank{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--text3);font-weight:600;width:30px;text-align:center}
+.tei-bar-wrap{background:var(--bg2);border-radius:4px;height:8px;width:100%;margin-top:3px}
+.tei-bar{height:8px;border-radius:4px;transition:.5s}
+.trend-up{color:var(--green);font-weight:700}
+.trend-dn{color:var(--red);font-weight:700}
+.trend-eq{color:var(--text3)}
+.csi-syn{background:#d4edda;color:#155724}
+.csi-ant{background:#f8d7da;color:#721c24}
+.csi-neu{background:#fff3cd;color:#856404}
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.75rem;font-weight:700}
+.badge-green{background:var(--green-l);color:var(--green)}
+.badge-amber{background:var(--amber-l);color:var(--amber)}
+.badge-red{background:var(--red-l);color:var(--red)}
+.badge-blue{background:var(--primary-l);color:var(--primary)}
+.forecast-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.fc-card{background:var(--card);border-radius:var(--r);padding:15px;border:1px solid var(--border);box-shadow:var(--shadow)}
+.fc-date{font-weight:700;font-size:.88rem;color:var(--primary);margin-bottom:8px}
+.fc-weather{font-size:.82rem;color:var(--text2);margin-bottom:10px}
+.fc-list{list-style:none;font-size:.82rem}
+.fc-list li{padding:3px 0;border-bottom:1px solid var(--bg2)}
+.fc-list li:last-child{border:none}
+.diagnosis-body{font-size:.9rem;color:var(--text2);line-height:1.8}
+.diagnosis-body h4{font-family:'Playfair Display',serif;color:var(--primary);font-size:1rem;margin:16px 0 6px;border-bottom:1px solid var(--border);padding-bottom:4px}
+.diagnosis-body p{margin-bottom:8px}
+.diagnosis-body ul{margin:6px 0 8px 18px}
+.diagnosis-body li{margin-bottom:3px}
+.front-list{list-style:none;font-size:.86rem}
+.front-list li{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--bg2)}
+.front-list li:last-child{border:none}
+.front-badge{padding:2px 8px;border-radius:10px;font-size:.75rem;font-weight:700}
+.front-app{background:var(--red-l);color:var(--red)}
+.front-dep{background:var(--green-l);color:var(--green)}
+@media(max-width:600px){
   .ex-grid{grid-template-columns:1fr}
-  .stats-row{grid-template-columns:repeat(2,1fr)}
-  .app-brand h1{font-size:1.25rem}
-  .tab-btn{padding:7px 12px;font-size:.8rem}
-  .weather-row{gap:9px}
+  .stats-row,.idx-grid{grid-template-columns:repeat(2,1fr)}
+  .tab-btn{padding:7px 10px;font-size:.78rem}
+  .forecast-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- ══════════════════ HEADER ══════════════════ -->
 <div class="header">
   <div class="header-inner">
     <div class="header-top">
       <div class="app-brand">
         <h1>MozgásNapló</h1>
-        <p>SMA III · Napi állapotkövetés</p>
+        <p>SMA III · Napi állapotkövetés &amp; Profi Elemzés</p>
       </div>
       <div class="weather" id="weatherWidget" onclick="refreshWeather()" title="Kattints a frissítéshez">
-        <div class="weather-row" id="weatherRow">
+        <div class="weather-row">
           <div class="w-item"><span class="w-val" id="wT">–</span><span class="w-lbl">°C</span></div>
           <div class="w-item"><span class="w-val" id="wH">–</span><span class="w-lbl">% RH</span></div>
           <div class="w-item"><span class="w-val" id="wP">–</span><span class="w-lbl">hPa</span></div>
         </div>
-        <div class="w-hint" id="wHint">📍 Helyzet kérése...</div>
+        <div class="w-hint" id="wHint">Nórápi (8591) · Tölt...</div>
       </div>
     </div>
     <div class="tabs">
       <button class="tab-btn active" onclick="showTab('bevitel',this)">✏️ Bevitel</button>
       <button class="tab-btn" onclick="showTab('statisztika',this)">📊 Statisztika</button>
+      <button class="tab-btn" onclick="showTab('elemzes',this)">🔬 Profi Elemzés</button>
       <button class="tab-btn" onclick="showTab('elozmenyek',this)">📋 Előzmények</button>
       <button class="tab-btn" onclick="showTab('beallitasok',this)">⚙️ Beállítások</button>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════ MAIN ══════════════════ -->
 <main>
 <div id="statusMsg" class="status"></div>
 
-<!-- ═══════ TAB: BEVITEL ═══════ -->
+<!-- BEVITEL -->
 <div id="tab-bevitel" class="tab-content active">
-
-  <!-- Dátum -->
   <div class="card">
     <div class="card-title">📅 Napi bejegyzés</div>
-    <div class="form-group">
-      <label class="form-label">Dátum</label>
-      <input type="date" id="entryDate" />
-    </div>
+    <div class="form-group"><label class="form-label">Dátum</label><input type="date" id="entryDate" /></div>
   </div>
-
-  <!-- Mozgás pontszám -->
   <div class="card">
-    <div class="card-title">🎯 Mozgás könnyűsége – mai napon</div>
+    <div class="card-title">🎯 Mozgás könnyűsége</div>
     <div class="score-display">
       <div class="score-big" id="scoreBig" style="color:var(--amber)">5</div>
       <div class="score-meta">
@@ -225,66 +222,76 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
     <input type="range" id="scoreSlider" min="1" max="10" value="5" oninput="onScore(this.value)" />
     <div class="range-labels"><span>1 – Alig tudok mozogni</span><span>10 – Kiváló!</span></div>
   </div>
-
-  <!-- Tornák -->
   <div class="card">
     <div class="card-title">🏃 Tornák &amp; kezelések</div>
     <p style="font-size:.84rem;color:var(--text3);margin-bottom:12px">Jelöld be amiben részt vettél, majd add meg a perceket.</p>
     <div class="ex-grid" id="exGrid"></div>
   </div>
-
-  <!-- Időjárás megjelenítés -->
   <div class="card">
-    <div class="card-title">🌤️ Mai időjárás (automatikus)</div>
-    <p style="font-size:.84rem;color:var(--text3)" id="wDetailStatus">Időjárási adatok lekérése folyamatban...</p>
+    <div class="card-title">🌤️ Mai időjárás – Nórápi (napi átlag)</div>
+    <p style="font-size:.84rem;color:var(--text3)" id="wDetailStatus">Időjárási adatok lekérése...</p>
     <div class="weather-detail-grid" id="wDetailGrid" style="display:none"></div>
   </div>
-
-  <!-- Megjegyzés -->
   <div class="card">
     <div class="card-title">📝 Megjegyzések</div>
-    <textarea id="notes" placeholder="Hogyan érezted magad? Mi volt nehéz, mi ment jól? Bármilyen megjegyzés..."></textarea>
+    <textarea id="notes" placeholder="Hogyan érezted magad? Mi volt nehéz, mi ment jól?"></textarea>
   </div>
-
   <button class="btn btn-primary btn-full" id="saveBtn" onclick="saveEntry()">💾 Bejegyzés mentése</button>
-  <p style="text-align:center;font-size:.78rem;color:var(--text3);margin-top:8px">
-    Az adat helyi tárolóba és Google Sheets-be kerül (ha be vagy lépve).
-  </p>
+  <p style="text-align:center;font-size:.78rem;color:var(--text3);margin-top:8px">Helyi tárolóba és Google Sheets-be kerül (ha be vagy lépve).</p>
 </div>
 
-<!-- ═══════ TAB: STATISZTIKA ═══════ -->
+<!-- STATISZTIKA -->
 <div id="tab-statisztika" class="tab-content">
   <div class="stats-row">
-    <div class="stat-box"><div class="stat-val" id="st7">–</div><div class="stat-lbl">Átlag pont<br>(7 nap)</div></div>
-    <div class="stat-box"><div class="stat-val" id="st30">–</div><div class="stat-lbl">Átlag pont<br>(30 nap)</div></div>
-    <div class="stat-box"><div class="stat-val" id="stAll">–</div><div class="stat-lbl">Összes<br>bejegyzés</div></div>
+    <div class="stat-box"><div class="stat-val" id="st7">–</div><div class="stat-lbl">Átlag pont (7 nap)</div></div>
+    <div class="stat-box"><div class="stat-val" id="st30">–</div><div class="stat-lbl">Átlag pont (30 nap)</div></div>
+    <div class="stat-box"><div class="stat-val" id="stAll">–</div><div class="stat-lbl">Összes bejegyzés</div></div>
   </div>
+  <div class="card"><div class="card-title">📈 Mozgás pontszám – utóbbi 30 nap</div><div class="chart-wrap"><canvas id="chartScore"></canvas></div></div>
+  <div class="card"><div class="card-title">🏋️ Tornatípusonkénti összes idő (perc)</div><div class="chart-wrap" style="height:280px"><canvas id="chartEx"></canvas></div></div>
+  <div class="card"><div class="card-title">🌡️ Hőmérséklet vs. Mozgás pontszám</div><div class="chart-wrap"><canvas id="chartCorr"></canvas></div></div>
+</div>
+
+<!-- PROFI ELEMZÉS -->
+<div id="tab-elemzes" class="tab-content">
   <div class="card">
-    <div class="card-title">📈 Mozgás pontszám – utóbbi 30 nap</div>
-    <div class="chart-wrap"><canvas id="chartScore"></canvas></div>
+    <div class="analysis-controls">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div class="card-title" style="margin:0">🔬 Profi Elemzés</div>
+        <select id="analysisPeriod" style="width:auto">
+          <option value="7">Utóbbi 7 nap</option>
+          <option value="30" selected>Utóbbi 30 nap</option>
+          <option value="90">Utóbbi 90 nap</option>
+          <option value="0">Összes adat</option>
+        </select>
+        <button class="btn btn-primary btn-sm" onclick="runAnalysis()">🔄 Elemzés futtatása</button>
+      </div>
+      <button class="btn btn-secondary btn-sm" onclick="exportAnalysisPDF()">📄 PDF Export</button>
+    </div>
+    <p id="analysisMeta" style="font-size:.82rem;color:var(--text3);margin-top:10px"></p>
   </div>
-  <div class="card">
-    <div class="card-title">🏋️ Tornatípusonkénti összes idő (perc)</div>
-    <div class="chart-wrap" style="height:260px"><canvas id="chartEx"></canvas></div>
-  </div>
-  <div class="card">
-    <div class="card-title">🌡️ Hőmérséklet vs. Mozgás pontszám</div>
-    <div class="chart-wrap"><canvas id="chartCorr"></canvas></div>
+  <div id="idxCards"></div>
+  <div id="teiSection"></div>
+  <div id="csiSection"></div>
+  <div id="weatherSection"></div>
+  <div id="frontSection"></div>
+  <div id="forecastSection"></div>
+  <div id="diagnosisSection"></div>
+  <div id="dataTableSection"></div>
+  <div id="analysisPlaceholder" style="text-align:center;padding:50px;color:var(--text3)">
+    <div style="font-size:2.5rem;margin-bottom:12px">🔬</div>
+    <p style="font-size:1rem;font-weight:600">Kattints az <strong>Elemzés futtatása</strong> gombra.</p>
+    <p style="font-size:.85rem;margin-top:8px">Ajánlott: legalább 14 napi bejegyzés az értékes eredményekhez.</p>
   </div>
 </div>
 
-<!-- ═══════ TAB: ELŐZMÉNYEK ═══════ -->
+<!-- ELŐZMÉNYEK -->
 <div id="tab-elozmenyek" class="tab-content">
-  <div class="card">
-    <div class="card-title">📋 Korábbi bejegyzések</div>
-    <div id="histContent"><p style="color:var(--text3)">Betöltés...</p></div>
-  </div>
+  <div class="card"><div class="card-title">📋 Korábbi bejegyzések</div><div id="histContent"><p style="color:var(--text3)">Betöltés...</p></div></div>
 </div>
 
-<!-- ═══════ TAB: BEÁLLÍTÁSOK ═══════ -->
+<!-- BEÁLLÍTÁSOK -->
 <div id="tab-beallitasok" class="tab-content">
-
-  <!-- Google fiók -->
   <div class="card">
     <div class="card-title">🔐 Google Fiók</div>
     <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px">
@@ -296,63 +303,21 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
     </button>
     <button class="btn btn-secondary" id="gSignOutBtn" onclick="gSignOut()" style="display:none">Kijelentkezés</button>
   </div>
-
-  <!-- Google Cloud setup -->
   <div class="card">
     <div class="card-title">🔑 Google Cloud beállítás</div>
-    <div class="note-box">⚠️ Ezt egyszer kell elvégezni. Utána az app automatikusan elmenti az adataidat a saját Google Sheets táblázatodba.</div>
-
-    <div class="setup-step">
-      <div class="step-num">1</div>
-      <div>
-        <div class="step-title">Google Cloud Projekt</div>
-        <div class="step-desc">Menj a <a href="https://console.cloud.google.com/" target="_blank">console.cloud.google.com</a> oldalra, és hozz létre egy új projektet (pl. „MozgásNapló").</div>
-      </div>
-    </div>
-    <div class="setup-step">
-      <div class="step-num">2</div>
-      <div>
-        <div class="step-title">Google Sheets API engedélyezése</div>
-        <div class="step-desc">APIs &amp; Services → Library → „Google Sheets API" keresés → Enable gomb.</div>
-      </div>
-    </div>
-    <div class="setup-step">
-      <div class="step-num">3</div>
-      <div>
-        <div class="step-title">OAuth 2.0 Client ID létrehozása</div>
-        <div class="step-desc">APIs &amp; Services → Credentials → Create Credentials → OAuth Client ID → Web Application típus.<br>
-        Az <strong>Authorized JavaScript origins</strong> mezőbe írd be a fájl helyét, pl.: <code>http://localhost:8080</code> vagy azt az URL-t ahol megnyitod.<br>
-        Másold ki a kapott <strong>Client ID</strong>-t az alábbi mezőbe.</div>
-      </div>
-    </div>
-    <div class="setup-step">
-      <div class="step-num">4</div>
-      <div>
-        <div class="step-title">Google Sheets táblázat ID</div>
-        <div class="step-desc">Hozz létre egy üres Google Sheets táblázatot. Az URL-ből vedd ki az azonosítót:<br>
-        <code>docs.google.com/spreadsheets/d/<strong>[EZ AZ ID]</strong>/edit</code></div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label">OAuth 2.0 Client ID</label>
-      <input type="text" id="clientIdInp" placeholder="123456789-abc.apps.googleusercontent.com" oninput="saveSettings()" />
-    </div>
-    <div class="form-group">
-      <label class="form-label">Google Sheets táblázat ID</label>
-      <input type="text" id="sheetIdInp" placeholder="1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms" oninput="saveSettings()" />
-    </div>
-    <div class="form-group">
-      <label class="form-label">Munkalap neve (sheet fül neve)</label>
-      <input type="text" id="sheetNameInp" value="MozgásNapló" oninput="saveSettings()" />
-    </div>
+    <div class="note-box">⚠️ Ezt egyszer kell elvégezni. Utána automatikusan menti a Google Sheets táblázatba.</div>
+    <div class="setup-step"><div class="step-num">1</div><div><div class="step-title">Google Cloud Projekt</div><div class="step-desc"><a href="https://console.cloud.google.com/" target="_blank">console.cloud.google.com</a> → új projekt</div></div></div>
+    <div class="setup-step"><div class="step-num">2</div><div><div class="step-title">Google Sheets API engedélyezése</div><div class="step-desc">APIs &amp; Services → Library → „Google Sheets API" → Enable</div></div></div>
+    <div class="setup-step"><div class="step-num">3</div><div><div class="step-title">OAuth 2.0 Client ID</div><div class="step-desc">Credentials → OAuth Client ID → Web Application → Authorized JS origins: <code>http://localhost:8080</code></div></div></div>
+    <div class="setup-step"><div class="step-num">4</div><div><div class="step-title">Sheets táblázat ID</div><div class="step-desc"><code>docs.google.com/spreadsheets/d/<strong>[EZ AZ ID]</strong>/edit</code></div></div></div>
+    <div class="form-group"><label class="form-label">OAuth 2.0 Client ID</label><input type="text" id="clientIdInp" oninput="saveSettings()" /></div>
+    <div class="form-group"><label class="form-label">Google Sheets táblázat ID</label><input type="text" id="sheetIdInp" oninput="saveSettings()" /></div>
+    <div class="form-group"><label class="form-label">Munkalap neve</label><input type="text" id="sheetNameInp" value="MozgásNapló" oninput="saveSettings()" /></div>
     <button class="btn btn-primary" onclick="applySettings()">✔ Beállítások mentése &amp; alkalmazása</button>
   </div>
-
-  <!-- Helyi adatok -->
   <div class="card">
     <div class="card-title">🗃️ Helyi adatok kezelése</div>
-    <p style="font-size:.88rem;color:var(--text2);margin-bottom:14px">Az app minden bejegyzést helyi tárolóban is megőriz. Internet nélkül is elérhető a statisztika és az előzmények.</p>
+    <p style="font-size:.88rem;color:var(--text2);margin-bottom:14px">Az app minden bejegyzést helyi tárolóban is megőriz.</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <button class="btn btn-secondary" onclick="exportExcel(false)">📊 Excel letöltés</button>
       <button class="btn btn-secondary" onclick="exportExcel(true)">📊 Excel (standardizált)</button>
@@ -361,601 +326,280 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
     </div>
   </div>
 </div>
-
 </main>
 
+<div id="pdfReport" style="display:none;position:absolute;left:-9999px;top:0;width:190mm;background:white;font-family:Arial,sans-serif;color:#1A1E25;font-size:10pt;line-height:1.5;padding:15mm 20mm"></div>
+
 <script>
-// ═══════════════════════════════════════════════════
-//  MozgásNapló – Teljes alkalmazás logika
-// ═══════════════════════════════════════════════════
-
-// ── KONSTANSOK ──────────────────────────────────────
-const EXERCISES = [
-  {id:'gyogytorna',     label:'Gyógytorna',           icon:'🤸'},
-  {id:'szomato',        label:'Szomatoterápia',        icon:'🖐️'},
-  {id:'gyogyuszas',     label:'Gyógyúszás',            icon:'🏊'},
-  {id:'masszazs',       label:'Masszázs',              icon:'💆'},
-  {id:'manualterpia',   label:'Manuálterápia',         icon:'🙌'},
-  {id:'robotterpia_allo',   label:'Robotterápia – Álló',    icon:'🦾'},
-  {id:'robotterpia_ulo',    label:'Robotterápia – Ülő',     icon:'🦿'},
-  {id:'otthoni_felso',  label:'Otthoni – Felsőtest',   icon:'💪'},
-  {id:'otthoni_vegyes', label:'Otthoni – Vegyes',      icon:'🔄'},
-  {id:'otthoni_labak',  label:'Otthoni – Lábak',       icon:'🦵'},
-  {id:'szobabicikli',   label:'Szobabicikli',          icon:'🚴'},
+const EXERCISES=[
+  {id:'gyogytorna',label:'Gyógytorna',icon:'🤸'},
+  {id:'szomato',label:'Szomatoterápia',icon:'🖐️'},
+  {id:'gyogyuszas',label:'Gyógyúszás',icon:'🏊'},
+  {id:'masszazs',label:'Masszázs',icon:'💆'},
+  {id:'manualterpia',label:'Manuálterápia',icon:'🙌'},
+  {id:'robotterpia_allo',label:'Robotterápia – Álló',icon:'🦾'},
+  {id:'robotterpia_ulo',label:'Robotterápia – Ülő',icon:'🦿'},
+  {id:'otthoni_felso',label:'Otthoni – Felsőtest',icon:'💪'},
+  {id:'otthoni_vegyes',label:'Otthoni – Vegyes',icon:'🔄'},
+  {id:'otthoni_labak',label:'Otthoni – Lábak',icon:'🦵'},
+  {id:'szobabicikli',label:'Szobabicikli',icon:'🚴'},
 ];
-
-const SCORE_DATA = [
-  null,
-  {lbl:'Kritikus',    desc:'Alig tudok mozogni',         tag:'#B03030', tagBg:'#FEF2F2'},
-  {lbl:'Nagyon nehéz',desc:'Szinte minden mozgás nehéz', tag:'#B03030', tagBg:'#FEF2F2'},
-  {lbl:'Nehéz',       desc:'Feszültség, lassúság',        tag:'#A05020', tagBg:'#FBF0EB'},
-  {lbl:'Kissé nehéz', desc:'Küzdős, de megy',            tag:'#9A6C18', tagBg:'#FDF6E3'},
-  {lbl:'Közepes',     desc:'Átlagos nap',                tag:'#9A6C18', tagBg:'#FDF6E3'},
-  {lbl:'Jó',          desc:'Átlag feletti mozgás',        tag:'#1D6B78', tagBg:'#E8F4F6'},
-  {lbl:'Jól megy',    desc:'Könnyedén mozgok',           tag:'#1D6B78', tagBg:'#E8F4F6'},
-  {lbl:'Nagyon jó',   desc:'Szinte minden megy',         tag:'#2A7A52', tagBg:'#E8F5EE'},
-  {lbl:'Kiváló',      desc:'Kivételesen könnyű mozgás',  tag:'#2A7A52', tagBg:'#E8F5EE'},
+const SCORE_DATA=[null,
+  {lbl:'Kritikus',desc:'Alig tudok mozogni',tag:'#B03030',tagBg:'#FEF2F2'},
+  {lbl:'Nagyon nehéz',desc:'Szinte minden mozgás nehéz',tag:'#B03030',tagBg:'#FEF2F2'},
+  {lbl:'Nehéz',desc:'Feszültség, lassúság',tag:'#A05020',tagBg:'#FBF0EB'},
+  {lbl:'Kissé nehéz',desc:'Küzdős, de megy',tag:'#9A6C18',tagBg:'#FDF6E3'},
+  {lbl:'Közepes',desc:'Átlagos nap',tag:'#9A6C18',tagBg:'#FDF6E3'},
+  {lbl:'Jó',desc:'Átlag feletti mozgás',tag:'#1D6B78',tagBg:'#E8F4F6'},
+  {lbl:'Jól megy',desc:'Könnyedén mozgok',tag:'#1D6B78',tagBg:'#E8F4F6'},
+  {lbl:'Nagyon jó',desc:'Szinte minden megy',tag:'#2A7A52',tagBg:'#E8F5EE'},
+  {lbl:'Kiváló',desc:'Kivételesen könnyű mozgás',tag:'#2A7A52',tagBg:'#E8F5EE'},
   {lbl:'Fantasztikus',desc:'A legjobb, amit érezni tudok!',tag:'#2A7A52',tagBg:'#E8F5EE'},
 ];
 
-// ── ÁLLAPOT ─────────────────────────────────────────
-let weatherData = {temperature:null, humidity:null, pressure:null};
-let accessToken = null;
-let tokenClient = null;
-let charts = {};
+let weatherData={temperature:null,humidity:null,pressure:null};
+let accessToken=null,tokenClient=null,charts={},lastAnalysis=null;
 
-// ── INICIALIZÁLÁS ────────────────────────────────────
-window.onload = () => {
-  setToday();
-  buildExGrid();
-  loadSettings();
-  refreshWeather();
-  loadStats();
-  loadHistory();
-};
+window.onload=()=>{setToday();buildExGrid();loadSettings();refreshWeather();loadStats();loadHistory();};
+window.onGoogleLibraryLoad=()=>{initGAuth();};
 
-window.onGoogleLibraryLoad = () => { initGAuth(); };
+function setToday(){document.getElementById('entryDate').value=new Date().toISOString().split('T')[0];}
+function showTab(name,btn){
+  document.querySelectorAll('.tab-content').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el=>el.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  if(btn)btn.classList.add('active');
+  if(name==='statisztika')renderCharts();
+  if(name==='elozmenyek')loadHistory();
+}
+function showStatus(msg,type='info'){
+  const el=document.getElementById('statusMsg');
+  el.textContent=msg;el.className='status show '+(type==='success'?'ok':type);
+  clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),5500);
+}
+function daysDiff(d){return Math.floor((Date.now()-new Date(d))/86400000);}
+function fmtDateShort(d){const dt=new Date(d);return(dt.getMonth()+1)+'/'+dt.getDate();}
+function fmtDateHu(d){return new Date(d).toLocaleDateString('hu-HU',{year:'numeric',month:'long',day:'numeric'});}
 
-// ── SEGÉDFÜGGVÉNYEK ──────────────────────────────────
-function setToday() {
-  document.getElementById('entryDate').value = new Date().toISOString().split('T')[0];
+function onScore(v){
+  const n=parseInt(v),sd=SCORE_DATA[n];
+  document.getElementById('scoreBig').textContent=n;
+  document.getElementById('scoreBig').style.color=sd.tag;
+  document.getElementById('scoreTag').textContent=sd.lbl;
+  document.getElementById('scoreTag').style.background=sd.tagBg;
+  document.getElementById('scoreTag').style.color=sd.tag;
+  document.getElementById('scoreDesc').textContent=sd.desc;
 }
 
-function showTab(name, btn) {
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
-  if (btn) btn.classList.add('active');
-  if (name === 'statisztika') renderCharts();
-  if (name === 'elozmenyek')  loadHistory();
-}
-
-function showStatus(msg, type='info') {
-  const el = document.getElementById('statusMsg');
-  el.textContent = msg;
-  el.className = 'status show ' + (type==='success'?'ok':type);
-  clearTimeout(el._t);
-  el._t = setTimeout(() => el.classList.remove('show'), 5500);
-}
-
-function daysDiff(dateStr) {
-  return Math.floor((Date.now() - new Date(dateStr)) / 86400000);
-}
-
-function fmtDateShort(d) {
-  const dt = new Date(d);
-  return (dt.getMonth()+1) + '/' + dt.getDate();
-}
-
-// ── SCORE SLIDER ─────────────────────────────────────
-function onScore(v) {
-  const n = parseInt(v);
-  const sd = SCORE_DATA[n];
-  document.getElementById('scoreBig').textContent = n;
-  document.getElementById('scoreBig').style.color = sd.tag;
-  document.getElementById('scoreTag').textContent = sd.lbl;
-  document.getElementById('scoreTag').style.background = sd.tagBg;
-  document.getElementById('scoreTag').style.color = sd.tag;
-  document.getElementById('scoreDesc').textContent = sd.desc;
-}
-
-// ── EXERCISE GRID ────────────────────────────────────
-function buildExGrid() {
-  const grid = document.getElementById('exGrid');
-  grid.innerHTML = '';
-  EXERCISES.forEach(ex => {
-    const div = document.createElement('div');
-    div.className = 'ex-item';
-    div.id = 'exItem-' + ex.id;
-    div.innerHTML = `
-      <div class="ex-name">
-        <input type="checkbox" id="chk-${ex.id}" onchange="toggleEx('${ex.id}')" />
-        <label for="chk-${ex.id}">${ex.icon} ${ex.label}</label>
-      </div>
-      <div class="dur-wrap">
-        <input type="number" id="dur-${ex.id}" min="5" max="360" step="5" value="30" />
-        <span>perc</span>
-      </div>`;
+function buildExGrid(){
+  const grid=document.getElementById('exGrid');grid.innerHTML='';
+  EXERCISES.forEach(ex=>{
+    const div=document.createElement('div');div.className='ex-item';div.id='exItem-'+ex.id;
+    div.innerHTML=`<div class="ex-name"><input type="checkbox" id="chk-${ex.id}" onchange="toggleEx('${ex.id}')" /><label for="chk-${ex.id}">${ex.icon} ${ex.label}</label></div><div class="dur-wrap"><input type="number" id="dur-${ex.id}" min="5" max="360" step="5" value="30" /><span>perc</span></div>`;
     grid.appendChild(div);
   });
 }
+function toggleEx(id){document.getElementById('exItem-'+id).classList.toggle('sel',document.getElementById('chk-'+id).checked);}
 
-function toggleEx(id) {
-  const item = document.getElementById('exItem-' + id);
-  item.classList.toggle('sel', document.getElementById('chk-' + id).checked);
+async function refreshWeather(){
+  document.getElementById('wHint').textContent='⏳ Frissítés...';
+  try{
+    const url=`https://api.open-meteo.com/v1/forecast?latitude=47.2017&longitude=17.5947&daily=temperature_2m_mean,relative_humidity_2m_mean,surface_pressure_mean&timezone=auto&forecast_days=1`;
+    const d=await(await fetch(url)).json();
+    weatherData={temperature:d.daily?.temperature_2m_mean?.[0]??null,humidity:d.daily?.relative_humidity_2m_mean?.[0]??null,pressure:d.daily?.surface_pressure_mean?.[0]?Math.round(d.daily.surface_pressure_mean[0]):null};
+    document.getElementById('wT').textContent=weatherData.temperature!==null?weatherData.temperature.toFixed(1):'–';
+    document.getElementById('wH').textContent=weatherData.humidity!==null?Math.round(weatherData.humidity):'–';
+    document.getElementById('wP').textContent=weatherData.pressure!==null?weatherData.pressure:'–';
+    const now=new Date();document.getElementById('wHint').textContent=`Nórápi · ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
+    const dg=document.getElementById('wDetailGrid');document.getElementById('wDetailStatus').style.display='none';dg.style.display='grid';
+    dg.innerHTML=`<div class="wd-box"><div class="wd-val">${weatherData.temperature!==null?weatherData.temperature.toFixed(1)+'°':'–'}</div><div class="wd-lbl">Átlag hőmérséklet</div></div><div class="wd-box"><div class="wd-val">${weatherData.humidity!==null?Math.round(weatherData.humidity)+'%':'–'}</div><div class="wd-lbl">Átlag páratartalom</div></div><div class="wd-box"><div class="wd-val">${weatherData.pressure!==null?weatherData.pressure:'–'}</div><div class="wd-lbl">Átlag légnyomás (hPa)</div></div>`;
+  }catch(e){document.getElementById('wHint').textContent='⚠️ Hiba – kattints újra';}
 }
 
-// ── IDŐJÁRÁS ─────────────────────────────────────────
-async function refreshWeather() {
-  document.getElementById('wHint').textContent = '⏳ Frissítés...';
-  try {
-    // Nórápi koordinátái (8591)
-    const lat = 47.2017;
-    const lon = 17.5947;
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat.toFixed(4)}&longitude=${lon.toFixed(4)}&daily=temperature_2m_mean,relative_humidity_2m_mean,surface_pressure_mean&timezone=auto&forecast_days=1`;
-    const d = await (await fetch(url)).json();
-    weatherData = {
-      temperature: d.daily?.temperature_2m_mean?.[0] ?? null,
-      humidity:    d.daily?.relative_humidity_2m_mean?.[0] ?? null,
-      pressure:    d.daily?.surface_pressure_mean?.[0] ? Math.round(d.daily.surface_pressure_mean[0]) : null
-    };
-    document.getElementById('wT').textContent = weatherData.temperature !== null ? weatherData.temperature.toFixed(1) : '–';
-    document.getElementById('wH').textContent = weatherData.humidity !== null ? weatherData.humidity : '–';
-    document.getElementById('wP').textContent = weatherData.pressure !== null ? weatherData.pressure : '–';
-    const now = new Date();
-    document.getElementById('wHint').textContent = `Frissítve ${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}`;
-    // Beviteli kártya
-    const dg = document.getElementById('wDetailGrid');
-    const ds = document.getElementById('wDetailStatus');
-    ds.style.display = 'none';
-    dg.style.display = 'grid';
-    dg.innerHTML = `
-      <div class="wd-box"><div class="wd-val">${weatherData.temperature !== null ? weatherData.temperature.toFixed(1)+'°' : '–'}</div><div class="wd-lbl">Átlag hőmérséklet</div></div>
-      <div class="wd-box"><div class="wd-val">${weatherData.humidity !== null ? weatherData.humidity+'%' : '–'}</div><div class="wd-lbl">Páratartalom</div></div>
-      <div class="wd-box"><div class="wd-val">${weatherData.pressure !== null ? weatherData.pressure : '–'}</div><div class="wd-lbl">Légnyomás (hPa)</div></div>`;
-  } catch(e) {
-    document.getElementById('wHint').textContent = '⚠️ Hiba – kattints újra';
-    document.getElementById('wDetailStatus').textContent = '⚠️ Időjárás lekérési hiba. Kattints az időjárás widgetre, vagy próbáld később.';
-  }
+function initGAuth(){
+  const cid=localStorage.getItem('gClientId');if(!cid||!window.google?.accounts)return;
+  try{tokenClient=google.accounts.oauth2.initTokenClient({client_id:cid,scope:'https://www.googleapis.com/auth/spreadsheets',callback:r=>{if(r.error){showStatus('Google hitelesítési hiba: '+r.error,'err');return;}accessToken=r.access_token;updateAuthUI(true);showStatus('✓ Sikeresen bejelentkezve!','success');}});}catch(e){console.error(e);}
 }
+function gSignIn(){const cid=document.getElementById('clientIdInp').value.trim();if(!cid){showStatus('⚠️ Add meg az OAuth Client ID-t!','err');return;}saveSettings();if(!tokenClient)initGAuth();if(tokenClient)tokenClient.requestAccessToken({prompt:''});else showStatus('⚠️ Inicializálás sikertelen.','err');}
+function gSignOut(){if(accessToken)google.accounts.oauth2.revoke(accessToken,()=>{});accessToken=null;updateAuthUI(false);}
+function updateAuthUI(on){document.getElementById('authBadge').textContent=on?'● Bejelentkezve':'● Nincs bejelentkezve';document.getElementById('authBadge').className='auth-badge '+(on?'on':'off');document.getElementById('gSignInBtn').style.display=on?'none':'inline-flex';document.getElementById('gSignOutBtn').style.display=on?'inline-flex':'none';}
 
-// ── GOOGLE AUTH ──────────────────────────────────────
-function initGAuth() {
-  const cid = localStorage.getItem('gClientId');
-  if (!cid || !window.google?.accounts) return;
-  try {
-    tokenClient = google.accounts.oauth2.initTokenClient({
-      client_id: cid,
-      scope: 'https://www.googleapis.com/auth/spreadsheets',
-      callback: r => {
-        if (r.error) { showStatus('Google hitelesítési hiba: ' + r.error, 'err'); return; }
-        accessToken = r.access_token;
-        updateAuthUI(true);
-        showStatus('✓ Sikeresen bejelentkezve Google-lel!', 'success');
-      }
-    });
-  } catch(e) { console.error('initGAuth:', e); }
-}
-
-function gSignIn() {
-  const cid = document.getElementById('clientIdInp').value.trim();
-  if (!cid) { showStatus('⚠️ Add meg az OAuth Client ID-t a Beállításokban!', 'err'); return; }
-  saveSettings();
-  if (!tokenClient) initGAuth();
-  if (tokenClient) tokenClient.requestAccessToken({prompt:''});
-  else showStatus('⚠️ Google Auth inicializálás sikertelen – ellenőrizd a Client ID-t.', 'err');
-}
-
-function gSignOut() {
-  if (accessToken) google.accounts.oauth2.revoke(accessToken, ()=>{});
-  accessToken = null;
-  updateAuthUI(false);
-  showStatus('Kijelentkezve.', 'info');
-}
-
-function updateAuthUI(on) {
-  document.getElementById('authBadge').textContent = on ? '● Bejelentkezve' : '● Nincs bejelentkezve';
-  document.getElementById('authBadge').className = 'auth-badge ' + (on?'on':'off');
-  document.getElementById('gSignInBtn').style.display = on ? 'none' : 'inline-flex';
-  document.getElementById('gSignOutBtn').style.display = on ? 'inline-flex' : 'none';
-}
-
-// ── MENTÉS ───────────────────────────────────────────
-async function saveEntry() {
-  const btn = document.getElementById('saveBtn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Mentés...';
-  try {
-    const date  = document.getElementById('entryDate').value;
-    const score = parseInt(document.getElementById('scoreSlider').value);
-    const notes = document.getElementById('notes').value;
-    if (!date) { showStatus('⚠️ Kérlek válassz dátumot!', 'err'); return; }
-
-    const exercises = {};
-    EXERCISES.forEach(ex => {
-      exercises[ex.id] = document.getElementById('chk-' + ex.id).checked
-        ? (parseInt(document.getElementById('dur-' + ex.id).value) || 0)
-        : 0;
-    });
-
-    const entry = { date, score, exercises, weather: {...weatherData}, notes, ts: new Date().toISOString() };
-
+async function saveEntry(){
+  const btn=document.getElementById('saveBtn');btn.disabled=true;btn.textContent='⏳ Mentés...';
+  try{
+    const date=document.getElementById('entryDate').value,score=parseInt(document.getElementById('scoreSlider').value),notes=document.getElementById('notes').value;
+    if(!date){showStatus('⚠️ Kérlek válassz dátumot!','err');return;}
+    const exercises={};EXERCISES.forEach(ex=>{exercises[ex.id]=document.getElementById('chk-'+ex.id).checked?(parseInt(document.getElementById('dur-'+ex.id).value)||0):0;});
+    const entry={date,score,exercises,weather:{...weatherData},notes,ts:new Date().toISOString()};
     saveLocal(entry);
+    if(accessToken){await sheetsAppend(entry);showStatus('✓ Mentve helyi tárolóba és Google Sheets-be!','success');}
+    else showStatus('✓ Mentve helyi tárolóba.','info');
+    resetForm();loadStats();
+  }catch(e){console.error(e);showStatus('⚠️ Hiba: '+e.message,'err');}
+  finally{btn.disabled=false;btn.textContent='💾 Bejegyzés mentése';}
+}
+function resetForm(){setToday();document.getElementById('scoreSlider').value=5;onScore(5);document.getElementById('notes').value='';EXERCISES.forEach(ex=>{document.getElementById('chk-'+ex.id).checked=false;document.getElementById('exItem-'+ex.id).classList.remove('sel');document.getElementById('dur-'+ex.id).value=30;});}
+function saveLocal(entry){const all=getLocal();const i=all.findIndex(e=>e.date===entry.date);if(i>=0)all[i]=entry;else all.push(entry);all.sort((a,b)=>b.date.localeCompare(a.date));localStorage.setItem('mozgasnaplo',JSON.stringify(all));}
+function getLocal(){try{return JSON.parse(localStorage.getItem('mozgasnaplo')||'[]');}catch{return[];}}
 
-    if (accessToken) {
-      await sheetsAppend(entry);
-      showStatus('✓ Mentve: helyi tárolóba és Google Sheets-be!', 'success');
-    } else {
-      showStatus('✓ Mentve helyi tárolóba. (Google Sheets-hez jelentkezz be.)', 'info');
-    }
-    resetForm();
-    loadStats();
-  } catch(e) {
-    console.error(e);
-    showStatus('⚠️ Hiba: ' + e.message, 'err');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = '💾 Bejegyzés mentése';
-  }
+async function sheetsAppend(entry){
+  const sid=localStorage.getItem('gSheetId'),sname=localStorage.getItem('gSheetName')||'MozgásNapló';
+  if(!sid)throw new Error('Nincs Sheets ID.');
+  await ensureHeader(sid,sname);
+  const r=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sid}/values/${encodeURIComponent(sname)}!A1:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,{method:'POST',headers:{'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'},body:JSON.stringify({values:[buildRow(entry)]})});
+  if(!r.ok){const e=await r.json();throw new Error(e.error?.message||'Sheets API hiba');}
+}
+async function ensureHeader(sid,sname){
+  const r=await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sid}/values/${encodeURIComponent(sname)}!A1`,{headers:{'Authorization':'Bearer '+accessToken}});
+  const d=await r.json();if(d.values?.[0]?.[0]==='Dátum')return;
+  await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sid}/values/${encodeURIComponent(sname)}!A1?valueInputOption=RAW`,{method:'PUT',headers:{'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'},body:JSON.stringify({values:[buildHeaders()]})});
+}
+function buildHeaders(){const h=['Dátum','Mozgás Pontszám (1–10)'];EXERCISES.forEach(ex=>h.push(ex.label+' (perc)'));h.push('Összes tornaidő (perc)','Átlag hőmérséklet (°C)','Átlag páratartalom (%)','Átlag légnyomás (hPa)','Megjegyzések');return h;}
+function buildRow(e){const row=[e.date,e.score];let total=0;EXERCISES.forEach(ex=>{const m=e.exercises[ex.id]||0;row.push(m);total+=m;});row.push(total,e.weather.temperature??'',e.weather.humidity??'',e.weather.pressure??'',e.notes||'');return row;}
+function saveSettings(){const cid=document.getElementById('clientIdInp').value.trim(),sid=document.getElementById('sheetIdInp').value.trim(),sname=document.getElementById('sheetNameInp').value.trim();if(cid)localStorage.setItem('gClientId',cid);if(sid)localStorage.setItem('gSheetId',sid);if(sname)localStorage.setItem('gSheetName',sname);}
+function applySettings(){saveSettings();initGAuth();showStatus('✓ Beállítások mentve!','success');}
+function loadSettings(){document.getElementById('clientIdInp').value=localStorage.getItem('gClientId')||'';document.getElementById('sheetIdInp').value=localStorage.getItem('gSheetId')||'';document.getElementById('sheetNameInp').value=localStorage.getItem('gSheetName')||'MozgásNapló';}
+
+function loadStats(){const all=getLocal(),l7=all.filter(e=>daysDiff(e.date)<=7),l30=all.filter(e=>daysDiff(e.date)<=30),avg=arr=>arr.length?(arr.reduce((s,e)=>s+e.score,0)/arr.length).toFixed(1):'–';document.getElementById('st7').textContent=avg(l7);document.getElementById('st30').textContent=avg(l30);document.getElementById('stAll').textContent=all.length;}
+
+function renderCharts(){
+  Object.values(charts).forEach(c=>c.destroy());charts={};
+  const all=getLocal().slice().reverse(),l30=all.filter(e=>daysDiff(e.date)<=30);
+  charts.score=new Chart(document.getElementById('chartScore').getContext('2d'),{type:'line',data:{labels:l30.map(e=>fmtDateShort(e.date)),datasets:[{label:'Pontszám',data:l30.map(e=>e.score),borderColor:'#1D6B78',backgroundColor:'rgba(29,107,120,0.09)',borderWidth:2.5,pointRadius:4,pointBackgroundColor:'#1D6B78',fill:true,tension:0.35}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{min:0,max:10,ticks:{stepSize:2},grid:{color:'rgba(0,0,0,0.05)'}},x:{ticks:{maxRotation:45},grid:{display:false}}},plugins:{legend:{display:false}}}});
+  const totals=EXERCISES.map(ex=>all.reduce((s,e)=>s+(e.exercises?.[ex.id]||0),0));
+  charts.ex=new Chart(document.getElementById('chartEx').getContext('2d'),{type:'bar',data:{labels:EXERCISES.map(ex=>ex.icon+' '+ex.label),datasets:[{label:'perc',data:totals,backgroundColor:'rgba(29,107,120,0.72)',borderRadius:5,borderSkipped:false}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'}},y:{grid:{display:false},ticks:{font:{size:11}}}},plugins:{legend:{display:false}}}});
+  const we=all.filter(e=>e.weather?.temperature!=null);
+  charts.corr=new Chart(document.getElementById('chartCorr').getContext('2d'),{type:'scatter',data:{datasets:[{label:'Nap',data:we.map(e=>({x:e.weather.temperature,y:e.score})),backgroundColor:'rgba(184,88,48,0.65)',pointRadius:6}]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{title:{display:true,text:'Hőmérséklet (°C)'},grid:{color:'rgba(0,0,0,0.05)'}},y:{min:0,max:10,title:{display:true,text:'Mozgás pontszám'},grid:{color:'rgba(0,0,0,0.05)'}}},plugins:{legend:{display:false},tooltip:{callbacks:{label:d=>`${d.raw.x}°C → ${d.raw.y} pont`}}}}});
 }
 
-function resetForm() {
-  setToday();
-  document.getElementById('scoreSlider').value = 5;
-  onScore(5);
-  document.getElementById('notes').value = '';
-  EXERCISES.forEach(ex => {
-    document.getElementById('chk-' + ex.id).checked = false;
-    document.getElementById('exItem-' + ex.id).classList.remove('sel');
-    document.getElementById('dur-' + ex.id).value = 30;
+function loadHistory(){
+  const all=getLocal(),cont=document.getElementById('histContent');
+  if(!all.length){cont.innerHTML='<div class="empty-state"><div style="font-size:2.5rem">📋</div><p>Még nincs bejegyzés.</p></div>';return;}
+  const sp=s=>s>=8?'background:#E8F5EE;color:#2A7A52':s>=6?'background:#E8F4F6;color:#1D6B78':s>=4?'background:#FDF6E3;color:#9A6C18':'background:#FEF2F2;color:#B03030';
+  let html=`<div class="hist-wrap"><table class="hist-table"><thead><tr><th>Dátum</th><th>Pont</th><th>Tornák</th><th>Perc</th><th>Hőm.</th><th>RH</th><th>hPa</th></tr></thead><tbody>`;
+  all.slice(0,60).forEach(e=>{
+    const active=EXERCISES.filter(ex=>(e.exercises?.[ex.id]||0)>0).map(ex=>`${ex.icon}${e.exercises[ex.id]}p`).join(' ');
+    const total=EXERCISES.reduce((s,ex)=>s+(e.exercises?.[ex.id]||0),0);
+    html+=`<tr><td><strong>${e.date}</strong></td><td><span class="score-pill" style="${sp(e.score)}">${e.score}</span></td><td style="font-size:.8rem">${active||'–'}</td><td>${total||'–'}</td><td>${e.weather?.temperature!=null?e.weather.temperature.toFixed(1)+'°':'–'}</td><td>${e.weather?.humidity!=null?Math.round(e.weather.humidity)+'%':'–'}</td><td>${e.weather?.pressure!=null?e.weather.pressure:'–'}</td></tr>`;
   });
+  cont.innerHTML=html+'</tbody></table></div>';
 }
 
-// ── LOCAL STORAGE ─────────────────────────────────────
-function saveLocal(entry) {
-  const all = getLocal();
-  const i = all.findIndex(e => e.date === entry.date);
-  if (i >= 0) all[i] = entry; else all.push(entry);
-  all.sort((a,b) => b.date.localeCompare(a.date));
-  localStorage.setItem('mozgasnaplo', JSON.stringify(all));
+function exportCSV(){const all=getLocal();if(!all.length){showStatus('Nincs adat.','info');return;}let csv=buildHeaders().join(';')+'\n';all.map(e=>buildRow(e)).forEach(r=>{csv+=r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(';')+'\n';});const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));a.download='mozgasnaplo_'+new Date().toISOString().split('T')[0]+'.csv';a.click();showStatus('✓ CSV letöltve!','success');}
+function exportExcel(std=false){const all=getLocal();if(!all.length){showStatus('Nincs adat.','info');return;}let rows=all.map(e=>buildRow(e));if(std)rows=stdRows(rows);const ws=XLSX.utils.aoa_to_sheet([buildHeaders(),...rows]);ws['!cols']=Array(buildHeaders().length).fill({wch:13});const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,std?'Standardizált':'MozgásNapló');XLSX.writeFile(wb,`mozgasnaplo_${std?'std_':''}${new Date().toISOString().split('T')[0]}.xlsx`);showStatus('✓ Excel letöltve!','success');}
+function stdRows(rows){if(!rows.length)return rows;const numCols=[];for(let c=1;c<buildHeaders().length-1;c++)numCols.push(c);const st={};numCols.forEach(col=>{const vals=rows.map(r=>r[col]).filter(v=>typeof v==='number'&&!isNaN(v));if(!vals.length)return;const m=vals.reduce((s,v)=>s+v,0)/vals.length,sd=Math.sqrt(vals.reduce((s,v)=>s+(v-m)**2,0)/vals.length)||1;st[col]={m,sd};});return rows.map(row=>{const nr=[...row];numCols.forEach(col=>{if(st[col]&&typeof nr[col]==='number')nr[col]=Math.round(((nr[col]-st[col].m)/st[col].sd)*100)/100;});return nr;});}
+function clearLocal(){if(confirm('Biztosan törlöd az összes helyi adatot?')){localStorage.removeItem('mozgasnaplo');loadStats();loadHistory();showStatus('Törölve.','info');}}
+
+// ════════════ ANALYTICS ENGINE ════════════
+const S={
+  mean(a){return a.length?a.reduce((s,v)=>s+v,0)/a.length:0;},
+  std(a){if(a.length<2)return 0;const m=this.mean(a);return Math.sqrt(a.reduce((s,v)=>s+(v-m)**2,0)/a.length);},
+  r(x,y){const n=x.length;if(n<3)return 0;const mx=this.mean(x),my=this.mean(y),num=x.reduce((s,xi,i)=>s+(xi-mx)*(y[i]-my),0),den=Math.sqrt(x.reduce((s,xi)=>s+(xi-mx)**2,0)*y.reduce((s,yi)=>s+(yi-my)**2,0));return den?num/den:0;},
+  p(r,n){if(n<3)return '>0.15';const t=Math.abs(r)*Math.sqrt((n-2)/(1-r*r+1e-10));return t>3.5?'<0.001':t>2.8?'<0.01':t>2.0?'<0.05':t>1.5?'<0.15':'>0.15';},
+  str(r){const a=Math.abs(r);return a>0.6?'erős':a>0.3?'közepes':a>0.1?'gyenge':'elhanyagolható';}
+};
+
+function calcMQI(entries){if(!entries.length)return null;const s=[...entries].sort((a,b)=>a.date.localeCompare(b.date));let ws=0,wt=0;s.forEach((e,i)=>{const w=i+1;ws+=e.score*w;wt+=w;});const mqi=ws/wt;let cat,col;if(mqi>=7.5){cat='Kiváló';col='var(--green)';}else if(mqi>=5.5){cat='Közepes';col='var(--amber)';}else if(mqi>=3.5){cat='Gyenge';col='var(--accent)';}else{cat='Kritikus';col='var(--red)';}return{mqi,cat,col};}
+function calcPVI(entries){if(entries.length<3)return null;const sc=entries.map(e=>e.score),m=S.mean(sc),sd=S.std(sc),pvi=(sd/m)*100;let lbl=pvi<15?'Nagyon stabil':pvi<25?'Stabil':pvi<35?'Mérsékelt ingadozás':'Nagy ingadozás';return{pvi,lbl,mean:m,stddev:sd};}
+function calcTEI(entries){return EXERCISES.map(ex=>{const days=entries.filter(e=>(e.exercises?.[ex.id]||0)>0),tei=days.length?S.mean(days.map(e=>e.score)):null,totalMins=entries.reduce((s,e)=>s+(e.exercises?.[ex.id]||0),0);let rating='–';if(tei!==null){if(tei>=7.5)rating='Kiváló';else if(tei>=6.0)rating='Jó';else if(tei>=4.5)rating='Közepes';else rating='Gyenge';}let trend=0;if(days.length>=4){const sd=[...days].sort((a,b)=>a.date.localeCompare(b.date)),h=Math.floor(sd.length/2);trend=S.mean(sd.slice(h).map(e=>e.score))-S.mean(sd.slice(0,h).map(e=>e.score));}return{id:ex.id,label:ex.label,icon:ex.icon,count:days.length,tei,totalMins,rating,trend};}).sort((a,b)=>(b.tei||0)-(a.tei||0));}
+function calcCSI(entries){const res=[];for(let i=0;i<EXERCISES.length;i++)for(let j=i+1;j<EXERCISES.length;j++){const A=EXERCISES[i],B=EXERCISES[j],both=entries.filter(e=>(e.exercises?.[A.id]||0)>0&&(e.exercises?.[B.id]||0)>0);if(both.length<2)continue;const onlyA=entries.filter(e=>(e.exercises?.[A.id]||0)>0&&(e.exercises?.[B.id]||0)===0),onlyB=entries.filter(e=>(e.exercises?.[A.id]||0)===0&&(e.exercises?.[B.id]||0)>0),mB=S.mean(both.map(e=>e.score)),mA=onlyA.length?S.mean(onlyA.map(e=>e.score)):mB,mBo=onlyB.length?S.mean(onlyB.map(e=>e.score)):mB,base=Math.max(mA,mBo,0.1),csi=mB/base;res.push({A:A.id,B:B.id,labelA:A.label,labelB:B.label,iconA:A.icon,iconB:B.icon,mBoth:mB,mA,mB:mBo,csi,count:both.length,type:csi>1.1?'szinergia':csi<0.9?'antagonizmus':'semleges'});}return res.sort((a,b)=>b.csi-a.csi);}
+function calcWSI(entries){const w=entries.filter(e=>e.weather?.temperature!=null&&e.weather?.humidity!=null&&e.weather?.pressure!=null);if(w.length<3)return null;const sc=w.map(e=>e.score),tp=w.map(e=>e.weather.temperature),hm=w.map(e=>e.weather.humidity),pr=w.map(e=>e.weather.pressure),n=w.length,rT=S.r(tp,sc),rH=S.r(hm,sc),rP=S.r(pr,sc);const dom=[{name:'Hőmérséklet',r:Math.abs(rT)},{name:'Páratartalom',r:Math.abs(rH)},{name:'Légnyomás',r:Math.abs(rP)}].sort((a,b)=>b.r-a.r)[0].name;return{rT,rH,rP,pT:S.p(rT,n),pH:S.p(rH,n),pP:S.p(rP,n),n,dom};}
+function calcFDI(entries){const sorted=[...entries].filter(e=>e.weather?.pressure!=null).sort((a,b)=>a.date.localeCompare(b.date));const evts=[];for(let i=1;i<sorted.length;i++){const prev=sorted[i-1],curr=sorted[i],gap=(new Date(curr.date)-new Date(prev.date))/86400000;if(gap>2)continue;const dp=curr.weather.pressure-prev.weather.pressure;if(Math.abs(dp)<3)continue;evts.push({date:curr.date,dp,type:dp<0?'közeledő':'távolodó',score:curr.score,scoreDelta:curr.score-prev.score});}const app=evts.filter(e=>e.type==='közeledő'),dep=evts.filter(e=>e.type==='távolodó');return{evts,total:evts.length,appCount:app.length,depCount:dep.length,avgImpactApp:app.length?S.mean(app.map(e=>e.scoreDelta)):null,avgImpactDep:dep.length?S.mean(dep.map(e=>e.scoreDelta)):null,sensitive:evts.length>=3&&Math.abs(S.mean(evts.map(e=>e.scoreDelta)))>0.5};}
+function calcOptWeather(entries){const w=entries.filter(e=>e.weather?.temperature!=null&&e.weather?.humidity!=null&&e.weather?.pressure!=null);if(w.length<5)return null;const sorted=[...w].sort((a,b)=>b.score-a.score),n=Math.max(3,Math.floor(sorted.length*0.25)),top=sorted.slice(0,n),bot=sorted.slice(-n);const band=(arr,key)=>({mean:parseFloat(S.mean(arr.map(e=>e.weather[key])).toFixed(1)),min:parseFloat(Math.min(...arr.map(e=>e.weather[key])).toFixed(1)),max:parseFloat(Math.max(...arr.map(e=>e.weather[key])).toFixed(1))});return{opt:{temp:band(top,'temperature'),hum:band(top,'humidity'),press:band(top,'pressure')},adv:{temp:band(bot,'temperature'),hum:band(bot,'humidity'),press:band(bot,'pressure')},topMean:parseFloat(S.mean(top.map(e=>e.score)).toFixed(2)),botMean:parseFloat(S.mean(bot.map(e=>e.score)).toFixed(2))};}
+async function fetchForecast(){try{const d=await(await fetch(`https://api.open-meteo.com/v1/forecast?latitude=47.2017&longitude=17.5947&daily=temperature_2m_mean,relative_humidity_2m_mean,surface_pressure_mean&timezone=auto&forecast_days=4`)).json();const days=[];for(let i=1;i<=3;i++)days.push({date:d.daily.time[i],temperature:d.daily.temperature_2m_mean[i],humidity:Math.round(d.daily.relative_humidity_2m_mean[i]),pressure:Math.round(d.daily.surface_pressure_mean[i])});return days;}catch(e){return[];}}
+function adviseForecast(fc,tei,optW,wsi){const scored=tei.filter(t=>t.tei!==null).map(t=>{let sc=t.tei;if(optW&&wsi){const tD=Math.abs(fc.temperature-optW.opt.temp.mean),hD=Math.abs(fc.humidity-optW.opt.hum.mean),pD=Math.abs(fc.pressure-optW.opt.press.mean);sc-=(tD*Math.abs(wsi.rT)*0.3+hD*Math.abs(wsi.rH)*0.05+pD*Math.abs(wsi.rP)*0.02);}return{...t,prob:Math.round(Math.min(95,Math.max(20,(sc/10)*100)))};}).sort((a,b)=>b.prob-a.prob);let wa='normál';if(optW){const tD=Math.abs(fc.temperature-optW.opt.temp.mean),hD=Math.abs(fc.humidity-optW.opt.hum.mean),pD=Math.abs(fc.pressure-optW.opt.press.mean),pen=tD*0.3+hD*0.05+pD*0.02;if(pen>8)wa='kedvezőtlen';else if(pen>4)wa='átlag alatti';else if(pen<2)wa='kedvező';}return{scored,wa};}
+
+async function runAnalysis(){
+  const period=parseInt(document.getElementById('analysisPeriod').value),all=getLocal(),entries=period===0?all:all.filter(e=>daysDiff(e.date)<=period);
+  if(!entries.length){showStatus('⚠️ Nincs elegendő adat.','err');return;}
+  document.getElementById('analysisPlaceholder').style.display='none';
+  document.getElementById('analysisMeta').textContent=`${entries.length} bejegyzés · ${entries[entries.length-1]?.date} – ${entries[0]?.date} · Generálva: ${new Date().toLocaleDateString('hu-HU')}`;
+  const mqi=calcMQI(entries),pvi=calcPVI(entries),tei=calcTEI(entries),csi=calcCSI(entries),wsi=calcWSI(entries),fdi=calcFDI(entries),optW=calcOptWeather(entries),forecast=await fetchForecast();
+  lastAnalysis={mqi,pvi,tei,csi,wsi,fdi,optW,forecast,entries,period};
+  renderIdxCards(mqi,pvi,tei,wsi);renderTEI(tei);renderCSI(csi);renderWeatherSection(wsi,optW);renderFrontSection(fdi);
+  if(forecast.length)renderForecast(forecast,tei,optW,wsi);
+  renderDiagnosis(entries,mqi,pvi,tei,csi,wsi,fdi,optW,period);renderDataTable(entries);
+  showStatus('✓ Elemzés kész!','success');
 }
 
-function getLocal() {
-  try { return JSON.parse(localStorage.getItem('mozgasnaplo') || '[]'); }
-  catch { return []; }
-}
+function renderIdxCards(mqi,pvi,tei,wsi){
+  const top=tei.filter(t=>t.tei!==null)[0];
+  document.getElementById('idxCards').innerHTML=`<div class="idx-grid">
+    <div class="idx-card"><div class="idx-val" style="color:${mqi?mqi.col:'var(--text3)'}">${mqi?mqi.mqi.toFixed(2):'–'}</div><div class="idx-name">MQI · Mozgásminőség Index</div>${mqi?`<div class="idx-sub" style="background:${mqi.col}20;color:${mqi.col}">${mqi.cat}</div>`:''}</div>
+    <div class="idx-card"><div class="idx-val" style="color:${pvi?pvi.pvi<25?'var(--green)':pvi.pvi<35?'var(--amber)':'var(--red)':'var(--text3)'}">${pvi?pvi.pvi.toFixed(1)+'%':'–'}</div><div class="idx-name">PVI · Variabilitás Index</div>${pvi?`<div class="idx-sub" style="background:var(--bg2);color:var(--text2)">${pvi.lbl}</div>`:''}</div>
+    <div class="idx-card"><div class="idx-val" style="color:var(--primary)">${top&&top.tei!==null?top.tei.toFixed(2):'–'}</div><div class="idx-name">TEI max · ${top?top.icon+' '+top.label:'–'}</div>${top&&top.tei!==null?`<span class="badge badge-green">${top.rating}</span>`:''}</div>
+    <div class="idx-card"><div class="idx-val" style="color:var(--primary)">${wsi?wsi.rT.toFixed(3):'–'}</div><div class="idx-name">WSI · Hőmérs. korreláció (r)</div>${wsi?`<span class="badge badge-blue">${S.str(wsi.rT)}</span>`:''}</div>
+    <div class="idx-card"><div class="idx-val" style="color:var(--primary)">${wsi?wsi.rP.toFixed(3):'–'}</div><div class="idx-name">WSI · Légnyomás korrel. (r)</div>${wsi?`<span class="badge badge-blue">${S.str(wsi.rP)}</span>`:''}</div>
+    <div class="idx-card"><div class="idx-val" style="color:${pvi?pvi.mean>6.5?'var(--green)':pvi.mean>4.5?'var(--amber)':'var(--red)':'var(--text3)'}">${pvi?pvi.mean.toFixed(2):'–'}</div><div class="idx-name">Átlag mozgáspontszám</div>${pvi?`<span class="badge badge-blue">σ = ${pvi.stddev.toFixed(2)}</span>`:''}</div>
+  </div>`;}
 
-// ── GOOGLE SHEETS API ─────────────────────────────────
-async function sheetsAppend(entry) {
-  const sid   = localStorage.getItem('gSheetId');
-  const sname = localStorage.getItem('gSheetName') || 'MozgásNapló';
-  if (!sid) throw new Error('Nincs megadva Sheets táblázat ID.');
+function renderTEI(tei){
+  const rows=tei.map((t,i)=>{if(t.count===0)return'';const pct=t.tei?(t.tei/10)*100:0,bc=t.tei>=7.5?'var(--green)':t.tei>=6?'var(--primary)':t.tei>=4.5?'var(--amber)':'var(--red)',bCls=t.rating==='Kiváló'?'badge-green':t.rating==='Jó'?'badge-blue':t.rating==='Közepes'?'badge-amber':'badge-red',tr=t.trend>0.3?`<span class="trend-up">▲${t.trend.toFixed(1)}</span>`:t.trend<-0.3?`<span class="trend-dn">▼${Math.abs(t.trend).toFixed(1)}</span>`:`<span class="trend-eq">→</span>`;return`<tr><td class="rank">${i+1}</td><td>${t.icon} <strong>${t.label}</strong></td><td><strong>${t.tei!==null?t.tei.toFixed(2):'–'}</strong><div class="tei-bar-wrap"><div class="tei-bar" style="width:${pct}%;background:${bc}"></div></div></td><td>${t.count}</td><td>${t.totalMins}</td><td><span class="badge ${bCls}">${t.rating}</span></td><td>${tr}</td></tr>`;}).join('');
+  document.getElementById('teiSection').innerHTML=`<div class="card"><div class="card-title">🏅 Kezelési Hatékonysági Rangsor (TEI)</div><div style="overflow-x:auto"><table class="ana-table"><thead><tr><th>#</th><th>Kezelés</th><th>TEI (max 10)</th><th>Alkalmak</th><th>Összes perc</th><th>Értékelés</th><th>Trend</th></tr></thead><tbody>${rows}</tbody></table></div><p style="font-size:.78rem;color:var(--text3);margin-top:10px">TEI = átlagos mozgáspontszám az adott kezelés napjain · Trend = 2. fél – 1. fél átlag</p></div>`;}
 
-  await ensureHeader(sid, sname);
+function renderCSI(csi){
+  if(!csi.length){document.getElementById('csiSection').innerHTML=`<div class="card"><div class="card-title">🔗 Kombinációs Szinergia (CSI)</div><p style="color:var(--text3)">Kevés adat – legalább 2 együttes alkalom szükséges páronként.</p></div>`;return;}
+  const rows=csi.slice(0,8).map((c,i)=>{const cls=c.type==='szinergia'?'csi-syn':c.type==='antagonizmus'?'csi-ant':'csi-neu',icon=c.type==='szinergia'?'✅':c.type==='antagonizmus'?'❌':'➡️';return`<tr><td class="rank">${i+1}</td><td>${c.iconA} ${c.labelA}</td><td>${c.iconB} ${c.labelB}</td><td class="${cls}"><strong>${c.csi.toFixed(3)}</strong></td><td>${c.mBoth.toFixed(2)}</td><td>${c.count}</td><td>${icon} ${c.type}</td></tr>`;}).join('');
+  document.getElementById('csiSection').innerHTML=`<div class="card"><div class="card-title">🔗 Kombinációs Szinergia Index (CSI) – Top párok</div><div style="overflow-x:auto"><table class="ana-table"><thead><tr><th>#</th><th>Kezelés A</th><th>Kezelés B</th><th>CSI</th><th>Átlag pont</th><th>Alkalmak</th><th>Típus</th></tr></thead><tbody>${rows}</tbody></table></div><p style="font-size:.78rem;color:var(--text3);margin-top:10px">CSI>1.1: szinergia · CSI&lt;0.9: antagonizmus · 0.9–1.1: semleges</p></div>`;}
 
-  const row = buildRow(entry);
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${sid}/values/${encodeURIComponent(sname)}!A1:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`;
-  const r = await fetch(url, {
-    method: 'POST',
-    headers: {'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'},
-    body: JSON.stringify({values:[row]})
-  });
-  if (!r.ok) { const e = await r.json(); throw new Error(e.error?.message || 'Sheets API hiba'); }
-}
+function renderWeatherSection(wsi,optW){
+  let cH='',oH='';
+  if(wsi){const rows=[{n:'Hőmérséklet',r:wsi.rT,p:wsi.pT},{n:'Páratartalom',r:wsi.rH,p:wsi.pH},{n:'Légnyomás',r:wsi.rP,p:wsi.pP}].map(row=>{const cls=Math.abs(row.r)>0.5?'badge-green':Math.abs(row.r)>0.3?'badge-blue':'badge-amber';return`<tr><td><strong>${row.n}</strong></td><td><strong>${row.r.toFixed(3)}</strong></td><td>${row.p}</td><td>${row.r>0?'Pozitív':'Negatív'}</td><td><span class="badge ${cls}">${S.str(row.r)}</span></td></tr>`;}).join('');cH=`<table class="ana-table"><thead><tr><th>Változó</th><th>Pearson r</th><th>p-érték</th><th>Irány</th><th>Erősség</th></tr></thead><tbody>${rows}</tbody></table><p style="font-size:.78rem;color:var(--text3);margin-top:8px">n = ${wsi.n} nap · Domináns tényező: <strong>${wsi.dom}</strong></p>`;}
+  else cH='<p style="color:var(--text3)">Kevés adat (min. 3 időjárásos nap szükséges).</p>';
+  if(optW){oH=`<div class="card-title" style="margin-top:20px">🎯 Optimális időjárási körülmények</div><div style="overflow-x:auto"><table class="ana-table"><thead><tr><th>Változó</th><th>Optimum átlag</th><th>Optimum tartomány</th><th>Kedvezőtlen átlag</th><th>Különbség</th></tr></thead><tbody><tr><td><strong>Hőmérséklet (°C)</strong></td><td><strong>${optW.opt.temp.mean}°C</strong></td><td>${optW.opt.temp.min}–${optW.opt.temp.max}°C</td><td>${optW.adv.temp.mean}°C</td><td><strong>${(optW.opt.temp.mean-optW.adv.temp.mean).toFixed(1)}°C</strong></td></tr><tr><td><strong>Páratartalom (%)</strong></td><td><strong>${optW.opt.hum.mean}%</strong></td><td>${optW.opt.hum.min}–${optW.opt.hum.max}%</td><td>${optW.adv.hum.mean}%</td><td><strong>${(optW.opt.hum.mean-optW.adv.hum.mean).toFixed(1)}%</strong></td></tr><tr><td><strong>Légnyomás (hPa)</strong></td><td><strong>${optW.opt.press.mean} hPa</strong></td><td>${optW.opt.press.min}–${optW.opt.press.max} hPa</td><td>${optW.adv.press.mean} hPa</td><td><strong>${(optW.opt.press.mean-optW.adv.press.mean).toFixed(1)} hPa</strong></td></tr></tbody></table></div><p style="font-size:.78rem;color:var(--text3);margin-top:8px">Optimum napok átlag pontszáma: <strong>${optW.topMean}/10</strong> · Kedvezőtlen napok: <strong>${optW.botMean}/10</strong></p>`;}
+  document.getElementById('weatherSection').innerHTML=`<div class="card"><div class="card-title">🌡️ Időjárás-korreláció &amp; Optimális körülmények</div>${cH}${oH}</div>`;}
 
-async function ensureHeader(sid, sname) {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${sid}/values/${encodeURIComponent(sname)}!A1`;
-  const r = await fetch(url, {headers:{'Authorization':'Bearer '+accessToken}});
-  const d = await r.json();
-  if (d.values?.[0]?.[0] === 'Dátum') return;
-  // Fejléc írása
-  const wurl = `https://sheets.googleapis.com/v4/spreadsheets/${sid}/values/${encodeURIComponent(sname)}!A1?valueInputOption=RAW`;
-  await fetch(wurl, {
-    method:'PUT',
-    headers:{'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'},
-    body: JSON.stringify({values:[buildHeaders()]})
-  });
-}
+function renderFrontSection(fdi){
+  const evtHtml=fdi.evts.length?`<ul class="front-list">${fdi.evts.slice(0,10).map(ev=>`<li><span class="front-badge ${ev.type==='közeledő'?'front-app':'front-dep'}">${ev.type==='közeledő'?'↘ Közeledő':'↗ Távolodó'}</span><strong>${ev.date}</strong><span style="color:var(--text2)">${ev.dp>0?'+':''}${ev.dp.toFixed(1)} hPa</span><span style="${ev.scoreDelta>=0?'color:var(--green)':'color:var(--red)'}">${ev.scoreDelta>=0?'▲':'▼'}${Math.abs(ev.scoreDelta).toFixed(1)} pont</span></li>`).join('')}</ul>`:'<p style="color:var(--text3)">Nem azonosítható frontesemény.</p>';
+  const sensHtml=fdi.sensitive?`<span class="badge badge-red">Frontérzékenység azonosítható</span>`:`<span class="badge badge-green">Nincs egyértelmű frontérzékenység</span>`;
+  document.getElementById('frontSection').innerHTML=`<div class="card"><div class="card-title">🌪️ Frontérzékenység Elemzés (FDI)</div><div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px"><div class="wd-box" style="flex:1"><div class="wd-val">${fdi.total}</div><div class="wd-lbl">Frontesemény</div></div><div class="wd-box" style="flex:1"><div class="wd-val" style="color:var(--red)">${fdi.appCount}</div><div class="wd-lbl">Közeledő</div></div><div class="wd-box" style="flex:1"><div class="wd-val" style="color:var(--green)">${fdi.depCount}</div><div class="wd-lbl">Távolodó</div></div><div class="wd-box" style="flex:1"><div class="wd-val">${fdi.avgImpactApp!==null?(fdi.avgImpactApp>0?'+':'')+fdi.avgImpactApp.toFixed(2):'–'}</div><div class="wd-lbl">Hatás (közeledő)</div></div></div>${sensHtml}<div style="margin-top:14px">${evtHtml}</div></div>`;}
 
-function buildHeaders() {
-  const h = ['Dátum','Mozgás Pontszám (1–10)'];
-  EXERCISES.forEach(ex => h.push(ex.label + ' (perc)'));
-  h.push('Összes tornaidő (perc)','Átlag hőmérséklet (°C)','Páratartalom (%)','Légnyomás (hPa)','Megjegyzések');
-  return h;
-}
+function renderForecast(forecast,tei,optW,wsi){
+  const cards=forecast.map(fc=>{const adv=adviseForecast(fc,tei,optW,wsi),wCol=adv.wa==='kedvező'?'var(--green)':adv.wa==='kedvezőtlen'?'var(--red)':'var(--amber)',dateStr=new Date(fc.date).toLocaleDateString('hu-HU',{weekday:'short',month:'short',day:'numeric'});return`<div class="fc-card"><div class="fc-date">${dateStr}</div><div class="fc-weather">🌡️ ${fc.temperature.toFixed(1)}°C · 💧 ${fc.humidity}% · 🔽 ${fc.pressure} hPa</div><div style="font-size:.8rem;font-weight:700;color:${wCol};margin-bottom:8px">Időjárás: ${adv.wa}</div><ul class="fc-list">${adv.scored.slice(0,4).map(t=>`<li>${t.icon} ${t.label.replace('Otthoni – ','').replace('Robotterápia – ','R-')} <span style="float:right;font-weight:700;color:var(--primary)">${t.prob}%</span></li>`).join('')}</ul></div>`;}).join('');
+  document.getElementById('forecastSection').innerHTML=`<div class="card"><div class="card-title">🔮 3 napos előrejelzés &amp; Kezelési Tanács – Nórápi</div><div class="forecast-grid">${cards}</div><p style="font-size:.78rem;color:var(--text3);margin-top:10px">A valószínűség a TEI-n és az előrejelzett időjárás optimum-egyezésén alapul.</p></div>`;}
 
-function buildRow(e) {
-  const row = [e.date, e.score];
-  let total = 0;
-  EXERCISES.forEach(ex => { const m = e.exercises[ex.id]||0; row.push(m); total+=m; });
-  row.push(total, e.weather.temperature??'', e.weather.humidity??'', e.weather.pressure??'', e.notes||'');
-  return row;
-}
+function renderDiagnosis(entries,mqi,pvi,tei,csi,wsi,fdi,optW,period){
+  const now=new Date().toLocaleDateString('hu-HU',{year:'numeric',month:'long',day:'numeric'}),periStr=period===0?'az összes rendelkezésre álló':`az utóbbi ${period}`,topTEI=tei.filter(t=>t.tei!==null),topCSI=csi.filter(c=>c.type==='szinergia'),antCSI=csi.filter(c=>c.type==='antagonizmus');
+  let h='<div class="diagnosis-body">';
+  h+=`<h4>1. Általános áttekintés</h4><p>Az elemzés <strong>${entries.length} napi bejegyzés</strong> alapján készült, ${periStr} napra vonatkozóan (Nórápi, ${now}).</p>`;
+  if(mqi)h+=`<p>A mozgásteljesítmény összesített mutatója (<strong>MQI = ${mqi.mqi.toFixed(2)}</strong>) a <strong>${mqi.cat}</strong> kategóriába sorolja az időszakot. ${mqi.mqi>=7?'A vizsgált időszak mozgásilag kedvező volt.':mqi.mqi>=5?'A mozgásteljesítmény átlagos szintű volt.':'A mozgásteljesítmény az átlag alatt marad.'}</p>`;
+  h+=`<h4>2. Teljesítmény és stabilitás</h4>`;
+  if(pvi)h+=`<p>A variabilitási index (<strong>PVI = ${pvi.pvi.toFixed(1)}%</strong>, átlag: ${pvi.mean.toFixed(1)}, σ = ${pvi.stddev.toFixed(2)}) alapján a mozgásteljesítmény <strong>${pvi.lbl}</strong> ingadozást mutat. ${pvi.pvi<20?'Kiszámítható, jól tervezhető állapot.':pvi.pvi<35?'Bizonyos napokon jelentős különbségek mutatkoznak.':'Fokozott figyelmet érdemel a nagy variabilitás.'}</p>`;
+  else h+=`<p>A stabilitáshoz több bejegyzés szükséges.</p>`;
+  h+=`<h4>3. Kezelési hatékonyság (TEI)</h4>`;
+  if(topTEI.length>=1){h+=`<p>A leghatékonyabb kezelések:</p><ul>`;topTEI.slice(0,3).forEach((t,i)=>{h+=`<li>${t.icon} <strong>${t.label}</strong> — TEI: ${t.tei.toFixed(2)}/10, ${t.count} alkalom, ${t.totalMins} perc, ${t.trend>0.3?'emelkedő tendencia':t.trend<-0.3?'csökkenő tendencia':'stabil'}. Értékelés: <em>${t.rating}</em>.</li>`;});h+=`</ul>`;if(topTEI.length>=4)h+=`<p>Legalacsonyabb TEI-értékű kezelések: ${topTEI.slice(-2).map(t=>`<strong>${t.label}</strong> (TEI: ${t.tei.toFixed(2)})`).join(', ')}.</p>`;}
+  else h+=`<p>A TEI elemzéshez több bejegyzés szükséges kezelésenként.</p>`;
+  h+=`<h4>4. Kombinációs szinergiák (CSI)</h4>`;
+  if(topCSI.length){h+=`<p>Szinergista kombinációk (CSI > 1.1):</p><ul>`;topCSI.slice(0,3).forEach(c=>{h+=`<li>${c.iconA}<strong>${c.labelA}</strong> + ${c.iconB}<strong>${c.labelB}</strong> — CSI: ${c.csi.toFixed(3)}, átlag: ${c.mBoth.toFixed(1)}/10, ${c.count} alkalom.</li>`;});h+=`</ul>`;}else h+=`<p>Szinergiaelemzéshez legalább 2 közös alkalom szükséges páronként.</p>`;
+  if(antCSI.length)h+=`<p>Antagonista kombinációk (CSI &lt; 0.9): ${antCSI.slice(0,2).map(c=>`<strong>${c.labelA} + ${c.labelB}</strong>`).join(', ')}.</p>`;
+  h+=`<h4>5. Meteorológiai korreláció</h4>`;
+  if(wsi){h+=`<p>Pearson-korreláció elemzése (n = ${wsi.n} nap):</p><ul><li><strong>Hőmérséklet:</strong> r = ${wsi.rT.toFixed(3)} (${S.str(wsi.rT)}, ${wsi.rT>0?'pozitív':'negatív'}, p ${wsi.pT})</li><li><strong>Páratartalom:</strong> r = ${wsi.rH.toFixed(3)} (${S.str(wsi.rH)}, ${wsi.rH>0?'pozitív':'negatív'}, p ${wsi.pH})</li><li><strong>Légnyomás:</strong> r = ${wsi.rP.toFixed(3)} (${S.str(wsi.rP)}, ${wsi.rP>0?'pozitív':'negatív'}, p ${wsi.pP})</li></ul><p>Domináns meteorológiai tényező: <strong>${wsi.dom}</strong>.</p>`;}
+  else h+=`<p>Meteorológiai korreláció elemzéséhez legalább 3 időjárásos bejegyzés szükséges.</p>`;
+  if(optW){h+=`<h4>6. Optimális körülmények</h4><p>A legjobb mozgásnapokon (átlag: ${optW.topMean}/10) jellemző körülmények: <strong>${optW.opt.temp.mean}°C</strong> (${optW.opt.temp.min}–${optW.opt.temp.max}°C), <strong>${optW.opt.hum.mean}%</strong> RH, <strong>${optW.opt.press.mean} hPa</strong>. Kedvezőtlen napokon (átlag: ${optW.botMean}/10): ${optW.adv.temp.mean}°C, ${optW.adv.hum.mean}%, ${optW.adv.press.mean} hPa.</p>`;}
+  h+=`<h4>7. Frontérzékenység</h4>`;
+  if(fdi.total>0){h+=`<p>${fdi.total} frontátvonulás (${fdi.appCount} közeledő, ${fdi.depCount} távolodó). `;if(fdi.avgImpactApp!==null)h+=`Közeledő frontnál átlag pontszámváltozás: <strong>${fdi.avgImpactApp>0?'+':''}${fdi.avgImpactApp.toFixed(2)}</strong> pont. `;h+=fdi.sensitive?`<strong>Frontérzékenység azonosítható.</strong> Javasolt könnyebb kezelések frontidőszakban.</p>`:`Egyértelmű frontérzékenység nem mutatható ki.</p>`;}
+  else h+=`<p>Frontérzékenység elemzéséhez több légnyomásadattal ellátott bejegyzés szükséges.</p>`;
+  h+=`<h4>8. Összefoglalás</h4><ul>`;
+  if(mqi)h+=`<li>MQI = <strong>${mqi.mqi.toFixed(2)}</strong> → ${mqi.cat}</li>`;
+  if(pvi)h+=`<li>PVI = <strong>${pvi.pvi.toFixed(1)}%</strong> → ${pvi.lbl}</li>`;
+  if(topTEI.length)h+=`<li>Leghatékonyabb kezelés: <strong>${topTEI[0].label}</strong> (TEI: ${topTEI[0].tei.toFixed(2)})</li>`;
+  if(topCSI.length)h+=`<li>Legjobb kombináció: <strong>${topCSI[0].labelA} + ${topCSI[0].labelB}</strong> (CSI: ${topCSI[0].csi.toFixed(3)})</li>`;
+  if(wsi)h+=`<li>Legerősebb időjárási hatás: <strong>${wsi.dom}</strong></li>`;
+  if(fdi.sensitive)h+=`<li><strong>Frontérzékenység kimutatható</strong> – frontátvonulások körül pihenés javasolt</li>`;
+  if(optW)h+=`<li>Optimális hőmérsékleti tartomány: <strong>${optW.opt.temp.min}–${optW.opt.temp.max}°C</strong></li>`;
+  h+=`</ul></div>`;
+  document.getElementById('diagnosisSection').innerHTML=`<div class="card"><div class="card-title">📋 Szöveges Diagnózis – Teljes Elemzés</div>${h}</div>`;}
 
-// ── BEÁLLÍTÁSOK ───────────────────────────────────────
-function saveSettings() {
-  const cid   = document.getElementById('clientIdInp').value.trim();
-  const sid   = document.getElementById('sheetIdInp').value.trim();
-  const sname = document.getElementById('sheetNameInp').value.trim();
-  if (cid)   localStorage.setItem('gClientId',   cid);
-  if (sid)   localStorage.setItem('gSheetId',    sid);
-  if (sname) localStorage.setItem('gSheetName',  sname);
-}
+function renderDataTable(entries){
+  const rows=entries.slice(0,30).map((e,i)=>{const total=EXERCISES.reduce((s,ex)=>s+(e.exercises?.[ex.id]||0),0),exList=EXERCISES.filter(ex=>(e.exercises?.[ex.id]||0)>0).map(ex=>`${ex.icon}${e.exercises[ex.id]}p`).join(' ');return`<tr style="${i%2?'background:var(--bg)':''}"><td>${e.date}</td><td style="text-align:center;font-weight:700">${e.score}</td><td style="font-size:.8rem">${exList||'–'}</td><td>${total||'–'}</td><td>${e.weather?.temperature!=null?e.weather.temperature.toFixed(1)+'°':'–'}</td><td>${e.weather?.humidity!=null?Math.round(e.weather.humidity)+'%':'–'}</td><td>${e.weather?.pressure!=null?e.weather.pressure:'–'}</td></tr>`;}).join('');
+  document.getElementById('dataTableSection').innerHTML=`<div class="card"><div class="card-title">📊 Nyers adattábla (utolsó 30 bejegyzés)</div><div style="overflow-x:auto"><table class="ana-table"><thead><tr><th>Dátum</th><th>Pont</th><th>Kezelések</th><th>Perc</th><th>Hőm.</th><th>RH</th><th>hPa</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;}
 
-function applySettings() {
-  saveSettings();
-  initGAuth();
-  showStatus('✓ Beállítások mentve! Ha megadtad a Client ID-t, most bejelentkezhetsz.', 'success');
-}
-
-function loadSettings() {
-  const cid   = localStorage.getItem('gClientId')  || '';
-  const sid   = localStorage.getItem('gSheetId')   || '';
-  const sname = localStorage.getItem('gSheetName') || 'MozgásNapló';
-  document.getElementById('clientIdInp').value  = cid;
-  document.getElementById('sheetIdInp').value   = sid;
-  document.getElementById('sheetNameInp').value = sname;
-}
-
-// ── STATISZTIKA ───────────────────────────────────────
-function loadStats() {
-  const all   = getLocal();
-  const l7    = all.filter(e => daysDiff(e.date) <= 7);
-  const l30   = all.filter(e => daysDiff(e.date) <= 30);
-  const avg   = arr => arr.length ? (arr.reduce((s,e)=>s+e.score,0)/arr.length).toFixed(1) : '–';
-  document.getElementById('st7').textContent  = avg(l7);
-  document.getElementById('st30').textContent = avg(l30);
-  document.getElementById('stAll').textContent = all.length;
-}
-
-function renderCharts() {
-  Object.values(charts).forEach(c => c.destroy());
-  charts = {};
-  const all  = getLocal().slice().reverse(); // régi→új
-  const l30  = all.filter(e => daysDiff(e.date) <= 30);
-
-  // 1. Pontszám trend
-  const ctx1 = document.getElementById('chartScore').getContext('2d');
-  charts.score = new Chart(ctx1, {
-    type:'line',
-    data:{
-      labels: l30.map(e=>fmtDateShort(e.date)),
-      datasets:[{
-        label:'Pontszám',
-        data: l30.map(e=>e.score),
-        borderColor:'#1D6B78',
-        backgroundColor:'rgba(29,107,120,0.09)',
-        borderWidth:2.5,
-        pointRadius:4,
-        pointBackgroundColor:'#1D6B78',
-        fill:true,
-        tension:0.35
-      }]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      scales:{
-        y:{min:0,max:10,ticks:{stepSize:2},grid:{color:'rgba(0,0,0,0.05)'}},
-        x:{ticks:{maxRotation:45},grid:{display:false}}
-      },
-      plugins:{legend:{display:false}}
-    }
-  });
-
-  // 2. Tornatípusok bar (vízszintes)
-  const totals = EXERCISES.map(ex => all.reduce((s,e) => s+(e.exercises?.[ex.id]||0), 0));
-  const ctx2 = document.getElementById('chartEx').getContext('2d');
-  charts.ex = new Chart(ctx2, {
-    type:'bar',
-    data:{
-      labels: EXERCISES.map(ex => ex.icon+' '+ex.label),
-      datasets:[{
-        label:'perc',
-        data: totals,
-        backgroundColor:'rgba(29,107,120,0.72)',
-        borderRadius:5,
-        borderSkipped:false
-      }]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      indexAxis:'y',
-      scales:{
-        x:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.05)'}},
-        y:{grid:{display:false},ticks:{font:{size:11}}}
-      },
-      plugins:{legend:{display:false}}
-    }
-  });
-
-  // 3. Korreláció szórásdiagram
-  const wEntries = all.filter(e => e.weather?.temperature != null);
-  const ctx3 = document.getElementById('chartCorr').getContext('2d');
-  charts.corr = new Chart(ctx3, {
-    type:'scatter',
-    data:{
-      datasets:[{
-        label:'Nap',
-        data: wEntries.map(e => ({x: e.weather.temperature, y: e.score})),
-        backgroundColor:'rgba(184,88,48,0.65)',
-        pointRadius:6,
-        pointHoverRadius:8
-      }]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      scales:{
-        x:{title:{display:true,text:'Hőmérséklet (°C)'},grid:{color:'rgba(0,0,0,0.05)'}},
-        y:{min:0,max:10,title:{display:true,text:'Mozgás pontszám'},grid:{color:'rgba(0,0,0,0.05)'}}
-      },
-      plugins:{
-        legend:{display:false},
-        tooltip:{callbacks:{label:d=>`${d.raw.x}°C → ${d.raw.y} pont`}}
-      }
-    }
-  });
-}
-
-// ── ELŐZMÉNYEK ────────────────────────────────────────
-function loadHistory() {
-  const all = getLocal();
-  const cont = document.getElementById('histContent');
-  if (!all.length) {
-    cont.innerHTML = '<div class="empty-state"><div class="big">📋</div><p>Még nincs bejegyzés.<br>Kezdd el a Bevitel fülön!</p></div>';
-    return;
-  }
-  const scoreStyle = s => {
-    if (s >= 8) return 'background:#E8F5EE;color:#2A7A52';
-    if (s >= 6) return 'background:#E8F4F6;color:#1D6B78';
-    if (s >= 4) return 'background:#FDF6E3;color:#9A6C18';
-    return 'background:#FEF2F2;color:#B03030';
-  };
-  let html = `<div class="hist-wrap"><table class="hist-table">
-    <thead><tr><th>Dátum</th><th>Pont</th><th>Tornák</th><th>Idő</th><th>Hőm.</th><th>RH</th><th>hPa</th></tr></thead><tbody>`;
-  all.slice(0,50).forEach(e => {
-    const active = EXERCISES.filter(ex => (e.exercises?.[ex.id]||0) > 0)
-      .map(ex => `${ex.icon} ${ex.label.replace('Otthoni – ','')} (${e.exercises[ex.id]} p)`).join(', ');
-    const total = EXERCISES.reduce((s,ex) => s+(e.exercises?.[ex.id]||0), 0);
-    html += `<tr>
-      <td><strong>${e.date}</strong></td>
-      <td><span class="score-pill" style="${scoreStyle(e.score)}">${e.score}</span></td>
-      <td style="font-size:.8rem;max-width:200px;color:var(--text2)">${active||'–'}</td>
-      <td style="white-space:nowrap">${total>0?total+' p':'–'}</td>
-      <td>${e.weather?.temperature!=null?e.weather.temperature.toFixed(1)+'°':'–'}</td>
-      <td>${e.weather?.humidity!=null?e.weather.humidity+'%':'–'}</td>
-      <td>${e.weather?.pressure!=null?e.weather.pressure:'–'}</td>
-    </tr>`;
-  });
-  html += '</tbody></table></div>';
-  cont.innerHTML = html;
-}
-
-// ── CSV EXPORT ────────────────────────────────────────
-function exportCSV() {
-  const all = getLocal();
-  if (!all.length) { showStatus('Nincs exportálható adat.', 'info'); return; }
-  const rows = all.map(e => buildRow(e));
-  let csv = buildHeaders().join(';') + '\n';
-  rows.forEach(r => { csv += r.map(c => '"' + String(c).replace(/"/g,'""') + '"').join(';') + '\n'; });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'}));
-  a.download = 'mozgasnaplo_' + new Date().toISOString().split('T')[0] + '.csv';
-  a.click();
-  showStatus('✓ CSV fájl letöltve!', 'success');
-}
-
-function exportExcel(standardized = false) {
-  const all = getLocal();
-  if (!all.length) { showStatus('Nincs exportálható adat.', 'info'); return; }
-  
-  // Fejléc és adatok előkészítése
-  const headers = buildHeaders();
-  let rows = all.map(e => buildRow(e));
-  
-  // Standardizálás (Z-score normalizálás)
-  if (standardized) {
-    rows = standardizeRows(rows, headers);
-  }
-  
-  const data = [headers, ...rows];
-  
-  // Munkalap létrehozása
-  const ws = XLSX.utils.aoa_to_sheet(data);
-  
-  // Oszlopszélességek beállítása
-  const colWidths = [12, 8, 10, 10, 10, 10, 10, 10, 10, 10, 10, 12, 12, 12, 12, 15];
-  ws['!cols'] = colWidths.map(w => ({wch: w}));
-  
-  // Fejléc formázása (félkövér, világos háttér)
-  for (let col = 0; col < headers.length; col++) {
-    const cellRef = XLSX.utils.encode_cell({r: 0, c: col});
-    ws[cellRef].s = {
-      font: {bold: true, color: {rgb: 'FFFFFF'}},
-      fill: {fgColor: {rgb: '1D6B78'}},
-      alignment: {horizontal: 'center', vertical: 'center', wrapText: true}
-    };
-  }
-  
-  // Adatsorok formázása (alternáló szín)
-  for (let row = 1; row < data.length; row++) {
-    const bgColor = row % 2 === 0 ? 'F5F0E8' : 'FFFFFF';
-    for (let col = 0; col < headers.length; col++) {
-      const cellRef = XLSX.utils.encode_cell({r: row, c: col});
-      if (!ws[cellRef]) continue;
-      ws[cellRef].s = {
-        fill: {fgColor: {rgb: bgColor}},
-        alignment: {horizontal: 'left', vertical: 'center'},
-        border: {
-          top: {style: 'thin', color: {rgb: 'DDD8CE'}},
-          bottom: {style: 'thin', color: {rgb: 'DDD8CE'}},
-          left: {style: 'thin', color: {rgb: 'DDD8CE'}},
-          right: {style: 'thin', color: {rgb: 'DDD8CE'}}
-        }
-      };
-      // Standardizált értékek 2 tizedesjegyre
-      if (standardized && typeof ws[cellRef].v === 'number') {
-        ws[cellRef].v = Math.round(ws[cellRef].v * 100) / 100;
-        ws[cellRef].z = '0.00';
-      }
-    }
-  }
-  
-  // Munkafüzet létrehozása
-  const wb = XLSX.utils.book_new();
-  const sheetName = standardized ? 'MozgásNapló (Standardizált)' : 'MozgásNapló';
-  XLSX.utils.book_append_sheet(wb, ws, sheetName);
-  
-  // Letöltés
-  const fileName = standardized 
-    ? 'mozgasnaplo_standardizalt_' + new Date().toISOString().split('T')[0] + '.xlsx'
-    : 'mozgasnaplo_' + new Date().toISOString().split('T')[0] + '.xlsx';
-  XLSX.writeFile(wb, fileName);
-  showStatus('✓ Excel fájl letöltve!', 'success');
-}
-
-function standardizeRows(rows, headers) {
-  if (!rows.length) return rows;
-  
-  // Numerikus oszlopok indexei (nem a dátum, nem a megjegyzés)
-  const numericCols = [];
-  for (let col = 1; col < headers.length - 1; col++) {
-    numericCols.push(col);
-  }
-  
-  // Átlag és szórás számítása minden numerikus oszlophoz
-  const stats = {};
-  numericCols.forEach(col => {
-    const values = rows.map(r => r[col]).filter(v => typeof v === 'number' && !isNaN(v));
-    if (!values.length) return;
-    
-    const mean = values.reduce((s, v) => s + v, 0) / values.length;
-    const variance = values.reduce((s, v) => s + Math.pow(v - mean, 2), 0) / values.length;
-    const stdDev = Math.sqrt(variance);
-    
-    stats[col] = {mean, stdDev: stdDev || 1}; // stdDev = 1 ha 0
-  });
-  
-  // Standardizálás (Z-score = (x - mean) / stdDev)
-  return rows.map(row => {
-    const newRow = [...row];
-    numericCols.forEach(col => {
-      if (stats[col] && typeof newRow[col] === 'number') {
-        const {mean, stdDev} = stats[col];
-        newRow[col] = (newRow[col] - mean) / stdDev;
-      }
-    });
-    return newRow;
-  });
-}
-
-function clearLocal() {
-  if (confirm('Biztosan törlöd az összes helyi adatot?\nEz a művelet nem vonható vissza!')) {
-    localStorage.removeItem('mozgasnaplo');
-    loadStats();
-    loadHistory();
-    showStatus('Helyi adatok törölve.', 'info');
-  }
-}
-</script>
-</body>
-</html>
+// ════════════ PDF EXPORT ════════════
+async function exportAnalysisPDF(){
+  if(!lastAnalysis){showStatus('⚠️ Először futtasd le az elemzést!','err');return;}
+  showStatus('⏳ PDF generálása...','info');
+  const {mqi,pvi,tei,csi,wsi,fdi,optW,entries,period}=lastAnalysis;
+  const now=new Date().toLocaleDateString('hu-HU',{year:'numeric',month:'long',day:'numeric'}),periStr=period===0?'Összes adat':`Utóbbi ${period} nap`,topTEI=tei.filter(t=>t.tei!==null),topCSI=csi.filter(c=>c.type==='szinergia');
+  const th='background:#1D6B78;color:white;padding:7px 9px;text-align:left;font-size:9pt;border:1px solid #1D6B78';
+  const td='padding:6px 9px;border:1px solid #DDD8CE;font-size:9pt';
+  const teiRows=topTEI.map((t,i)=>`<tr style="background:${i%2?'#f7f7f7':'white'}"><td style="${td};text-align:center;font-weight:700">${i+1}</td><td style="${td}">${t.icon} ${t.label}</td><td style="${td};text-align:center;font-weight:700;color:#1D6B78">${t.tei!==null?t.tei.toFixed(2):'–'}</td><td style="${td};text-align:center">${t.count}</td><td style="${td};t
